@@ -28,7 +28,7 @@ TableColumnItem Element for TableColumnItems for TableControl (Format)
 <TableColumnItem>
   <Alignment>Left, Right, or Center</Alignment>
   <PropertyName>Nameof.NetProperty</PropertyName>
-  <SciptBlock>ScriptToEvaluate</ScriptBlock>
+  <ScriptBlock>ScriptToEvaluate</ScriptBlock>
 </TableColumnItem>
 ```
 
@@ -87,4 +87,4 @@ This example shows a `TableColumnItem` element that displays the value of the `S
 
 [ScriptBlock Element for TableColumnItem for TableControl (Format)](./scriptblock-element-for-tablecolumnitem-for-tablecontrol-format.md)
 
-[Writing a Windows PowerShell Formatting File](./writing-a-windows-powershell-formatting-file.md)
+[Writing a PowerShell Formatting File](./writing-a-powershell-formatting-file.md)

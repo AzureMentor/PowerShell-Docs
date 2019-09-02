@@ -1,9 +1,9 @@
-﻿---
+---
 ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkID=113309
+online version: https://go.microsoft.com/fwlink/?linkid=113309
 external help file:  System.Management.Automation.dll-Help.xml
 title:  Get-Command
 ---
@@ -285,9 +285,10 @@ By default, **Get-Command** gets all cmdlets, functions, workflows, and aliases.
 
 Valid values are:
 
-- **Alias**: Gets the aliases of all Windows PowerShell commands. For more information, see about_Aliases.
+- **Alias**: Gets the aliases of all PowerShell commands.
+  For more information, see [about_Aliases](About/about_Aliases.md).
 - **All**: Gets all command types. This parameter value is the equivalent of "Get-Command *".
-- **Application**: Gets non-Windows-PowerShell files in paths listed in the **Path** environment variable ($env:path), including .txt, .exe, and .dll files. For more information about the **Path** environment variable, see about_Environment_Variables.
+- **Application**: Gets non-Windows-PowerShell files in paths listed in the **Path** environment variable ($env:path), including .txt, .exe, and .dll files. For more information about the **Path** environment variable, see [about_Environment_Variables](./About/about_Environment_Variables.md).
 - **Cmdlet**: Gets all cmdlets.
 - **ExternalScript**: Gets all .ps1 files in the paths listed in the **Path** environment variable ($env:path).
 - **Filter** and **Function**: Gets all Windows PowerShell advanced and simple functions and filters.
@@ -511,7 +512,7 @@ Represents aliases.
 
 ### System.Management.Automation.ApplicationInfo
 
-Represents or applications and files
+Represents applications and files
 
 ### System.Management.Automation.CmdletInfo
 
@@ -525,7 +526,7 @@ Represents functions and filters
 
 ## NOTES
 
-- When more than one command with the same name is available to the session, **Get-Command** returns the command that runs when you type the command name. To get commands with the same name (listed in execution order), use the **All** parameter. For more information, see about_Command_Precedence.
+- When more than one command with the same name is available to the session, **Get-Command** returns the command that runs when you type the command name. To get commands with the same name (listed in execution order), use the **All** parameter. For more information, see [about_Command_Precedence](./About/about_Command_Precedence.md).
 - When a module is imported automatically, the effect is the same as using the Import-Module cmdlet. The module can add commands, types and formatting files, and run scripts in the session. To enable, disable, and configuration automatic importing of modules, use the **$PSModuleAutoLoadingPreference** preference variable. For more information, see [about_Preference_Variables](About/about_Preference_Variables.md).
 
 ## RELATED LINKS

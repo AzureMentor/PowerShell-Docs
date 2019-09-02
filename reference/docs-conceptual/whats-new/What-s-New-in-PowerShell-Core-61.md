@@ -39,8 +39,8 @@ The Windows Compatibility Pack enables PowerShell Core to use **more than 1900 c
 
 ## Support for Application Whitelisting
 
-PowerShell Core 6.1 has parity with Windows PowerShell 5.1 supporting [AppLocker](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-overview)
-and [Device Guard](https://docs.microsoft.com/en-us/windows/security/threat-protection/device-guard/introduction-to-device-guard-virtualization-based-security-and-windows-defender-application-control) application whitelisting.
+PowerShell Core 6.1 has parity with Windows PowerShell 5.1 supporting [AppLocker](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-overview)
+and [Device Guard](https://docs.microsoft.com/windows/security/threat-protection/device-guard/introduction-to-device-guard-virtualization-based-security-and-windows-defender-application-control) application whitelisting.
 Application whitelisting allows granular control of what binaries are allowed to be executed used with PowerShell [Constrained Language mode](https://blogs.msdn.microsoft.com/powershell/2017/11/02/powershell-constrained-language-mode/).
 
 ## Performance improvements
@@ -189,8 +189,12 @@ For more information about how these cmdlets work, check out
 
 ## Experimental feature flags
 
-Experimental feature flags enable users to turn on features that haven't been finalized.
-These experimental features aren't supported and may have bugs.
+We enabled support for [Experimental Features][]. This allows PowerShell developers to deliver new
+features and get feedback before the design is complete. This way we avoid making breaking changes
+as the design evolves.
+
+Use `Get-ExperimentalFeature` to get a list of available experimental features. You can enable
+or disable these features with `Enable-ExperimentalFeature` and `Disable-ExperimentalFeature`.
 
 You can learn more about this feature in [PowerShell RFC0029](https://github.com/PowerShell/PowerShell-RFC/blob/master/5-Final/RFC0029-Support-Experimental-Features.md).
 
@@ -208,13 +212,13 @@ and [`Invoke-RestMethod`](/powershell/module/microsoft.powershell.utility/invoke
 
 ## Remoting improvements
 
-### PowerShell Direct tries to use PowerShell Core first
+### PowerShell Direct for Containers tries to use PowerShell Core first
 
 [PowerShell Direct](/virtualization/hyper-v-on-windows/user-guide/powershell-direct)
-is a feature of PowerShell and Hyper-V that allows you to connect to a Hyper-V VM
+is a feature of PowerShell and Hyper-V that allows you to connect to a Hyper-V VM or Container
 without network connectivity or other remote management services.
 
-In the past, PowerShell Direct connected using the inbox Windows PowerShell instance on the VM.
+In the past, PowerShell Direct connected using the inbox Windows PowerShell instance on the Container.
 Now, PowerShell Direct first attempts to connect using any available `pwsh.exe` on the `PATH` environment variable.
 If `pwsh.exe` isn't available, PowerShell Direct falls back to use `powershell.exe`.
 
@@ -222,7 +226,7 @@ If `pwsh.exe` isn't available, PowerShell Direct falls back to use `powershell.e
 
 `Enable-PSRemoting` now creates two remoting session configurations:
 
-- One for the major version of PowerShell. For example,`PowerShell.6`. This endpoint that can be relied upon across minor version updates as the "system-wide" PowerShell 6 session configuration
+- One for the major version of PowerShell. For example, `PowerShell.6`. This endpoint that can be relied upon across minor version updates as the "system-wide" PowerShell 6 session configuration
 - One version-specific session configuration, for example: `PowerShell.6.1.0`
 
 This behavior is useful if you want to have multiple PowerShell 6 versions installed and accessible
@@ -448,7 +452,7 @@ $certThumbPrint = (Get-PfxCertificate -FilePath $certFile -Password $certPass ).
 In the past, PowerShell shipped a function on Windows called `more` that wrapped `more.com`.
 That function has now been removed.
 
-Also the `help` function changed to use `more.com` on Windows, or the system's default pager
+Also, the `help` function changed to use `more.com` on Windows, or the system's default pager
 specified by `$env:PAGER` on non-Windows platforms.
 
 ### `cd DriveName:` now returns users to the current working directory in that drive
@@ -540,7 +544,7 @@ To opt-out of this telemetry, set the environment variable `POWERSHELL_TELEMETRY
 To prevent the use of unencrypted traffic, PowerShell Remoting on Unix platforms now requires usage
 of NTLM/Negotiate or HTTPS.
 
-For more information on these changes, check out [PR #6799](https://github.com/PowerShell/PowerShell/pull/6799).
+For more information on these changes, check out [Issue #6779](https://github.com/PowerShell/PowerShell/issues/6779).
 
 ### Removed `VisualBasic` as a supported language in Add-Type
 
@@ -550,3 +554,15 @@ Visual Basic was rarely used with `Add-Type`. We removed this feature to reduce 
 ### Cleaned up uses of `CommandTypes.Workflow` and `WorkflowInfoCleaned`
 
 For more information on these changes, check out [PR #6708](https://github.com/PowerShell/PowerShell/pull/6708).
+
+### Group-Object now sorts the groups
+
+As part of the performance improvement, `Group-Object` now returns a sorted listing of the groups.
+Although you should not rely on the order, you could be broken by this change if you wanted the
+first group. We decided that this performance improvement was worth the change since the impact of
+being dependent on previous behavior is low.
+
+For more information on this change, see [Issue #7409](https://github.com/PowerShell/PowerShell/issues/7409).
+
+<!-- URL references -->
+[Experimental Features]: /powershell/module/Microsoft.PowerShell.Core/About/about_Experimental_Features

@@ -2,7 +2,6 @@
 ms.date:  06/05/2017
 keywords:  powershell,cmdlet
 title:  What s New in the PowerShell 50 ISE
-ms.assetid:  38648d47-7c27-4b37-a40e-ad29948519c2
 ---
 
 # What&#39;s New in the Windows PowerShell ISE
@@ -58,7 +57,7 @@ To use snippets in Windows PowerShell 3.0 or later, on the **Edit** menu, click 
 ### Add-on tools
 **Added in PowerShell 3.0**
 
-Windows PowerShell ISE now supports add-on tools, which are Windows Presentation Foundation (WPF) controls that are added by using the object model. Add-on tools can be displayed as a vertical or horizontal pane in the console. Multiple add-on tools in a pane are displayed as a tabbed control. You can also add or remove add-on tools that are produced by non-Microsoft parties. For more information about how to import or remove add-on tools, see [Windows PowerShell ISE Operations](http://technet.microsoft.com/library/cc732148.aspx).
+Windows PowerShell ISE now supports add-on tools, which are Windows Presentation Foundation (WPF) controls that are added by using the object model. Add-on tools can be displayed as a vertical or horizontal pane in the console. Multiple add-on tools in a pane are displayed as a tabbed control. You can also add or remove add-on tools that are produced by non-Microsoft parties. For more information about how to import or remove add-on tools, see [Windows PowerShell ISE Operations](https://technet.microsoft.com/library/cc732148.aspx).
 
 **What value does this change add?**
 
@@ -171,7 +170,7 @@ Other Windows PowerShell ISE editing features include:
 
 - **Parse error display** Parse errors are indicated with red underlines. When you hover over an indicated error, tooltip text displays the problem that was found in the code.
 
-- **Zoom** The zoom percentage of the console'™s content can be set by using the zoom slider (in the lower right corner of Windows PowerShell ISE window), or by entering the command **$psise.options.Zoom** in the Console Pane.
+- **Zoom** The zoom percentage of the console's content can be set by using the zoom slider (in the lower right corner of Windows PowerShell ISE window), or by entering the command **$psise.options.Zoom** in the Console Pane.
 
 - **Rich text copy and paste** Copying to the clipboard in Windows PowerShell ISE preserves the font, size, and color information of the original selection.
 
@@ -219,5 +218,5 @@ Show-Command is new Windows PowerShell ISE 3.0.
 For more information about using Windows PowerShell ISE in Windows PowerShell, see the following links.
 
 - [Exploring the Windows PowerShell Integrated Scripting Environment](../getting-started/fundamental/exploring-the-windows-powershell-ise.md)
-- [ISE on the TechNet Wiki](http://social.technet.microsoft.com/wiki/search/searchresults.aspx?q=ISE)
-- [Script Center](http://technet.microsoft.com/scriptcenter/default)
+- [ISE on the TechNet Wiki](https://social.technet.microsoft.com/wiki/search/searchresults.aspx?q=ISE)
+- [Script Center](https://technet.microsoft.com/scriptcenter/default)

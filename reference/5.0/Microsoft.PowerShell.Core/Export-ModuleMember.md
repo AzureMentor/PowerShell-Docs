@@ -3,7 +3,7 @@ ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821480
+online version: https://go.microsoft.com/fwlink/?linkid=821480
 external help file:  System.Management.Automation.dll-Help.xml
 title:  Export-ModuleMember
 ---
@@ -103,7 +103,7 @@ These commands show how multiple **Export-ModuleMember** commands are interprete
 These commands create three functions and one alias, and then they export two of the functions and the alias.
 
 Without the **Export-ModuleMember** commands, all three of the functions and the alias would be exported.
-With the **Export-ModuleMember** commands, only the **Get-Test** and **Start-Test** functions and the STT alias are exported.
+With the **Export-ModuleMember** commands, only the **New-Test** and **Start-Test** functions and the STT alias are exported.
 
 ### Example 6: Export members in a dynamic module
 
@@ -243,7 +243,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -270,3 +270,5 @@ This cmdlet does not generate any output.
 [Remove-Module](Remove-Module.md)
 
 [about_Modules](About/about_Modules.md)
+
+

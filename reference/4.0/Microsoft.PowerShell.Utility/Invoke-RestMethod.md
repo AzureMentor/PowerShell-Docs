@@ -1,9 +1,9 @@
 ---
-ms.date:  06/09/2017
+ms.date:  12/13/2018
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/p/?linkid=293987
+online version: https://go.microsoft.com/fwlink/?linkid=293987
 external help file:  Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 title:  Invoke-RestMethod
 ---
@@ -32,6 +32,11 @@ For an RSS or ATOM feed, Windows PowerShell returns the Item or Entry XML nodes.
 For JavaScript Object Notation (JSON) or XML, Windows PowerShell converts (or deserializes) the content into objects.
 
 This cmdlet is introduced in Windows PowerShell 3.0.
+
+> [!NOTE]
+> By default,
+> script code in the web page may be run when the page is being parsed to populate the `ParsedHtml` property.
+> Use the `-UseBasicParsing` switch to suppress this.
 
 ## Examples
 
@@ -98,6 +103,19 @@ Invoke-RestMethod -Method Post -Uri $url -Credential $Cred -Body $body -OutFile 
 {"preview":true,"offset":3,"result":{"sourcetype":"contoso4","count":"15277"}}
 ```
 
+### Example 3: Pass multiple headers
+
+```powershell
+$headers = @{
+    'userId' = 'UserIDValue'
+    'token' = 'TokenValue'
+}
+Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -Body $body
+```
+APIs often require passed headers for authentication, validation etc.
+
+This example demonstrates, how to pass multiple headers in from a `hash-table` to a REST API.
+
 ## Parameters
 
 ### -Body
@@ -120,12 +138,6 @@ For example:
 $R = Invoke-WebRequest http://website.com/login.aspx
 $R.Forms[0].Name = "MyName"
 $R.Forms[0].Password = "MyPassword"
-Invoke-RestMethod http://website.com/service.aspx -Body $R
-```
-
-or
-
-```powershell
 Invoke-RestMethod http://website.com/service.aspx -Body $R.Forms[0]
 ```
 
@@ -229,7 +241,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: KeepAlive
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -238,7 +250,7 @@ Accept wildcard characters: False
 Specifies the headers of the web request.
 Enter a hash table or dictionary.
 
-To set UserAgent headers, use the UserAgent parameter.
+To set UserAgent headers, use the `-UserAgent` parameter.
 You cannot use this parameter to specify UserAgent or cookie headers.
 
 ```yaml
@@ -306,10 +318,11 @@ The acceptable values for this parameter are:
 Type: WebRequestMethod
 Parameter Sets: (All)
 Aliases:
+Accepted values: Default, Get, Head, Post, Put, Delete, Trace, Options, Merge, Patch
 
 Required: False
 Position: Named
-Default value: Default
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -468,6 +481,7 @@ The acceptable values for this parameter are:
 Type: String
 Parameter Sets: (All)
 Aliases:
+Accepted values: chunked, compress, deflate, gzip, identity
 
 Required: False
 Position: Named
@@ -565,7 +579,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`, `-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`, `-Verbose`, `-WarningAction`, and `-WarningVariable`. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`, `-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`, `-Verbose`, `-WarningAction`, and `-WarningVariable`. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## Inputs
 
@@ -589,3 +603,4 @@ If the request returns JSON strings, `Invoke-RestMethod` returns a PSObject that
 [ConvertFrom-Json](ConvertFrom-Json.md)
 
 [Invoke-WebRequest](Invoke-WebRequest.md)
+

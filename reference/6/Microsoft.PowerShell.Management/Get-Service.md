@@ -1,13 +1,13 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821593
-external help file:  Microsoft.PowerShell.Commands.Management.dll-Help.xml
-title:  Get-Service
+external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Management
+ms.date: 06/09/2017
+online version: https://go.microsoft.com/fwlink/?linkid=2096297
+schema: 2.0.0
+title: Get-Service
 ---
-
 # Get-Service
 
 ## SYNOPSIS
@@ -18,22 +18,22 @@ Gets the services on the computer.
 ### Default (Default)
 
 ```
-Get-Service [[-Name] <String[]>] [-DependentServices] [-RequiredServices]
- [-Include <String[]>] [-Exclude <String[]>] [<CommonParameters>]
+Get-Service [[-Name] <String[]>] [-DependentServices] [-RequiredServices] [-Include <String[]>]
+ [-Exclude <String[]>] [<CommonParameters>]
 ```
 
 ### DisplayName
 
 ```
-Get-Service [-DependentServices] [-RequiredServices] -DisplayName <String[]>
- [-Include <String[]>] [-Exclude <String[]>] [<CommonParameters>]
+Get-Service [-DependentServices] [-RequiredServices] -DisplayName <String[]> [-Include <String[]>]
+ [-Exclude <String[]>] [<CommonParameters>]
 ```
 
 ### InputObject
 
 ```
-Get-Service [-DependentServices] [-RequiredServices] [-Include <String[]>]
- [-Exclude <String[]>] [-InputObject <ServiceController[]>] [<CommonParameters>]
+Get-Service [-DependentServices] [-RequiredServices] [-Include <String[]>] [-Exclude <String[]>]
+ [-InputObject <ServiceController[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -275,7 +275,7 @@ Parameter Sets: Default
 Aliases: ServiceName
 
 Required: False
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: True
@@ -297,12 +297,12 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -348,3 +348,5 @@ The sort is based on the integer value, not the name.
 [Suspend-Service](Suspend-Service.md)
 
 [Remove-Service](Remove-Service.md)
+
+

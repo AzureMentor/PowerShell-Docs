@@ -59,14 +59,14 @@ Feel free to help out.
   For example:
 
   This [Write-Host](..\reference\6\Microsoft.PowerShell.Utility\Write-Host.md) cmdlet uses the
-  **-Object** parameter to ...
+  **Object** parameter to ...
 
   > [!NOTE]
   > Never use backticks or bold inside the brackets of a hyperlink. This is an exception to the previous
   > rule.
 
 - When referring to a parameter by name, the name should be **bold**. When illustrating the use of
-  a parameter with the hyphen prefix, the paramter should be wrapped in backticks. For example:
+  a parameter with the hyphen prefix, the parameter should be wrapped in backticks. For example:
 
   > The parameter's name is **Name**, but it is typed as `-Name` when used on the command line as a
   > parameter.
@@ -120,10 +120,10 @@ https://docs.microsoft.com/en-us/powershell/azure/overview?view=azurermps-5.1.1
 ```
 
 - **\<locale>** - identifies the language of the article (example: en-us or de-de)
-- **\<product-service>** - the name of the product or service being documented (example: powershell,
-  dotnet, or azure)
-- **[\<feature-service>]** - (optional) the name of the product's feature or subservice (for
-  example, csharp or load-balancer)
+- **\<product-service>** - the name of the product or service (example: powershell, dotnet, or
+  azure)
+- **[\<feature-service>]** - (optional) the name of the product's feature or subservice (example:
+  csharp or load-balancer)
 - **[\<subfolder>]** - (optional) the name of a subfolder within a feature
 - \<topic> - the name of the article file for the topic (example: load-balancer-overview or
   overview)
@@ -132,9 +132,9 @@ https://docs.microsoft.com/en-us/powershell/azure/overview?view=azurermps-5.1.1
 
 ### Linking to content in the same Docset
 
-When the content is in the same Docset, the relative links are simple to calculate.
-The link target must be the path to the _Markdown file_ in the repo.
-For example, the following markdown links to the about_Arrays topic in this repo.
+When the content is in the same Docset, the relative links are simple to calculate. The link target
+must be the path to the _Markdown file_ in the repo. For example, the following markdown links to
+the about_Arrays topic in this repo.
 
 ```Markdown
 [about_Arrays](../reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md)
@@ -150,8 +150,8 @@ Note that the live link works within the GitHub view of this content.
 
 When the content is in a different Docset, the relative links are more complicated. The link target
 must be the URL path to the _published article_ on **docs.microsoft.com**. The relative link starts
-with the **\<product-service>** portion of the URL as described above. You should omit the
-**[?view=\<view-name>]** portion unless you need to link to a specific version of the content.
+with the `<product-service>` portion of the URL as described above. You should omit the
+`?view=\<view-name>` portion unless you need to link to a specific version of the content.
 
 For example, the following Markdown links to the Overview topic for Azure PowerShell.
 

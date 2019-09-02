@@ -5,6 +5,7 @@ locale:  en-us
 keywords:  powershell,cmdlet
 title:  about_Splatting
 ---
+
 # About Splatting
 
 ## SHORT DESCRIPTION
@@ -19,10 +20,10 @@ administrator and the winner of the Advanced Division of the 2012 Scripting
 Games. Revised for Windows PowerShell 3.0.]
 
 Splatting is a method of passing a collection of parameter values to a command
-as unit. Windows PowerShell associates each value in the collection with a
+as unit. PowerShell associates each value in the collection with a
 command parameter. Splatted parameter values are stored in named splatting
 variables, which look like standard variables, but begin with an At symbol (@)
-instead of a dollar sign ($). The At symbol tells Windows PowerShell that you
+instead of a dollar sign ($). The At symbol tells PowerShell that you
 are passing a collection of values, instead of a single value.
 
 Splatting makes your commands shorter and easier to read. You can re-use the
@@ -53,8 +54,8 @@ single command just so you pass no more than one value for each parameter.
 ## SPLATTING WITH HASH TABLES
 
 Use a hash table to splat parameter name and value pairs. You can use this
-format for all parameter types, including positional and named parameters and
-switch parameters.
+format for all parameter types, including positional and switch parameters.
+Positional parameters must be assigned by name.
 
 The following examples compare two `Copy-Item` commands that copy the Test.txt
 file to the Test2.txt file in the same directory.
@@ -84,8 +85,8 @@ Copy-Item @HashArguments
 ```
 
 Note: In the first command, the At symbol (@) indicates a hash table, not a
-splatted value. The syntax for hash tables in Windows PowerShell is:
-@{\<name\>=\<value\>; \<name\>=\<value\>; …}*
+splatted value. The syntax for hash tables in PowerShell is:
+`@{\<name\>=\<value\>; \<name\>=\<value\>; ...}*`
 
 ## SPLATTING WITH ARRAYS
 
@@ -270,7 +271,7 @@ FileVersionInfo    : File:             C:\Windows\System32\WindowsPowerShell
                      OriginalFilename: PowerShell.EXE.MUI
                      FileVersion:      10.0.14393.0 (rs1_release.160715-1616
                      FileDescription:  Windows PowerShell
-                     Product:          Microsoft® Windows® Operating System
+                     Product:          Microsoft Windows Operating System
                      ProductVersion:   10.0.14393.0
                      Debug:            False
                      Patched:          False
@@ -280,7 +281,7 @@ FileVersionInfo    : File:             C:\Windows\System32\WindowsPowerShell
                      Language:         English (United States)
 ```
 
-# SEE ALSO
+## SEE ALSO
 
 [about_Arrays](about_Arrays.md)
 

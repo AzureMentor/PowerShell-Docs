@@ -417,8 +417,8 @@
           href: ./hosting/remoterunspace01-sample.md
         - name: RemoteRunspacePool01 Sample
           href: ./hosting/remoterunspacepool01-sample.md
-  - name: Writing a Windows PowerShell Formatting File
-    href: ./format/writing-a-windows-powershell-formatting-file.md
+  - name: Writing a PowerShell Formatting File
+    href: ./format/writing-a-powershell-formatting-file.md
     items:
     - name: Formatting File Overview
       href: ./format/formatting-file-overview.md
@@ -443,8 +443,8 @@
         href: ./format/defining-conditions-for-displaying-data.md
       - name: Formatting Displayed Data
         href: ./format/formatting-displayed-data.md
-      - name: Windows PowerShell Formatting Files
-        href: ./format/windows-powershell-formatting-files.md
+      - name: PowerShell Formatting Files
+        href: ./format/powershell-formatting-files.md
     - name: Examples of Formatting Files
       href: ./format/examples-of-formatting-files.md
       items:
@@ -813,8 +813,8 @@
         href: ./format/tableheaders-element-format.md
       - name: TableRowEntries Element for TableControl (Format)
         href: ./format/tablerowentries-element-for-tablecontrol-format.md
-      - name: TableRowEntry Element for TableRowEntroes for TableControl (Format)
-        href: ./format/tablerowentry-element-for-tablerowentroes-for-tablecontrol-format.md
+      - name: TableRowEntry Element for TableRowEntries for TableControl (Format)
+        href: ./format/tablerowentry-element-for-tablerowentries-for-tablecontrol-format.md
       - name: Text Element for CustomItem for Controls for Configuration (Format)
         href: ./format/text-element-for-customitem-for-controls-for-configuration-format.md
       - name: Text Element for CustomItem for Controls for View (Format)
@@ -877,8 +877,8 @@
         href: ./format/wideitem-element-for-widecontrol-format.md
       - name: Width Element for TableColumnHeader for TableControl (Format)
         href: ./format/width-element-for-tablecolumnheader-for-tablecontrol-format.md
-      - name: Wrap Element for TableRowEntry for TableContrl  (Format)
-        href: ./format/wrap-element-for-tablerowentry-for-tablecontrl-format.md
+      - name: Wrap Element for TableRowEntry for TableControl  (Format)
+        href: ./format/wrap-element-for-tablerowentry-for-tablecontrol-format.md
       - name: WrapTables Element (Format)
         href: ./format/wraptables-element-format.md
   - name: Writing Comment-Based Help Topics
@@ -1005,8 +1005,6 @@
       href: ./workflow/creating-a-workflow-by-using-a-windows-powershell-script.md
     - name: Creating a Workflow with Windows PowerShell Activities
       href: ./workflow/creating-a-workflow-with-windows-powershell-activities.md
-    - name: Extending the Windows PowerShell Workflow activity controller
-      href: ./workflow/extending-the-windows-powershell-workflow-activity-controller.md
     - name: Importing and Invoking a Windows PowerShell Workflow
       href: ./workflow/importing-and-invoking-a-windows-powershell-workflow.md
     - name: Scheduling Jobs with the Windows PowerShell API

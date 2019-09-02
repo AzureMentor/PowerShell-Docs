@@ -3,7 +3,7 @@ ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkID=113385
+online version: https://go.microsoft.com/fwlink/?linkid=113385
 external help file:  Microsoft.PowerShell.Commands.Management.dll-Help.xml
 title:  Restart-Service
 ---
@@ -37,25 +37,31 @@ Restart-Service -DisplayName <String[]>
 ```
 
 ## DESCRIPTION
+
 The Restart-Service cmdlet sends a stop message and then a start message to the Windows Service Controller for a specified service.
 If a service was already stopped, it is started without notifying you of an error.
 You can specify the services by their service names or display names, or you can use the InputObject parameter to pass an object that represents each service that you want to restart.
 ## EXAMPLES
 
 ### Example 1
-```
+
+```powershell
 PS C:\> Restart-Service winmgmt
 ```
 
 This command restarts the Windows Management Instrumentation service (WinMgmt) on the local computer.
+
 ### Example 2
-```
+
+```powershell
 PS C:\> Restart-Service -DisplayName net* -Exclude "net logon"
 ```
 
 This command restarts the services that have a display name that begins with "Net", except for the "Net Logon" service.
+
 ### Example 3
-```
+
+```powershell
 PS C:\> Get-Service net* | Where-Object {$_.Status -eq "Stopped"} | Restart-Service
 ```
 
@@ -161,7 +167,7 @@ Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### -PassThru
@@ -212,7 +218,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 ## INPUTS
 
 ### System.ServiceProcess.ServiceController, System.String
@@ -244,3 +250,5 @@ The service names appears in the Name column, and the display names appear in th
 [Stop-Service](Stop-Service.md)
 
 [Suspend-Service](Suspend-Service.md)
+
+

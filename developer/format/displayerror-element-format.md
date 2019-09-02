@@ -15,7 +15,7 @@ Specifies that the string #ERR is displayed when an error occurs displaying a pi
 
 Configuration Element (Format)
 DefaultSettings Element (Format)
-DisplayError Element (Frmat)
+DisplayError Element (Format)
 
 ## Syntax
 
@@ -49,4 +49,4 @@ By default, when an error occurs while trying to display a piece of data, the lo
 
 [DefaultSettings Element (Format)](./defaultsettings-element-format.md)
 
-[Writing a Windows PowerShell Formatting File](./writing-a-windows-powershell-formatting-file.md)
+[Writing a PowerShell Formatting File](./writing-a-powershell-formatting-file.md)

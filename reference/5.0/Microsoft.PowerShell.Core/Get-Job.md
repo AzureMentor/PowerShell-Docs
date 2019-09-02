@@ -3,7 +3,7 @@ ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821485
+online version: https://go.microsoft.com/fwlink/?linkid=821485
 external help file:  System.Management.Automation.dll-Help.xml
 title:  Get-Job
 ---
@@ -578,7 +578,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -588,7 +588,7 @@ You cannot pipe input to this cmdlet.
 ## OUTPUTS
 
 ### System.Management.Automation.RemotingJob
-This cmldet returns objects that represent the jobs in the session.
+This cmdlet returns objects that represent the jobs in the session.
 
 ## NOTES
 * The **PSJobTypeName** property of jobs indicates the job type of the job. The property value is determined by the job type author. The following list shows common job types.
@@ -627,3 +627,5 @@ Job started by using the *AsJob* common parameter of workflows.
 [about_Remote_Jobs](About/about_Remote_Jobs.md)
 
 [about_Scheduled_Jobs](../PSScheduledJob/About/about_Scheduled_Jobs.md)
+
+

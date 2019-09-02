@@ -3,7 +3,7 @@ ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/p/?linkid=289591
+online version: https://go.microsoft.com/fwlink/?linkid=289591
 external help file:  System.Management.Automation.dll-Help.xml
 title:  Import-Module
 ---
@@ -59,7 +59,7 @@ The modules that you import must be installed on the local computer or a remote 
 
 Starting in Windows PowerShell 3.0, installed modules are automatically imported to the session when you use any commands or providers in the module.
 However, you can still use the `Import-Module` command to import a module and you can enable and disable automatic module importing by using the `$PSModuleAutoloadingPreference` preference variable.
-For more information about modules, see [about_Modules](/powershell/module/microsoft.powershell.core/about/about_modules).
+For more information about modules, see [about_Modules](About/about_Modules.md).
 For more information about the `$PSModuleAutoloadingPreference` variable, see [about_Preference_Variables](About/about_Preference_Variables.md).
 
 A module is a package that contains members that can be used in Windows PowerShell.
@@ -478,7 +478,7 @@ Specifies arguments (parameter values) that are passed to a script module during
 This parameter is valid only when you are importing a script module.
 
 You can also refer to ArgumentList by its alias, "args".
-For more information, see about_Aliases.
+For more information, see [about_Aliases](About/about_Aliases.md).
 
 ```yaml
 Type: Object[]
@@ -574,7 +574,7 @@ Accept wildcard characters: False
 
 ### -CimSession
 Specifies a CIM session on the remote computer.
-Enter a variable that contains the CIM session or a command that gets the CIM session, such as a [Get-CimSession](https://docs.microsoft.com/en-us/powershell/module/cimcmdlets/get-cimsession) command.
+Enter a variable that contains the CIM session or a command that gets the CIM session, such as a [Get-CimSession](https://docs.microsoft.com/powershell/module/cimcmdlets/get-cimsession) command.
 
 **Import-Module** uses the CIM session connection to import modules from the remote computer into the current session.
 When you use the commands from the imported module in the current session, the commands actually run on the remote computer.
@@ -944,12 +944,12 @@ You can pipe a module name, module object, or assembly object to `Import-Module`
 ### None, System.Management.Automation.PSModuleInfo, or System.Management.Automation.PSCustomObject
 
 By default, **Import-Module** does not generate any output.
-If you specify the *PassThru* parameter, the cmldet generates a **System.Management.Automation.PSModuleInfo** object that represents the module.
+If you specify the *PassThru* parameter, the cmdlet generates a **System.Management.Automation.PSModuleInfo** object that represents the module.
 If you specify the *AsCustomObject* parameter, it generates a **PSCustomObject** object.
 
 ## NOTES
 
-- Before you can import a module, the module must be installed on the local computer, that is, the module directory must be copied to a directory that is accessible to your local computer. For more information, see [about_Modules](/powershell/module/microsoft.powershell.core/about/about_modules).
+- Before you can import a module, the module must be installed on the local computer, that is, the module directory must be copied to a directory that is accessible to your local computer. For more information, see [about_Modules](About/about_Modules.md).
 
   You can also use the `PSSession` and `CIMSession` parameters to import modules that are installed on remote computers.
 However, commands that use the cmdlets in these modules actually run in the remote session on the remote computer.

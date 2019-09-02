@@ -19,8 +19,8 @@ View Element (Format)
 ListControl Element (Format)
 ListEntries Element for ListControl (Format)
 ListEntry Element for ListEntries for ListControl (Format)
-ListItems Element for ListEntry for ListControl(Format)
-ListItem Element Element for ListItemes for ListControl (Format)
+ListItems Element for ListEntry for ListControl (Format)
+ListItem Element for ListItems for ListControl (Format)
 ItemSelectionCondition Element for ListItem for ListControl (Format)
 
 ## Syntax
@@ -65,4 +65,4 @@ You can specify one property name or a script for this condition but cannot spec
 
 [ScriptBlock Element for ItemSelectionCondition for ListControl (Format)](./scriptblock-element-for-itemselectioncondition-for-listcontrol-format.md)
 
-[Writing a Windows PowerShell Formatting File](./writing-a-windows-powershell-formatting-file.md)
+[Writing a PowerShell Formatting File](./writing-a-powershell-formatting-file.md)

@@ -1,14 +1,10 @@
 {
     "build": {
         "content": [
-            {
-                "files": [
-                    "**/**.md"
-                ],
-                "exclude": ["**/obj/**"]
-            }
+            { "files": ["**/**.md"], "exclude": ["**/obj/**"] }
         ],
         "globalMetadata": {
+            "toc_preview": true,
             "ROBOTS": "INDEX, FOLLOW",
             "ms.prod": "powershell",
             "ms.technology": "powershell",
@@ -17,19 +13,16 @@
             "ms.devlang": "powershell",
             "ms.tgt_pltfr": "windows, macos, linux",
             "author": "sdwheeler",
-            "ms.author": "sewhee"
+            "ms.author": "sewhee",
+            "feedback_system": "GitHub",
+            "feedback_github_repo": "MicrosoftDocs/PowerShell-Docs",
+            "feedback_product_url": "https://github.com/PowerShell/PowerShell/issues/new/choose"
         },
         "resource": [
-            {
-                "files": [
-                    "**/images/**",
-                    "**/*.png",
-                    "**/*.jpg"
-                ],
-                "exclude": ["**/obj/**"]
-            }
+            { "files": ["**/images/**", "**/*.png", "**/*.jpg"], "exclude": ["**/obj/**"] }
         ],
         "template": "op.html",
-        "dest": "scripting"
+        "dest": "scripting",
+        "markdownEngineName": "markdig"
     }
 }

@@ -3,14 +3,13 @@ ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821618
+online version: https://go.microsoft.com/fwlink/?linkid=821618
 external help file:  Microsoft.PowerShell.Commands.Management.dll-Help.xml
 title:  Remove-PSDrive
 ---
 # Remove-PSDrive
 
 ## SYNOPSIS
-
 Deletes temporary PowerShell drives and disconnects mapped network drives.
 
 ## SYNTAX

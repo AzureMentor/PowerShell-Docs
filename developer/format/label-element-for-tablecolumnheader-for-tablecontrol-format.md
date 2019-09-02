@@ -19,7 +19,7 @@ View Element (Format)
 TableControl Element (Format)
 TableHeaders Element for TableControl (Format)
 TableColumnHeader Element for TableHeaders for TableControl (Format)
-Label Element  for TableColumnHeader for TablControl (Format)
+Label Element  for TableColumnHeader for TableControl (Format)
 
 ## Syntax
 
@@ -74,4 +74,4 @@ This example shows a `TableColumnHeader` element whose label is "Column 1".
 
 [TableColumnHeader Element (Format)](./tablecolumnheader-element-format.md)
 
-[Writing a Windows PowerShell Formatting File](./writing-a-windows-powershell-formatting-file.md)
+[Writing a PowerShell Formatting File](./writing-a-powershell-formatting-file.md)

@@ -1,11 +1,12 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821865
-external help file:  Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-title:  Tee-Object
+external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Utility
+ms.date: 06/09/2017
+online version: https://go.microsoft.com/fwlink/?linkid=2097005
+schema: 2.0.0
+title: Tee-Object
 ---
 
 # Tee-Object
@@ -17,20 +18,17 @@ Saves command output in a file or variable and also sends it down the pipeline.
 
 ### File (Default)
 ```
-Tee-Object [-FilePath] <String> [-InputObject <PSObject>] [-Append]
- [<CommonParameters>]
+Tee-Object [-InputObject <PSObject>] [-FilePath] <String> [-Append] [<CommonParameters>]
 ```
 
 ### LiteralFile
 ```
-Tee-Object -LiteralPath <String> [-InputObject <PSObject>]
- [<CommonParameters>]
+Tee-Object [-InputObject <PSObject>] -LiteralPath <String> [<CommonParameters>]
 ```
 
 ### Variable
 ```
-Tee-Object -Variable <String> [-InputObject <PSObject>]
- [<CommonParameters>]
+Tee-Object [-InputObject <PSObject>] -Variable <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -112,7 +110,7 @@ Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### -InputObject
@@ -135,22 +133,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Variable
-Specifies a variable that the cmdlet saves the object to.
-Enter a variable name without the preceding dollar sign ($).
-
-```yaml
-Type: String
-Parameter Sets: Variable
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -LiteralPath
 Specifies a file that this cmdlet saves the object to.
 Unlike *FilePath*, the value of the *LiteralPath* parameter is used exactly as it is typed.
@@ -170,8 +152,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Variable
+Specifies a variable that the cmdlet saves the object to.
+Enter a variable name without the preceding dollar sign ($).
+
+```yaml
+Type: String
+Parameter Sets: Variable
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -200,3 +198,5 @@ You can pipe objects to **Tee-Object**.
 [Select-Object](Select-Object.md)
 
 [Sort-Object](Sort-Object.md)
+
+

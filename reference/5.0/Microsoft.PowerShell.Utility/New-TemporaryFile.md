@@ -3,11 +3,10 @@ ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821836
+online version: https://go.microsoft.com/fwlink/?linkid=821836
 external help file:  Microsoft.PowerShell.Utility-help.xml
 title:  New-TemporaryFile
 ---
-
 # New-TemporaryFile
 
 ## SYNOPSIS
@@ -20,6 +19,7 @@ New-TemporaryFile [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 The **New-TemporaryFile** cmdlet creates an empty file that has the .tmp file name extension.
 This cmdlet names the file `tmp`NNNN`.tmp`, where NNNN is a random hexadecimal number.
 The cmdlet creates the file in your $Env:Temp folder.
@@ -29,6 +29,7 @@ This cmdlet creates temporary files that you can use in scripts.
 ## EXAMPLES
 
 ### Example 1: Create a temporary file
+
 ```
 PS C:\> $TempFile = New-TemporaryFile
 ```
@@ -39,6 +40,7 @@ You can use this file later in your script.
 ## PARAMETERS
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
@@ -54,6 +56,7 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
+
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
@@ -70,13 +73,15 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ## OUTPUTS
 
 ### System.IO.FileInfo
+
 This cmdlet returns a **FileInfo** object that represents the temporary file.
 
 ## NOTES
@@ -84,3 +89,5 @@ This cmdlet returns a **FileInfo** object that represents the temporary file.
 ## RELATED LINKS
 
 [about_Environment_Variables](../Microsoft.PowerShell.Core/About/about_Environment_Variables.md)
+
+

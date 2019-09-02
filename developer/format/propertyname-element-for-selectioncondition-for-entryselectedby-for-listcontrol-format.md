@@ -21,7 +21,7 @@ ListEntries Element (Format)
 ListEntry Element (Format)
 EntrySelectedBy Element for ListEntry (Format)
 SelectionCondition Element for EntrySelectedBy for ListEntry (Format)
-PropertyName Element for SelectionCondition for EmtrySelectedBy for ListEntry (Format)
+PropertyName Element for SelectionCondition for EntrySelectedBy for ListEntry (Format)
 
 ## Syntax
 
@@ -67,4 +67,4 @@ For more information about other components of a list view, see [Creating List V
 
 [ScriptBlock Element for SelectionCondition for EntrySelectedBy for ListEntry (Format)](./scriptblock-element-for-selectioncondition-for-entryselectedby-for-listcontrol-format.md)
 
-[Writing a Windows PowerShell Formatting File](./writing-a-windows-powershell-formatting-file.md)
+[Writing a PowerShell Formatting File](./writing-a-powershell-formatting-file.md)

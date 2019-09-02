@@ -3,7 +3,7 @@ ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkID=113400
+online version: https://go.microsoft.com/fwlink/?linkid=113400
 external help file:  Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 title:  Set-TraceSource
 ---
@@ -245,7 +245,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 ## INPUTS
 
 ### System.String
@@ -289,3 +289,5 @@ The trace sources for each module are loaded automatically when the component is
 [Set-PSDebug](../Microsoft.PowerShell.Core/Set-PSDebug.md)
 
 [Trace-Command](Trace-Command.md)
+
+

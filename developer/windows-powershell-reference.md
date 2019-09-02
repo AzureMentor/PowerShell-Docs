@@ -26,8 +26,6 @@ The Windows PowerShell Software Development Kit (SDK) is written for command dev
 In addition to the Windows PowerShell SDK, the following resources provide more information.
 
 [Getting Started with Windows PowerShell](/powershell/scripting/getting-started/getting-started-with-windows-powershell)
-
-[Getting Started with Windows PowerShell](https://msdn.microsoft.com/en-us/mt707506?redirectUrl=https://msdn.microsoft.com/powershell/scripting/getting-started/getting-started-with-windows-powershell)
 Provides an introduction to Windows PowerShell: the language, the cmdlets, the providers, and the use of objects.
 
 [Writing a Windows PowerShell Module](./module/writing-a-windows-powershell-module.md)
@@ -39,7 +37,7 @@ Provides information and code examples for program managers who are designing cm
 [Windows PowerShell Team Blog](https://blogs.msdn.microsoft.com/PowerShell/)
 The best resource for learning from and collaborating with other Windows PowerShell users. Read the Windows PowerShell Team blog, and then join the Windows PowerShell User Forum (microsoft.public.windows.powershell). Use Windows Live Search to find other Windows PowerShell blogs and resources. Then, as you develop your expertise, freely contribute your ideas.
 
-[Windows PowerShell TechNet Library](/powershell/scripting/powershell-scripting)
+[PowerShell module browser](/powershell/module/)
 Provides the latest versions of the command-line Help topics.
 
 ## Class Libraries
@@ -50,14 +48,14 @@ This namespace is the root namespace for Windows PowerShell. It contains the cla
 [System.Management.Automation.Provider](/dotnet/api/System.Management.Automation.Provider)
 This namespace contains the classes, enumerations, and interfaces required to implement a Windows PowerShell provider. In particular, the [System.Management.Automation.Provider.Cmdletprovider](/dotnet/api/System.Management.Automation.Provider.CmdletProvider) class is the base class from which all Windows PowerShell provider classes must be derived.
 
-[Microsoft.Powershell.Commands](/dotnet/api/Microsoft.PowerShell.Commands)
+[Microsoft.PowerShell.Commands](/dotnet/api/Microsoft.PowerShell.Commands)
 This namespace contains the classes for the cmdlets and providers implemented by Windows PowerShell. Similarly, it is recommended that you create a *YourName*.Commands namespace for those cmdlets that you implement.
 
 [System.Management.Automation.Host](/dotnet/api/System.Management.Automation.Host)
 This namespace contains the classes, enumerations, and interfaces that the cmdlet uses to define the interaction between the user and Windows PowerShell.
 
 [System.Management.Automation.Internal](/dotnet/api/System.Management.Automation.Internal)
-This namespace contains the base classes used by other namespace classes. For example, the [System.Management.Automation.Internal.Cmdletmetadataattribute](/dotnet/api/System.Management.Automation.Internal.CmdletMetadataAttribute) class is the base class for the [System.Management.Automation.Cmdletattribute](/dotnet/api/System.Management.Automation.CmdletAttribute) class.
+This namespace contains the base classes used by other namespace classes. For example, the [System.Management.Automation.Internal.Cmdletmetadataattribute](/dotnet/api/System.Management.Automation.Internal.CmdletMetadataAttribute) class is the base class for the [System.Management.Automation.CmdletAttribute](/dotnet/api/System.Management.Automation.CmdletAttribute) class.
 
 [System.Management.Automation.Runspaces](/dotnet/api/System.Management.Automation.Runspaces)
-This namespace contains the classes, enumerations, and interfaces used to create a Windows PowerShell runspace. In this context, the Windows PowerShell runspace is the context in which one or more Windows PowerShell pipelines invoke cmdlets. That is, cmdlets work within the context of a Windows PowerShell runspace. For more information aboutWindows PowerShell runspaces, see [Windows PowerShell Runspaces](http://msdn.microsoft.com/en-us/a1582cfe-f06d-4aff-adc6-71f49a860ce9).
+This namespace contains the classes, enumerations, and interfaces used to create a Windows PowerShell runspace. In this context, the Windows PowerShell runspace is the context in which one or more Windows PowerShell pipelines invoke cmdlets. That is, cmdlets work within the context of a Windows PowerShell runspace. For more information aboutWindows PowerShell runspaces, see [Windows PowerShell Runspaces](https://msdn.microsoft.com/en-us/a1582cfe-f06d-4aff-adc6-71f49a860ce9).

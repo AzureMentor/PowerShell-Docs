@@ -3,7 +3,7 @@ ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/p/?linkid=293971
+online version: https://go.microsoft.com/fwlink/?linkid=293971
 external help file:  Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 title:  Get-Member
 ---
@@ -32,7 +32,7 @@ To get only certain types of members, such as NoteProperties, use the MemberType
 
 ### Example 1
 ```
-PS C:\> get-service | get-member
+PS> get-service | get-member
 TypeName: System.ServiceProcess.ServiceController
 
 Name                      MemberType    Definition
@@ -78,8 +78,8 @@ As such, it gets all member types, but it does not get static members and does n
 
 ### Example 2
 ```
-PS C:\> Get-Service | Get-Member -Force
-PS C:\> (Get-Service Schedule).PSBase
+PS> Get-Service | Get-Member -Force
+PS> (Get-Service Schedule).PSBase
 ```
 
 This example gets all of the members (properties and methods) of the service objects (System.ServiceProcess.ServiceController) retrieved by the Get-Service cmdlet, including the intrinsic members, such as PSBase and PSObject, and the get_ and set_ methods.
@@ -95,7 +95,7 @@ The second command shows how to display the value of the PSBase property of the 
 
 ### Example 3
 ```
-PS C:\> get-service| get-member -view extended
+PS> get-service| get-member -view extended
 TypeName: System.ServiceProcess.ServiceController
 
 Name MemberType    Definition
@@ -110,7 +110,7 @@ In this case, the extended member is the Name property, which is an alias proper
 
 ### Example 4
 ```powershell
-PS C:\> Get-EventLog -Log System | Get-Member -MemberType ScriptProperty
+PS> Get-EventLog -Log System | Get-Member -MemberType ScriptProperty
 
 
    TypeName: System.Diagnostics.EventLogEntry
@@ -126,8 +126,8 @@ The command returns the EventID property of the **EventLog** object.
 
 ### Example 5
 ```
-PS C:\> $a = "get-process", "get-service", "get-culture", "get-psdrive", "get-executionpolicy"
-PS C:\> foreach ($cmdlet in $a) {invoke-command $cmdlet | get-member -name machinename}
+PS> $a = "get-process", "get-service", "get-culture", "get-psdrive", "get-executionpolicy"
+PS> foreach ($cmdlet in $a) {invoke-command $cmdlet | get-member -name machinename}
 TypeName: System.Diagnostics.Process
 
 Name        MemberType Definition
@@ -151,20 +151,28 @@ The results show that only process objects (System.Diagnostics.Process) and serv
 
 ### Example 6
 ```
-PS C:\> $a = get-member -inputobject @(1)
-PS C:\> $a.count
+PS> $A = @(1)
+PS> $A.Count
 1
-PS C:\> $a = get-member -inputobject 1,2,3
+PS> Get-Member -InputObject $A
 TypeName: System.Object[]
-
 Name               MemberType    Definition
 ----               ----------    ----------
 Count              AliasProperty Count = Length
 Address            Method        System.Object& Address(Int32 )
 Clone              Method        System.Object Clone()
 ...
-PS C:\> $a.count
-1
+PS> $A = @(1,2,3)
+PS> Get-Member -InputObject $A
+TypeName: System.Object[]
+Name               MemberType    Definition
+----               ----------    ----------
+Count              AliasProperty Count = Length
+Address            Method        System.Object& Address(Int32 )
+Clone              Method        System.Object Clone()
+...
+PS C:\> $A.Count
+3
 ```
 
 This example demonstrates how to find the properties and methods of an array of objects when you have only one object of the given type.
@@ -179,8 +187,8 @@ The fourth command uses the Count property of the array to find the number of ob
 
 ### Example 7
 ```
-PS C:\> $file = get-item c:\test\textFile.txt
-PS C:\> $file.psobject.properties | where-object {$_.issettable} | format-table -property name
+PS> $file = get-item c:\test\textFile.txt
+PS> $file.psobject.properties | where-object {$_.issettable} | format-table -property name
 
 Name
 ----
@@ -199,7 +207,7 @@ LastWriteTime
 LastWriteTimeUtc
 Attributes
 
-PS C:\> [appdomain]::CurrentDomain.GetAssemblies() | foreach-object { $_.getexportedtypes() } | foreach-object {$_.getproperties() | where-object {$_.canwrite }} | select-object reflectedtype, name
+PS> [appdomain]::CurrentDomain.GetAssemblies() | foreach-object { $_.getexportedtypes() } | foreach-object {$_.getproperties() | where-object {$_.canwrite }} | select-object reflectedtype, name
 ```
 
 This example shows how to determine which properties of an object can be changed.
@@ -213,8 +221,8 @@ The third command gets the changeable properties of all objects in your Windows 
 
 ### Example 8
 ```
-PS C:\> $s = get-service
-PS C:\> $s | get-member
+PS> $s = get-service
+PS> $s | get-member
 TypeName: System.ServiceProcess.ServiceController
 
 Name                      MemberType    Definition
@@ -227,7 +235,7 @@ Continue                  Method        System.Void Continue()
 CreateObjRef              Method        System.Runtime.Remoting.ObjRef CreateObjRef(type requestedTy
 Dispose                   Method        System.Void Dispose()
 ...
-PS C:\> get-member -inputObject $s
+PS> get-member -inputObject $s
 TypeName: System.Object[]
 
 Name           MemberType    Definition
@@ -400,7 +408,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -438,3 +446,5 @@ For more information about the $this variable, see about_Automatic_Variables.
 [about_Methods](../Microsoft.PowerShell.Core/About/about_Methods.md)
 
 [about_Objects](../Microsoft.PowerShell.Core/About/about_Objects.md)
+
+

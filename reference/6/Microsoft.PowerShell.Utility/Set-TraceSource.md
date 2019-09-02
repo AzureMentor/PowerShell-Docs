@@ -1,11 +1,12 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821860
-external help file:  Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-title:  Set-TraceSource
+external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Utility
+ms.date: 06/09/2017
+online version: https://go.microsoft.com/fwlink/?linkid=2096981
+schema: 2.0.0
+title: Set-TraceSource
 ---
 
 # Set-TraceSource
@@ -16,22 +17,26 @@ Configures, starts, and stops a trace of PowerShell components.
 ## SYNTAX
 
 ### optionsSet (Default)
+
 ```
 Set-TraceSource [-Name] <String[]> [[-Option] <PSTraceSourceOptions>] [-ListenerOption <TraceOptions>]
  [-FilePath <String>] [-Force] [-Debugger] [-PSHost] [-PassThru] [<CommonParameters>]
 ```
 
 ### removeAllListenersSet
+
 ```
 Set-TraceSource [-Name] <String[]> [-RemoveListener <String[]>] [<CommonParameters>]
 ```
 
 ### removeFileListenersSet
+
 ```
 Set-TraceSource [-Name] <String[]> [-RemoveFileListener <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 The **Set-TraceSource** cmdlet configures, starts, and stops a trace of a PowerShell component.
 You can use it to specify which components will be traced and where the tracing output is sent.
 
@@ -146,10 +151,10 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### -Option
@@ -191,17 +196,18 @@ To specify multiple options, separate them with commas, but with no spaces, and 
 Type: PSTraceSourceOptions
 Parameter Sets: optionsSet
 Aliases:
+Accepted values: None, Constructor, Dispose, Finalizer, Method, Property, Delegates, Events, Exception, Lock, Error, Errors, Warning, Verbose, WriteLine, Data, Scope, ExecutionFlow, Assert, All
 
 Required: False
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -PSHost
-ndicates that this cmdlet sends the trace output to the PowerShell host.
-This parameter also selects the PSHost trace listener.
+### -PassThru
+Returns an object representing the item with which you are working.
+By default, this cmdlet does not generate any output.
 
 ```yaml
 Type: SwitchParameter
@@ -215,9 +221,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Returns an object representing the item with which you are working.
-By default, this cmdlet does not generate any output.
+### -PSHost
+ndicates that this cmdlet sends the trace output to the PowerShell host.
+This parameter also selects the PSHost trace listener.
 
 ```yaml
 Type: SwitchParameter
@@ -271,7 +277,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -310,3 +316,5 @@ You can elect to send the trace data to a user-mode or kernel-mode debugger, to 
 [Get-TraceSource](Get-TraceSource.md)
 
 [Trace-Command](Trace-Command.md)
+
+

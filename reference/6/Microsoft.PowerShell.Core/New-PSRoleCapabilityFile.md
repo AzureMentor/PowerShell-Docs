@@ -1,13 +1,13 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821497
-external help file:  System.Management.Automation.dll-Help.xml
-title:  New-PSRoleCapabilityFile
+external help file: System.Management.Automation.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Core
+ms.date: 06/09/2017
+online version: https://go.microsoft.com/fwlink/?linkid=2096157
+schema: 2.0.0
+title: New-PSRoleCapabilityFile
 ---
-
 # New-PSRoleCapabilityFile
 
 ## SYNOPSIS
@@ -26,6 +26,7 @@ New-PSRoleCapabilityFile [-Path] <String> [-Guid <Guid>] [-Author <String>] [-De
 ```
 
 ## DESCRIPTION
+
 The **New-PSRoleCapabilityFile** cmdlet creates a file that defines a set of user capabilities that can be exposed through session configuration files.
 This includes determining which cmdlets, functions, and scripts will be available to users.
 The capability file is a human-readable text file that contains a hash table of session configuration properties and values.
@@ -43,16 +44,18 @@ This cmdlet was introduced in Windows PowerShell 5.0.
 ## EXAMPLES
 
 ### Example 1: Create a blank role capability file
-```
-PS C:\> New-PSRoleCapabilityFile -Path ".\ExampleFile.psrc"
+
+```powershell
+New-PSRoleCapabilityFile -Path ".\ExampleFile.psrc"
 ```
 
 This command creates a new role capability file that uses the default (blank) values.
 The file can later be edited in a text editor to change these configuration settings.
 
 ### Example 2: Create a role capability file that enables users to restart any service and restart any VDI computer
-```
-PS C:\> New-PSRoleCapabilityFile -Path ".\Maintenance.psrc" -Author "User01" -CompanyName "Fabrikam Corporation" -Description "This role capability enables users to restart any service and restart any VDI computer." -ModulesToImport "Microsoft.PowerShell.Core" -VisibleCmdlets "Restart-Service", @{ Name = "Restart-Computer"; Parameters = @{ Name = "ComputerName"; ValidatePattern = "VDI\d+" }}
+
+```powershell
+New-PSRoleCapabilityFile -Path ".\Maintenance.psrc" -Author "User01" -CompanyName "Fabrikam Corporation" -Description "This role capability enables users to restart any service and restart any VDI computer." -ModulesToImport "Microsoft.PowerShell.Core" -VisibleCmdlets "Restart-Service", @{ Name = "Restart-Computer"; Parameters = @{ Name = "ComputerName"; ValidatePattern = "VDI\d+" }}
 ```
 
 This command creates a sample role capability file that enables users to restart any service and to restart any computer that has a host name starting with the string value VDI followed by a number, for example, VDI01, VDI02.
@@ -61,6 +64,7 @@ Name filtering is performed by setting the *ValidatePattern* parameter to the re
 ## PARAMETERS
 
 ### -AliasDefinitions
+
 Adds the specified aliases to sessions that use the role capability file.
 Enter a hash table with the following keys:
 
@@ -94,6 +98,7 @@ Accept wildcard characters: False
 ```
 
 ### -AssembliesToLoad
+
 Specifies the assemblies to load into the sessions that use the role capability file.
 
 ```yaml
@@ -109,6 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -Author
+
 Specifies the user that created the role capability file.
 
 ```yaml
@@ -124,6 +130,7 @@ Accept wildcard characters: False
 ```
 
 ### -CompanyName
+
 Identifies the company that created the role capability file.
 The default value is Unknown.
 
@@ -140,6 +147,7 @@ Accept wildcard characters: False
 ```
 
 ### -Copyright
+
 Specifies a copyright for the role capability file.
 If you omit this parameter, **New-PSRoleCapabilityFile** generates a copyright statement by using the value of the *Author* parameter.
 
@@ -156,6 +164,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
+
 Specifies a description for the role capability file.
 
 ```yaml
@@ -171,6 +180,7 @@ Accept wildcard characters: False
 ```
 
 ### -EnvironmentVariables
+
 Specifies the environment variables for sessions that expose this role capability file.
 Enter a hash table in which the keys are the environment variable names and the values are the environment variable values.
 
@@ -189,6 +199,7 @@ Accept wildcard characters: False
 ```
 
 ### -FormatsToProcess
+
 Specifies the formatting files (.ps1xml) that run in sessions that use the role capability file.
 The value of this parameter must be a full or absolute path of the formatting files.
 
@@ -205,6 +216,7 @@ Accept wildcard characters: False
 ```
 
 ### -FunctionDefinitions
+
 Adds the specified functions to sessions that expose the role capability.
 Enter a hash table with the following keys:
 
@@ -236,6 +248,7 @@ Accept wildcard characters: False
 ```
 
 ### -Guid
+
 Specifies a unique identifier for the role capability file.
 If you omit this parameter, **New-PSRoleCapabilityFile** generates a GUID for the file.
 To create a new GUID in PowerShell, type `\[guid\]::NewGuid()`.
@@ -253,6 +266,7 @@ Accept wildcard characters: False
 ```
 
 ### -ModulesToImport
+
 Specifies the modules that are automatically imported into sessions that use the role capability file.
 By default, all of the commands in listed modules are visible.
 When used with *VisibleCmdlets* or *VisibleFunctions*, the commands visible from the specified modules can be restricted.
@@ -280,6 +294,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
+
 Specifies the path and file name of the role capability file.
 The file must have a .psrc file name extension.
 
@@ -296,6 +311,7 @@ Accept wildcard characters: False
 ```
 
 ### -ScriptsToProcess
+
 Specifies scripts to add to sessions that use the role capability file.
 Enter the path and file names of the scripts.
 The value of this parameter must be a full or absolute path of the script file names.
@@ -313,6 +329,7 @@ Accept wildcard characters: False
 ```
 
 ### -TypesToProcess
+
 Specifies type files (.ps1xml) to add to sessions that use the role capability file.
 Enter the type file names.
 The value of this parameter must be a full or absolute path of the type file names.
@@ -330,20 +347,14 @@ Accept wildcard characters: False
 ```
 
 ### -VariableDefinitions
+
 Specifies variables to add to sessions that use the role capability file.
 Enter a hash table with the following keys:
 
-- Name.
-Name of the variable.
-This key is required.
-- Value.
-Variable value.
-This key is required.
-- Options.
-Variable options.
-This key is optional.
-The default value is None.
-The acceptable values for this parameter are: are None, ReadOnly, Constant, Private, or AllScope.
+- Name. Name of the variable. This key is required.
+- Value. Variable value. This key is required.
+- Options. Variable options. This key is optional. The default value is None. The acceptable values
+  for this parameter are: are None, ReadOnly, Constant, Private, or AllScope.
 
 For example: `@{Name="WarningPreference";Value="SilentlyContinue";Options="AllScope"}`
 
@@ -360,6 +371,7 @@ Accept wildcard characters: False
 ```
 
 ### -VisibleAliases
+
 Limits the aliases in the session to those aliases specified in the value of this parameter, plus any aliases that you define in the *AliasDefinition* parameter.
 Wildcard characters are supported.
 By default, all aliases that are defined by the PowerShell engine and all aliases that modules export are visible in the session.
@@ -377,10 +389,11 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### -VisibleCmdlets
+
 Limits the cmdlets in the session to those specified in the value of this parameter.
 Wildcard characters and Module Qualified Names are supported.
 
@@ -399,10 +412,11 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### -VisibleExternalCommands
+
 Limits the external binaries, scripts and commands that can be executed in the session to those specified in the value of this parameter.
 Wildcard characters are supported.
 
@@ -419,10 +433,11 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### -VisibleFunctions
+
 Limits the functions in the session to those specified in the value of this parameter, plus any functions that you define in the *FunctionDefinitions* parameter.
 Wildcard characters are supported.
 
@@ -440,10 +455,11 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### -VisibleProviders
+
 Limits the PowerShell providers in the session to those specified in the value of this parameter.
 Wildcard characters are supported.
 
@@ -461,11 +477,12 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

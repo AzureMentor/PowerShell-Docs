@@ -1,16 +1,16 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821618
-external help file:  Microsoft.PowerShell.Commands.Management.dll-Help.xml
-title:  Remove-PSDrive
+external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Management
+ms.date: 06/09/2017
+online version: https://go.microsoft.com/fwlink/?linkid=2096405
+schema: 2.0.0
+title: Remove-PSDrive
 ---
 # Remove-PSDrive
 
 ## SYNOPSIS
-
 Deletes temporary PowerShell drives and disconnects mapped network drives.
 
 ## SYNTAX
@@ -37,9 +37,9 @@ Beginning in Windows PowerShell 3.0, `Remove-PSDrive` also disconnects mapped ne
 
 `Remove-PSDrive` cannot delete Windows physical or logical drives.
 
-Beginning in Windows PowerShell 3.0, when an external drive is connected to the computer, Windows PowerShell automatically adds a PSDrive to the file system that represents the new drive.
+Beginning in Windows PowerShell 3.0, when an external drive is connected to the computer, PowerShell automatically adds a PSDrive to the file system that represents the new drive.
 You do not need to restart PowerShell.
-Similarly, when an external drive is disconnected from the computer, Windows PowerShell automatically deletes the PSDrive that represents the removed drive.
+Similarly, when an external drive is disconnected from the computer, PowerShell automatically deletes the PSDrive that represents the removed drive.
 
 ## EXAMPLES
 
@@ -92,7 +92,7 @@ Parameter Sets: LiteralName
 Aliases:
 
 Required: True
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -109,10 +109,10 @@ Parameter Sets: Name
 Aliases:
 
 Required: True
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### -PSProvider
@@ -208,3 +208,5 @@ This cmdlet does not return any output.
 [Get-PSDrive](Get-PSDrive.md)
 
 [New-PSDrive](New-PSDrive.md)
+
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md)

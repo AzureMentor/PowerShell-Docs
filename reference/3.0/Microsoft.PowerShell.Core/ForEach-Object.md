@@ -1,9 +1,9 @@
-﻿---
+---
 ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkID=113300
+online version: https://go.microsoft.com/fwlink/?linkid=113300
 external help file:  System.Management.Automation.dll-Help.xml
 title:  ForEach-Object
 ---
@@ -136,7 +136,7 @@ This example shows the effect of piping the `$Null` automatic variable to the `F
 
 Because Windows PowerShell treats null as an explicit placeholder, the `ForEach-Object` cmdlet generates a value for `$Null`, just as it does for other objects that you pipe to it.
 
-For more information about the `$Null` automatic variable, see about_Automatic_Variables.
+For more information about the `$Null` automatic variable, see [about_Automatic_Variables](./About/about_Automatic_Variables.md).
 
 ### Example 6: Get property values
 

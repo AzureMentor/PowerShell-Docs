@@ -1,9 +1,9 @@
-﻿---
+---
 ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkID=141554
+online version: https://go.microsoft.com/fwlink/?linkid=141554
 external help file:  System.Management.Automation.dll-Help.xml
 title:  New-Module
 ---
@@ -342,7 +342,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](./About/about_CommonParameters.md).
 
 ## INPUTS
 
@@ -359,10 +359,8 @@ If you use the AsCustomObject parameter, it generates a PSCustomObject object.
 If you use the ReturnResult parameter, it returns the result of evaluating the script block in the dynamic module.
 
 ## NOTES
-
-- You can also refer to New-Module by its alias, "nmo". For more information, see about_Aliases.
-
-- 
+* You can also refer to `New-Module` by its alias, `nmo`.
+  For more information, see [about_Aliases](About/about_Aliases.md).
 
 ## RELATED LINKS
 
