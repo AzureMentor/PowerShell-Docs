@@ -1,9 +1,9 @@
-﻿---
+---
 ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkID=113279
+online version: https://go.microsoft.com/fwlink/?linkid=113279
 external help file:  System.Management.Automation.dll-Help.xml
 title:  Add-History
 ---
@@ -65,7 +65,7 @@ PS> get-history -id 5 -count 5 | add-history
 This command adds the first five commands in the history to the end of the history list.
 It uses the Get-History cmdlet to get the five commands ending in command 5.
 The pipeline operator (|) passes them to the **Add-History** cmdlet, which appends them to the current history.
-The **Add-History** command does not include any parameters, but Windows PowerShell associates the objects passed through the pipeline with the **InputObject** parameter of ** Add-History**.
+The **Add-History** command does not include any parameters, but Windows PowerShell associates the objects passed through the pipeline with the **InputObject** parameter of **Add-History**.
 
 ### Example 4
 
@@ -129,7 +129,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](./About/about_CommonParameters.md).
 
 ## INPUTS
 
@@ -146,7 +146,7 @@ Otherwise, this cmdlet does not generate any output.
 
 ## NOTES
 
-- The session history is a list of the commands entered during the session along with the ID. The session history represents the order of execution, the status, and the start and end times of the command. As you enter each command, Windows PowerShell adds it to the history so that you can reuse it.  For more information about the session history, see about_History.
+- The session history is a list of the commands entered during the session along with the ID. The session history represents the order of execution, the status, and the start and end times of the command. As you enter each command, Windows PowerShell adds it to the history so that you can reuse it.  For more information about the session history, see [about_History](./About/about_History.md).
 
   To specify the commands to add to the history, use the **InputObject** parameter.
 The **Add-History** command accepts only **HistoryInfo** objects, such as those returned for each command by the Get-History cmdlet.
@@ -161,8 +161,6 @@ For more information, see the examples.
 If you intend to pass the objects back to **Add-History**, do not use the **NoTypeInformation** parameter of the Export-Csv cmdlet and do not delete the type information, column headings, or any fields in the file.
 
   To edit the session history, export the session to a CSV or XML file, edit the file, import the file, and use **Add-History** to append it to the current session history.
-
-- 
 
 ## RELATED LINKS
 

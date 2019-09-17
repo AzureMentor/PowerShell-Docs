@@ -3,14 +3,16 @@ ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkID=113422
+online version: https://go.microsoft.com/fwlink/?linkid=113422
 external help file:  System.Management.Automation.dll-Help.xml
 title:  Wait-Job
 ---
 
 # Wait-Job
+
 ## SYNOPSIS
 Suppresses the command prompt until one or all of the Windows PowerShell background jobs running in the session are complete.
+
 ## SYNTAX
 
 ### SessionIdParameterSet (Default)
@@ -50,11 +52,12 @@ You can wait until any background job is complete, or until all background jobs 
 When the commands in the job are complete, **Wait-Job** displays the command prompt and returns a job object so that you can pipe it to another command.
 
 You can use **Wait-Job** cmdlet to wait for background jobs, such as those that were started by using the Start-Job cmdlet or the **AsJob** parameter of the Invoke-Command cmdlet.
-For more information about Windows PowerShell background jobs, see about_Jobs.
+For more information about Windows PowerShell background jobs, see [about_Jobs](./About/about_Jobs.md).
 
 Beginning in Windows PowerShell 3.0, the **Wait-Job** cmdlet also waits for custom job types, such as workflow jobs and instances of scheduled jobs.
 To enable **Wait-Job** to wait for jobs of a particular type, import the module that supports the custom job type into the session before running a **Get-Job** command, either by using the Import-Module cmdlet or by using or getting a cmdlet in the module.
 For information about a particular custom job type, see the documentation of the custom job type feature.
+
 ## EXAMPLES
 
 ### Example 1
@@ -63,6 +66,7 @@ PS C:\> Get-Job | Wait-Job
 ```
 
 This command waits for all of the background jobs running in the session to complete.
+
 ### Example 2
 ```
 PS C:\> $s = New-PSSession Server01, Server02, Server03
@@ -87,6 +91,7 @@ This command waits for the Date1 jobs on each computer to complete.
 It stores the resulting collection (array) of job objects in the $done variable.
 
 The fourth command uses the Count property of the array of job objects in the $done variable to determine how many of the jobs are complete.
+
 ### Example 3
 ```
 PS C:\> $s = New-PSSession (Get-Content Machines.txt)
@@ -109,11 +114,13 @@ The **Start-Job** command starts a background job that runs the **Get-EventLog**
 
 The command uses the **Using** scope modifier to indicate that the $c variable was defined on the local computer.
 The **Using** scope modifier is introduced in Windows PowerShell 3.0.
-For more information about the **Using** scope modifier, see about_Remote_Variables (http://go.microsoft.com/fwlink/?LinkID=252653).
+For more information about the **Using** scope modifier, see [about_Remote_Variables](./About/about_Remote_Variables.md).
 
 The fourth command uses the **Invoke-Command** cmdlet to run a **Wait-Job** command in the sessions.
 It uses the **Any** parameter to wait until the first job on the remote computers is complete.
+
 ### Example 4
+
 ```
 PS C:\> $s = New-PSSession Server01, Server02, Server03
 PS C:\> $jobs = Invoke-Command -Session $s -ScriptBlock {Start-Job -ScriptBlock {Get-Date}}
@@ -135,7 +142,9 @@ In this case, after 30 seconds, only the command on the Server02 computer has co
 Wait-Job ends the wait, displays the command prompt, and returns the object that represents the job that was completed.
 
 The $done variable contains a job object that represents the job that ran on Server02.
+
 ### Example 5
+
 ```
 PS C:\> Wait-Job -id 1,2,5 -Any
 ```
@@ -319,7 +328,7 @@ Accept wildcard characters: False
 Waits only for jobs in the specified state.
 Valid values are NotStarted, Running, Completed, Failed, Stopped, Blocked, Suspended, Disconnected, Suspending, Stopping.
 
-For more information about job states, see [JobState Enumeration](https://msdn.microsoft.com/library/system.management.automation.jobstate) in the MSDN library.
+For more information about job states, see [JobState Enumeration](/dotnet/api/system.management.automation.jobstate) in the MSDN library.
 
 ```yaml
 Type: JobState
@@ -372,7 +381,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](./About/about_CommonParameters.md).
 ## INPUTS
 
 ### System.Management.Automation.RemotingJob

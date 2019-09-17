@@ -1,13 +1,13 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821833
-external help file:  Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-title:  New-Event
+external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Utility
+ms.date: 06/09/2017
+online version: https://go.microsoft.com/fwlink/?linkid=2096445
+schema: 2.0.0
+title: New-Event
 ---
-
 # New-Event
 
 ## SYNOPSIS
@@ -21,6 +21,7 @@ New-Event [-SourceIdentifier] <String> [[-Sender] <PSObject>] [[-EventArguments]
 ```
 
 ## DESCRIPTION
+
 The **New-Event** cmdlet creates a new custom event.
 
 You can use custom events to notify users about state changes in your program and any change that your program can detect, including hardware or system conditions, application status, disk status, network status, or the completion of a background job.
@@ -35,6 +36,7 @@ If you do not subscribe to the custom event, to delete the event, you must chang
 ## EXAMPLES
 
 ### Example 1: Create a new event in the event queue
+
 ```
 PS C:\> New-Event -SourceIdentifier Timer -Sender windows.timer -MessageData "Test"
 ```
@@ -43,6 +45,7 @@ This command creates a new event in the PowerShell event queue.
 It uses a **Windows.Timer** object to send the event.
 
 ### Example 2: Raise an event in response to another event
+
 ```
 PS C:\> function Enable-ProcessCreationEvent
 {
@@ -65,42 +68,11 @@ Because the events that **New-Event** raises are automatically added to the Powe
 ## PARAMETERS
 
 ### -EventArguments
+
 Specifies an object that contains options for the event.
 
 ```yaml
 Type: PSObject[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MessageData
-Specifies additional data associated with the event.
-The value of this parameter appears in the **MessageData** property of the event object.
-
-```yaml
-Type: PSObject
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Sender
-Specifies the object that raises the event.
-The default is the PowerShell engine.
-
-```yaml
-Type: PSObject
 Parameter Sets: (All)
 Aliases:
 
@@ -111,7 +83,42 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -MessageData
+
+Specifies additional data associated with the event.
+The value of this parameter appears in the **MessageData** property of the event object.
+
+```yaml
+Type: PSObject
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Sender
+
+Specifies the object that raises the event.
+The default is the PowerShell engine.
+
+```yaml
+Type: PSObject
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SourceIdentifier
+
 Specifies a name for the new event.
 This parameter is required, and it must be unique in the session.
 
@@ -123,18 +130,20 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
+
 You cannot pipe input to this cmdlet.
 
 ## OUTPUTS
@@ -142,6 +151,7 @@ You cannot pipe input to this cmdlet.
 ### System.Management.Automation.PSEventArgs
 
 ## NOTES
+
 * The new custom event, the event subscription, and the event queue exist only in the current session. If you close the current session, the event queue is discarded and the event subscription is canceled.
 
 *
@@ -159,3 +169,5 @@ You cannot pipe input to this cmdlet.
 [Unregister-Event](Unregister-Event.md)
 
 [Wait-Event](Wait-Event.md)
+
+

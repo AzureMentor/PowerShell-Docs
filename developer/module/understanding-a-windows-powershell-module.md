@@ -23,7 +23,7 @@ A module is made up of four basic components:
 
 2. Anything else that the above code file may need, such as additional assemblies, help files, or scripts.
 
-3. A manifest file that describes the above files, as well as stores metadada such as author and versioning information..
+3. A manifest file that describes the above files, as well as stores metadata such as author and versioning information.
 
 4. A directory that contains all of the above content, and is located where PowerShell can reasonably find it.
 
@@ -49,7 +49,7 @@ A *manifest module* is a module that uses a manifest file to describe all of its
 
 ### Dynamic Modules
 
-A *dynamic module* is a module is not loaded from, or saved to, a file. Instead, they are created dynamically by a script, using the [New-Module](/powershell/module/Microsoft.PowerShell.Core/New-Module) cmdlet. This type of module enables a script to create a module on demand that does not need to be loaded or saved to persistent storage. By its nature, a dynamic module is intended to be short-lived, and therefore cannot be accessed by the `Get-Module` cmdlet. Similarly, they usually do not need module manifests, nor do they likely need permanent folders to store their related assemblies.
+A *dynamic module* is a module that is not loaded from, or saved to, a file. Instead, they are created dynamically by a script, using the [New-Module](/powershell/module/Microsoft.PowerShell.Core/New-Module) cmdlet. This type of module enables a script to create a module on demand that does not need to be loaded or saved to persistent storage. By its nature, a dynamic module is intended to be short-lived, and therefore cannot be accessed by the `Get-Module` cmdlet. Similarly, they usually do not need module manifests, nor do they likely need permanent folders to store their related assemblies.
 
 ## Module Manifests
 

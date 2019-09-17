@@ -19,7 +19,7 @@ This sample shows how to build an interactive console-based host application tha
 
 ## Demonstrates
 
-- Creating a custom host whose classes derive from the [System.Management.Automation.Host.Pshost](/dotnet/api/System.Management.Automation.Host.PSHost) class, the [System.Management.Automation.Host.Pshostuserinterface](/dotnet/api/System.Management.Automation.Host.PSHostUserInterface) class, and the [System.Management.Automation.Host.Pshostrawuserinterface](/dotnet/api/System.Management.Automation.Host.PSHostRawUserInterface) class.
+- Creating a custom host whose classes derive from the [System.Management.Automation.Host.PSHost](/dotnet/api/System.Management.Automation.Host.PSHost) class, the [System.Management.Automation.Host.Pshostuserinterface](/dotnet/api/System.Management.Automation.Host.PSHostUserInterface) class, and the [System.Management.Automation.Host.Pshostrawuserinterface](/dotnet/api/System.Management.Automation.Host.PSHostRawUserInterface) class.
 
 - Building a console application that uses these host classes to build an interactive Windows PowerShell shell.
 
@@ -69,7 +69,7 @@ namespace Microsoft.Samples.PowerShell.Host
     private MyHost myHost;
 
     /// <summary>
-    /// Holds a reference to the runspace for this interpeter.
+    /// Holds a reference to the runspace for this interpreter.
     /// </summary>
     private Runspace myRunSpace;
 
@@ -85,7 +85,7 @@ namespace Microsoft.Samples.PowerShell.Host
     private object instanceLock = new object();
 
     /// <summary>
-    /// Gets or sets a value indicating whether the host applcation
+    /// Gets or sets a value indicating whether the host application
     /// should exit.
     /// </summary>
     public bool ShouldExit
@@ -173,7 +173,7 @@ namespace Microsoft.Samples.PowerShell.Host
     /// <summary>
     /// A helper class that builds and executes a pipeline that writes to the
     /// default output path. Any exceptions that are thrown are just passed to
-    /// the caller. Since all output goes to the default outter, this method
+    /// the caller. Since all output goes to the default outputter, this method
     /// returns nothing.
     /// </summary>
     /// <param name="cmd">The script to run</param>
@@ -376,7 +376,7 @@ namespace Microsoft.Samples.PowerShell.Host
 
 ## Example
 
- The following code is the implementation of the [System.Management.Automation.Host.Pshost](/dotnet/api/System.Management.Automation.Host.PSHost) class that is used by this host application. Those elements that are not implemented throw an exception or return nothing.
+ The following code is the implementation of the [System.Management.Automation.Host.PSHost](/dotnet/api/System.Management.Automation.Host.PSHost) class that is used by this host application. Those elements that are not implemented throw an exception or return nothing.
 
 ```csharp
 namespace Microsoft.Samples.PowerShell.Host
@@ -637,7 +637,7 @@ namespace Microsoft.Samples.PowerShell.Host
     /// <param name="caption">Text that proceeds (a title) the choices.</param>
     /// <param name="message">A message that describes the choice.</param>
     /// <param name="choices">A collection of ChoiceDescription objects that
-    /// describ each choice.</param>
+    /// describe each choice.</param>
     /// <param name="defaultChoice">The index of the label in the Choices
     /// parameter collection. To indicate no default choice, set to -1.</param>
     /// <returns>The index of the Choices parameter collection element that
@@ -711,7 +711,7 @@ namespace Microsoft.Samples.PowerShell.Host
     /// <param name="caption">Text that proceeds (a title) the choices.</param>
     /// <param name="message">A message that describes the choice.</param>
     /// <param name="choices">A collection of ChoiceDescription objects that
-    /// describ each choice.</param>
+    /// describe each choice.</param>
     /// <param name="defaultChoices">The index of the label in the Choices
     /// parameter collection. To indicate no default choice, set to -1.</param>
     /// <returns>The index of the Choices parameter collection element that
@@ -897,7 +897,7 @@ namespace Microsoft.Samples.PowerShell.Host
     /// foreground and background colors.
     /// </summary>
     /// <param name="foregroundColor">The color of the characters.</param>
-    /// <param name="backgroundColor">The backgound color to use.</param>
+    /// <param name="backgroundColor">The background color to use.</param>
     /// <param name="value">The characters to be written.</param>
     public override void Write(
                                ConsoleColor foregroundColor,
@@ -917,7 +917,7 @@ namespace Microsoft.Samples.PowerShell.Host
     /// Writes a line of characters to the output display of the host
     /// with foreground and background colors and appends a newline (carriage return).
     /// </summary>
-    /// <param name="foregroundColor">The forground color of the display. </param>
+    /// <param name="foregroundColor">The foreground color of the display. </param>
     /// <param name="backgroundColor">The background color of the display. </param>
     /// <param name="value">The line to be written.</param>
     public override void WriteLine(
@@ -1047,7 +1047,7 @@ namespace Microsoft.Samples.PowerShell.Host
     /// <summary>
     /// This is a private worker function splits out the
     /// accelerator keys from the menu and builds a two
-    /// dimentional array with the first access containing the
+    /// dimensional array with the first access containing the
     /// accelerator and the second containing the label string
     /// with the & removed.
     /// </summary>
@@ -1137,7 +1137,7 @@ namespace Microsoft.Samples.PowerShell.Host
 
     /// <summary>
     /// Gets or sets the foreground color of the text to be written.
-    /// This maps to the corresponding Console.ForgroundColor property.
+    /// This maps to the corresponding Console.ForegroundColor property.
     /// </summary>
     public override ConsoleColor ForegroundColor
     {
@@ -1288,7 +1288,7 @@ namespace Microsoft.Samples.PowerShell.Host
 
 ## See Also
 
- [System.Management.Automation.Host.Pshost](/dotnet/api/System.Management.Automation.Host.PSHost)
+ [System.Management.Automation.Host.PSHost](/dotnet/api/System.Management.Automation.Host.PSHost)
 
  [System.Management.Automation.Host.Pshostuserinterface](/dotnet/api/System.Management.Automation.Host.PSHostUserInterface)
 

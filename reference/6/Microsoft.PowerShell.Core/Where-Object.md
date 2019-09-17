@@ -1,16 +1,16 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821526
-external help file:  System.Management.Automation.dll-Help.xml
-title:  Where-Object
+external help file: System.Management.Automation.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Core
+ms.date: 06/09/2017
+online version: https://go.microsoft.com/fwlink/?linkid=2096187
+schema: 2.0.0
+title: Where-Object
 ---
 # Where-Object
 
 ## SYNOPSIS
-
 Selects objects from a collection based on their property values.
 
 ## SYNTAX
@@ -22,6 +22,7 @@ Where-Object [-InputObject <PSObject>] [-Property] <String> [[-Value] <Object>] 
 ```
 
 ### NotSet
+
 ```
 Where-Object [-Property] <string> -Not [-InputObject <psobject>] [<CommonParameters>]
 ```
@@ -32,10 +33,10 @@ Where-Object [-Property] <string> -Not [-InputObject <psobject>] [<CommonParamet
 Where-Object [-InputObject <PSObject>] [-FilterScript] <ScriptBlock> [<CommonParameters>]
 ```
 
-### CaseSensitiveLikeSet
+### CaseSensitiveLessOrEqualSet
 
 ```
-Where-Object [-InputObject <PSObject>] [-Property] <String> [[-Value] <Object>] [-CLike] [<CommonParameters>]
+Where-Object [-InputObject <PSObject>] [-Property] <String> [[-Value] <Object>] [-CLE] [<CommonParameters>]
 ```
 
 ### CaseSensitiveEqualSet
@@ -98,16 +99,16 @@ Where-Object [-InputObject <PSObject>] [-Property] <String> [[-Value] <Object>] 
 Where-Object [-InputObject <PSObject>] [-Property] <String> [[-Value] <Object>] [-LE] [<CommonParameters>]
 ```
 
-### CaseSensitiveLessOrEqualSet
-
-```
-Where-Object [-InputObject <PSObject>] [-Property] <String> [[-Value] <Object>] [-CLE] [<CommonParameters>]
-```
-
 ### LikeSet
 
 ```
 Where-Object [-InputObject <PSObject>] [-Property] <String> [[-Value] <Object>] [-Like] [<CommonParameters>]
+```
+
+### CaseSensitiveLikeSet
+
+```
+Where-Object [-InputObject <PSObject>] [-Property] <String> [[-Value] <Object>] [-CLike] [<CommonParameters>]
 ```
 
 ### NotLikeSet
@@ -213,7 +214,7 @@ Where-Object [-InputObject <PSObject>] [-Property] <String> [[-Value] <Object>] 
 Where-Object [-InputObject <PSObject>] [-Property] <String> [[-Value] <Object>] [-IsNot] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Where-Object` cmdlet selects objects that have particular property values from the collection of objects that are passed to it.
 For example, you can use the `Where-Object` cmdlet to select files that were created after a certain date, events with a particular ID, or computers that use a particular version of Windows.
@@ -246,7 +247,7 @@ Starting in Windows PowerShell 3.0, there are two different ways to construct a 
   Unless specified, all operators are case-insensitive.
   Prior to Windows PowerShell 3.0, the comparison operators in the PowerShell language could be used only in script blocks.
 
-## Examples
+## EXAMPLES
 
 ### Example 1: Get stopped services
 
@@ -479,25 +480,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -CLT
-
-Indicates that this cmdlet gets objects if the property value is less-than the specified value.
-This operation is case-sensitive.
-
-This parameter was introduced in Windows PowerShell 3.0.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: CaseSensitiveLessThanSet
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -CLike
 
 Indicates that this cmdlet gets objects if the property value matches a value that includes wildcard characters.
@@ -510,6 +492,25 @@ This parameter was introduced in Windows PowerShell 3.0.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: CaseSensitiveLikeSet
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CLT
+
+Indicates that this cmdlet gets objects if the property value is less-than the specified value.
+This operation is case-sensitive.
+
+This parameter was introduced in Windows PowerShell 3.0.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: CaseSensitiveLessThanSet
 Aliases:
 
 Required: True
@@ -853,24 +854,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -LT
-
-Indicates that this cmdlet gets objects if the property value is less than the specified value.
-
-This parameter was introduced in Windows PowerShell 3.0.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: LessThanSet
-Aliases: ILT
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Like
 
 Indicates that this cmdlet gets objects if the property value matches a value that includes wildcard characters.
@@ -883,6 +866,24 @@ This parameter was introduced in Windows PowerShell 3.0.
 Type: SwitchParameter
 Parameter Sets: LikeSet
 Aliases: ILike
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LT
+
+Indicates that this cmdlet gets objects if the property value is less than the specified value.
+
+This parameter was introduced in Windows PowerShell 3.0.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: LessThanSet
+Aliases: ILT
 
 Required: True
 Position: Named
@@ -931,6 +932,7 @@ Accept wildcard characters: False
 ```
 
 ### -Not
+
 Indicates that this cmdlet gets objects if the property does not exist or has a value of null or false.
 
 For example: `Get-Service | where -Not "DependentServices"`
@@ -940,7 +942,7 @@ This parameter was introduced in Windows PowerShell 6.1.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Not
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -1048,7 +1050,7 @@ This parameter was introduced in Windows PowerShell 3.0.
 
 ```yaml
 Type: String
-Parameter Sets: EqualSet, CaseSensitiveLikeSet, CaseSensitiveEqualSet, NotEqualSet, CaseSensitiveNotEqualSet, GreaterThanSet, CaseSensitiveGreaterThanSet, LessThanSet, CaseSensitiveLessThanSet, GreaterOrEqualSet, CaseSensitiveGreaterOrEqualSet, LessOrEqualSet, CaseSensitiveLessOrEqualSet, LikeSet, NotLikeSet, CaseSensitiveNotLikeSet, MatchSet, CaseSensitiveMatchSet, NotMatchSet, CaseSensitiveNotMatchSet, ContainsSet, CaseSensitiveContainsSet, NotContainsSet, CaseSensitiveNotContainsSet, InSet, CaseSensitiveInSet, NotInSet, CaseSensitiveNotInSet, IsSet, IsNotSet
+Parameter Sets: EqualSet, CaseSensitiveLessOrEqualSet, CaseSensitiveEqualSet, NotEqualSet, CaseSensitiveNotEqualSet, GreaterThanSet, CaseSensitiveGreaterThanSet, LessThanSet, CaseSensitiveLessThanSet, GreaterOrEqualSet, CaseSensitiveGreaterOrEqualSet, LessOrEqualSet, LikeSet, CaseSensitiveLikeSet, NotLikeSet, CaseSensitiveNotLikeSet, MatchSet, CaseSensitiveMatchSet, NotMatchSet, CaseSensitiveNotMatchSet, ContainsSet, CaseSensitiveContainsSet, NotContainsSet, CaseSensitiveNotContainsSet, InSet, CaseSensitiveInSet, NotInSet, CaseSensitiveNotInSet, IsSet, IsNotSet
 Aliases:
 
 Required: True
@@ -1060,27 +1062,31 @@ Accept wildcard characters: False
 
 ### -Value
 
-Specifies a property value.
+Specifies a property value. The parameter name, **Value**, is optional. This parameter accepts
+wildcard characters when used with the following comparison parameters:
 
-The parameter name, *Value*, is optional.
+- **CLike**
+- **CNotLike**
+- **Like**
+- **NotLike**
 
 This parameter was introduced in Windows PowerShell 3.0.
 
 ```yaml
 Type: Object
-Parameter Sets: EqualSet, CaseSensitiveLikeSet, CaseSensitiveEqualSet, NotEqualSet, CaseSensitiveNotEqualSet, GreaterThanSet, CaseSensitiveGreaterThanSet, LessThanSet, CaseSensitiveLessThanSet, GreaterOrEqualSet, CaseSensitiveGreaterOrEqualSet, LessOrEqualSet, CaseSensitiveLessOrEqualSet, LikeSet, NotLikeSet, CaseSensitiveNotLikeSet, MatchSet, CaseSensitiveMatchSet, NotMatchSet, CaseSensitiveNotMatchSet, ContainsSet, CaseSensitiveContainsSet, NotContainsSet, CaseSensitiveNotContainsSet, InSet, CaseSensitiveInSet, NotInSet, CaseSensitiveNotInSet, IsSet, IsNotSet
+Parameter Sets: EqualSet, CaseSensitiveLessOrEqualSet, CaseSensitiveEqualSet, NotEqualSet, CaseSensitiveNotEqualSet, GreaterThanSet, CaseSensitiveGreaterThanSet, LessThanSet, CaseSensitiveLessThanSet, GreaterOrEqualSet, CaseSensitiveGreaterOrEqualSet, LessOrEqualSet, LikeSet, CaseSensitiveLikeSet, NotLikeSet, CaseSensitiveNotLikeSet, MatchSet, CaseSensitiveMatchSet, NotMatchSet, CaseSensitiveNotMatchSet, ContainsSet, CaseSensitiveContainsSet, NotContainsSet, CaseSensitiveNotContainsSet, InSet, CaseSensitiveInSet, NotInSet, CaseSensitiveNotInSet, IsSet, IsNotSet
 Aliases:
 
 Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](./About/about_CommonParameters.md).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

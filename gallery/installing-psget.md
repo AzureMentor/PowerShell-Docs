@@ -8,14 +8,14 @@ title:  Installing PowerShellGet
 
 ## PowerShellGet is an in-box module in the following releases
 
-- [Windows 10](https://www.microsoft.com/en-us/windows) or newer
+- [Windows 10](https://www.microsoft.com/windows) or newer
 - [Windows Server 2016](/windows-server/windows-server) or newer
-- [Windows Management Framework (WMF) 5.0](https://www.microsoft.com/en-us/download/details.aspx?id=50395) or newer
+- [Windows Management Framework (WMF) 5.0](https://www.microsoft.com/download/details.aspx?id=50395) or newer
 - [PowerShell 6](https://github.com/PowerShell/PowerShell/releases)
 
 ## Get PowerShellGet module for PowerShell versions 3.0 and 4.0
 
-- [PackageManagement MSI](https://www.microsoft.com/en-us/download/details.aspx?id=51451)
+- [PackageManagement MSI](https://www.microsoft.com/download/details.aspx?id=51451)
 
 ## Get the latest version from PowerShell Gallery
 
@@ -23,7 +23,7 @@ title:  Installing PowerShellGet
   run the following in an elevated PowerShell session.
 
   ```powershell
-  Install-PackageProvider Nuget –Force
+  Install-PackageProvider Nuget -Force
   Exit
   ```
 
@@ -32,7 +32,7 @@ title:  Installing PowerShellGet
 - To do this on Windows 10, Windows Server 2016, any system with WMF 5.0 or 5.1 installed, or any system with PowerShell 6, run the following commands from an elevated PowerShell session.
 
   ```powershell
-  Install-Module –Name PowerShellGet –Force
+  Install-Module -Name PowerShellGet -Force
   Exit
   ```
 
@@ -43,7 +43,7 @@ title:  Installing PowerShellGet
   Exit
   ```
 
-### For systems running PowerShell 3 or PowerShell 4, that have installed the [PackageManagement MSI](https://www.microsoft.com/en-us/download/details.aspx?id=51451)
+### For systems running PowerShell 3 or PowerShell 4, that have installed the [PackageManagement MSI](https://www.microsoft.com/download/details.aspx?id=51451)
 
 - Use below PowerShellGet cmdlet from an elevated PowerShell session to save the modules to a local directory
 
@@ -52,7 +52,7 @@ title:  Installing PowerShellGet
   Exit
   ```
 
-- Ensure that PowerShellGet and PackageManagment modules are not loaded in any other processes.
+- Ensure that PowerShellGet and PackageManagement modules are not loaded in any other processes.
 - Delete contents of `$env:ProgramFiles\WindowsPowerShell\Modules\PowerShellGet\` and  `$env:ProgramFiles\WindowsPowerShell\Modules\PackageManagement\` folders.
 - Re-open the PS Console with elevated permissions then run the following commands.
 

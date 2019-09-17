@@ -1,9 +1,9 @@
-﻿---
+---
 ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkID=210608
+online version: https://go.microsoft.com/fwlink/?linkid=210608
 external help file:  System.Management.Automation.dll-Help.xml
 title:  New-PSTransportOption
 ---
@@ -353,7 +353,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](./About/about_CommonParameters.md).
 
 ## INPUTS
 

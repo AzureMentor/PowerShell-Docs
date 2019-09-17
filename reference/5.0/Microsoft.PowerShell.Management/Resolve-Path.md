@@ -3,15 +3,13 @@ ms.date:  08/23/2018
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821624
+online version: https://go.microsoft.com/fwlink/?linkid=821624
 external help file:  Microsoft.PowerShell.Commands.Management.dll-Help.xml
 title:  Resolve-Path
 ---
-
 # Resolve-Path
 
 ## SYNOPSIS
-
 Resolves the wildcard characters in a path, and displays the path contents.
 
 ## SYNTAX
@@ -188,6 +186,7 @@ Accept wildcard characters: False
 ```
 
 ### -UseTransaction
+
 Includes the command in the active transaction.
 This parameter is valid only when a transaction is in progress.
 For more information, see about_transactions.
@@ -208,7 +207,7 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -239,3 +238,4 @@ Returns a **PathInfo** object. Returns a string value for the resolved path if y
 [Split-Path](Split-Path.md)
 
 [Test-Path](Test-Path.md)
+

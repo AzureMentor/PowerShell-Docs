@@ -43,7 +43,7 @@ None.
 
 |Element|Description|
 |-------------|-----------------|
-|[TableColumnHeader Element for TableHeaders for TbleControl (Format)](./tablecolumnheader-element-format.md)|Defines a label, width, and alignment of the data for a column of the table.|
+|[TableColumnHeader Element for TableHeaders for TableControl (Format)](./tablecolumnheader-element-format.md)|Defines a label, width, and alignment of the data for a column of the table.|
 
 ## Text Value
 
@@ -71,4 +71,4 @@ The following example shows a `TableColumnHeader` element whose width is 16 char
 
 [TableColumnHeader Element for TableHeader for TableControl (Format)](./tablecolumnheader-element-format.md)
 
-[Writing a Windows PowerShell Formatting File](./writing-a-windows-powershell-formatting-file.md)
+[Writing a PowerShell Formatting File](./writing-a-powershell-formatting-file.md)

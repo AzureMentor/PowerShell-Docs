@@ -1,11 +1,12 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell, cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821842
-external help file:  Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-title:  Out-String
+external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Utility
+ms.date: 06/09/2017
+online version: https://go.microsoft.com/fwlink/?linkid=2096958
+schema: 2.0.0
+title: Out-String
 ---
 
 # Out-String
@@ -19,7 +20,7 @@ Sends objects to the host as a series of strings.
 ### NoNewLineFormatting (Default)
 
 ```
-Out-String [-NoNewLine] [-Width <Int32>] [-InputObject <PSObject>] [<CommonParameters>]
+Out-String [-Width <Int32>] [-NoNewline] [-InputObject <PSObject>] [<CommonParameters>]
 ```
 
 ### StreamFormatting
@@ -95,8 +96,8 @@ PS> @{key='value'} | Out-String -NoNewLine
 Name Value  -----  key value
 ```
 
-Not using the **NoNewLine** parameter would have resulted in an output like `a<newline>b<newline>`.
-It should be noted that the **NoNewLine** parameter does not strip newlines embedded within a string but strips out embedded newlines from formatter-generated output. Compare the second and third commands in this examples for clarity.
+Not using `-NoNewLine` would have resulted in an output like `a<newline>b<newline>`.
+It should be noted that `-NoNewLine` does not strip newlines embedded within a string but strips out embedded newlines from formatter-generated output. Compare the second and third commands in this examples for clarity.
 
 ## PARAMETERS
 
@@ -114,6 +115,21 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -NoNewline
+Removes all newlines from formatter generated output. Note that newlines present as part of string objects are preserved
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: NoNewLineFormatting
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -156,26 +172,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -NoNewline
-
-Removes all newlines from formatter generated output.
-Note that newlines present as part of string objects are preserved.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: NoNewLineFormatting
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -207,3 +206,5 @@ You can also store data in a variable and use the **InputObject** parameter to p
 [Out-Host](../Microsoft.PowerShell.Core/Out-Host.md)
 
 [Out-Null](../Microsoft.PowerShell.Core/Out-Null.md)
+
+

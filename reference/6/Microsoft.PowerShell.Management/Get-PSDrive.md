@@ -1,13 +1,13 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?linkid=821591
-external help file:  Microsoft.PowerShell.Commands.Management.dll-Help.xml
-title:  Get-PSDrive
+external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Management
+ms.date: 5/14/2019
+online version: https://go.microsoft.com/fwlink/?linkid=2096198
+schema: 2.0.0
+title: Get-PSDrive
 ---
-
 # Get-PSDrive
 
 ## SYNOPSIS
@@ -16,16 +16,19 @@ Gets drives in the current session.
 ## SYNTAX
 
 ### Name (Default)
+
 ```
-Get-PSDrive [[-Name] <String[]>] [-Scope <String>] [-PSProvider <String[]>] [-UseTransaction] [<CommonParameters>]
+Get-PSDrive [[-Name] <String[]>] [-Scope <String>] [-PSProvider <String[]>] [<CommonParameters>]
 ```
 
 ### LiteralName
+
 ```
-Get-PSDrive [-LiteralName] <String[]> [-Scope <String>] [-PSProvider <String[]>] [-UseTransaction] [<CommonParameters>]
+Get-PSDrive [-LiteralName] <String[]> [-Scope <String>] [-PSProvider <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 The **Get-PSDrive** cmdlet gets the drives in the current session.
 You can get a particular drive or all drives in the session.
 
@@ -45,6 +48,7 @@ Similarly, when an external drive is disconnected from the computer, PowerShell 
 ## EXAMPLES
 
 ### Example 1: Get drives in the current session
+
 ```
 PS C:\> Get-PSDrive
 
@@ -66,6 +70,7 @@ This command gets the drives in the current session.
 The output shows the hard drive (C:), CD-ROM drive (D:), and the drives exposed by the PowerShell providers (Alias:, Cert:, Env:, Function:, HKCU:, HKLM:, and Variable:).
 
 ### Example 2: Get a drive on the computer
+
 ```
 PS C:\foo> Get-PSDrive D
 
@@ -78,6 +83,7 @@ This command gets the D: drive on the computer.
 Note that the drive letter in the command is not followed by a colon.
 
 ### Example 3: Get all the drives that are supported by the PowerShell file system provider
+
 ```
 PS C:\> Get-PSDrive -PSProvider FileSystem
 Name           Used (GB)     Free (GB) Provider      Root
@@ -92,6 +98,7 @@ This command gets all of the drives that are supported by the PowerShell FileSys
 This includes fixed drives, logical partitions, mapped network drives, and temporary drives that you create by using the New-PSDrive cmdlet.
 
 ### Example 4: Check to see if a drive is in use as a PowerShell drive name
+
 ```powershell
 if (Get-PSDrive X -ErrorAction SilentlyContinue) {
 	Write-Host 'The X: drive is already in use.'
@@ -104,6 +111,7 @@ This command checks to see whether the X drive is already in use as a PowerShell
 If it is not, the command uses the `New-PSDrive` cmdlet to create a temporary drive that is mapped to the HKLM:\SOFTWARE registry key.
 
 ### Example 5: Compare the types of files system drives
+
 ```
 PS C:\> Get-PSDrive -PSProvider FileSystem
 Name           Used (GB)     Free (GB) Provider      Root
@@ -168,6 +176,7 @@ Like **net use**, it returns only the persistent G: drive reated by **New-PSDriv
 ## PARAMETERS
 
 ### -LiteralName
+
 Specifies the name of the drive.
 
 The value of *LiteralName* is used exactly as it is typed.
@@ -181,13 +190,14 @@ Parameter Sets: LiteralName
 Aliases:
 
 Required: True
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -Name
+
 Specifies, as a string array, the name or name of drives that this cmdlet gets in the operation.
 Type the drive name or letter without a colon (:).
 
@@ -197,13 +207,14 @@ Parameter Sets: Name
 Aliases:
 
 Required: False
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -PSProvider
+
 Specifies, as a string array, the PowerShell provider.
 This cmdlet gets only the drives supported by this provider.
 Type the name of a provider, such as FileSystem, Registry, or Certificate.
@@ -221,6 +232,7 @@ Accept wildcard characters: False
 ```
 
 ### -Scope
+
 Specifies the scope in which this cmdlet gets the drives.
 
 The acceptable values for this parameter are:
@@ -230,7 +242,7 @@ The acceptable values for this parameter are:
 - Script
 - a number relative to the current scope (0 through the number of scopes, where 0 is the current scope and 1 is its parent).
 "Local" is the default.
-For more information, see about_Scopes (http://go.microsoft.com/fwlink/?LinkID=113260).
+For more information, see [about_Scopes](../Microsoft.PowerShell.Core/about/about_Scopes.md).
 
 ```yaml
 Type: String
@@ -244,39 +256,24 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -UseTransaction
-Includes the command in the active transaction.
-This parameter is valid only when a transaction is in progress.
-For more information, see Includes the command in the active transaction.
-This parameter is valid only when a transaction is in progress.
-For more information, see
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: usetx
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
 
 ## INPUTS
 
 ### None
+
 You cannot pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Management.Automation.PSDriveInfo
+
 This cmdlet returns objects that represent the drives in the session.
 
 ## NOTES
+
 * This cmdlet is designed to work with the data exposed by any provider. To list the providers available in your session, use the **Get-PSProvider** cmdlet. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 * Mapped network drives that are created by using the *Persist* parameter of the New-PSDrive cmdlet are specific to a user account. Mapped network drives that you create in sessions that are started with the Run as administrator option or with the credentials of another user are not visible in sessions that are started without explicit credentials or with the credentials of the current user.
 
@@ -286,6 +283,6 @@ This cmdlet returns objects that represent the drives in the session.
 
 [Remove-PSDrive](Remove-PSDrive.md)
 
-[Get-WmiObject](https://msdn.microsoft.com/en-us/powershell/reference/5.1/Microsoft.PowerShell.Management/Get-WmiObject)
+[Get-WmiObject](../../5.1/Microsoft.PowerShell.Management/Get-WmiObject.md)
 
 [Get-PSProvider](Get-PSProvider.md)

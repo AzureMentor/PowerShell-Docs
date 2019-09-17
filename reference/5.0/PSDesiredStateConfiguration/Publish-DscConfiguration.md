@@ -3,7 +3,7 @@ ms.date:  06/09/2017
 schema:  2.0.0
 locale:  en-us
 keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821460
+online version: https://go.microsoft.com/fwlink/?linkid=821460
 external help file:  Microsoft.Windows.DSC.CoreConfProviders.dll-Help.xml
 title:  Publish-DscConfiguration
 ---
@@ -50,7 +50,7 @@ The user who runs the cmdlet should be administrator on the remote computer.
 
 ### -CimSession
 Runs the cmdlet in a remote session or on a remote computer.
-Enter a computer name or a session object, such as the output of a [New-CimSession](https://docs.microsoft.com/en-us/powershell/module/cimcmdlets/new-cimsession) or [Get-CimSession](https://docs.microsoft.com/en-us/powershell/module/cimcmdlets/get-cimsession) cmdlet.
+Enter a computer name or a session object, such as the output of a [New-CimSession](https://docs.microsoft.com/powershell/module/cimcmdlets/new-cimsession) or [Get-CimSession](https://docs.microsoft.com/powershell/module/cimcmdlets/get-cimsession) cmdlet.
 The default is the current session on the local computer.
 
 ```yaml
@@ -144,7 +144,7 @@ Accept wildcard characters: False
 
 ### -ThrottleLimit
 Specifies the maximum number of concurrent operations that can be established to run the cmdlet.
-If this parameter is omitted or a value of `0` is entered, then Windows PowerShell® calculates an optimum throttle limit for the cmdlet based on the number of CIM cmdlets that are running on the computer.
+If this parameter is omitted or a value of `0` is entered, then Windows PowerShell calculates an optimum throttle limit for the cmdlet based on the number of CIM cmdlets that are running on the computer.
 The throttle limit applies only to the current cmdlet, not to the session or to the computer.
 
 ```yaml
@@ -176,7 +176,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -186,7 +186,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Windows PowerShell Desired State Configuration Overview](http://go.microsoft.com/fwlink/?LinkID=311940)
+[Windows PowerShell Desired State Configuration Overview](https://go.microsoft.com/fwlink/?LinkID=311940)
 
 [Get-DscConfiguration](Get-DscConfiguration.md)
 
@@ -197,3 +197,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 [Start-DscConfiguration](Start-DscConfiguration.md)
 
 [Test-DscConfiguration](Test-DscConfiguration.md)
+
+
+

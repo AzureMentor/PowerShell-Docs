@@ -1,11 +1,12 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821764
-external help file:  Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-title:  Enable-PSBreakpoint
+external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Utility
+ms.date: 06/09/2017
+online version: https://go.microsoft.com/fwlink/?linkid=821764
+schema: 2.0.0
+title: Enable-PSBreakpoint
 ---
 
 # Enable-PSBreakpoint
@@ -124,21 +125,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Id
 Specifies breakpoint IDs that this cmdlet enables.
 The default value is all breakpoints.
@@ -174,6 +160,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -191,7 +192,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -223,3 +224,5 @@ You do not need to enable newly created breakpoints.
 [Remove-PSBreakpoint](Remove-PSBreakpoint.md)
 
 [Set-PSBreakpoint](Set-PSBreakpoint.md)
+
+

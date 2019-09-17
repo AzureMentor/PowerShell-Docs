@@ -1,13 +1,13 @@
 ---
-ms.date:  06/09/2017
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-online version:  http://go.microsoft.com/fwlink/?LinkId=821798
-external help file:  Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-title:  Get-PSCallStack
+external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
+keywords: powershell,cmdlet
+locale: en-us
+Module Name: Microsoft.PowerShell.Utility
+ms.date: 06/09/2017
+online version: https://go.microsoft.com/fwlink/?linkid=2096529
+schema: 2.0.0
+title: Get-PSCallStack
 ---
-
 # Get-PSCallStack
 
 ## SYNOPSIS
@@ -20,6 +20,7 @@ Get-PSCallStack [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 The **Get-PSCallStack** cmdlet displays the current call stack.
 
 Although it is designed to be used with the PowerShell debugger, you can use this cmdlet to display the call stack in a script or function outside of the debugger.
@@ -29,6 +30,7 @@ To run a **Get-PSCallStack** command while in the debugger, type `k` or `Get-PSC
 ## EXAMPLES
 
 ### Example 1: Get the call stack for a function
+
 ```
 PS C:\> function my-alias {
 $p = $args[0]
@@ -79,16 +81,19 @@ The final command is a Step-Out command (o) that exits the debugger and continue
 ## PARAMETERS
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
+
 You cannot pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Management.Automation.CallStackFrame
+
 **Get-PSCallStack** returns an object that represents the items in the call stack.
 
 ## NOTES
@@ -106,3 +111,5 @@ You cannot pipe objects to this cmdlet.
 [Remove-PSBreakpoint](Remove-PSBreakpoint.md)
 
 [Set-PSBreakpoint](Set-PSBreakpoint.md)
+
+
