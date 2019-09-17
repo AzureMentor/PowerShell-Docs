@@ -87,7 +87,7 @@ This example shows how to use the `InputObject` parameter of `Measure-Command`. 
 ```powershell
 # Perform a simple operation to demonstrate the InputObject parameter
 # Note that no output is displayed.
-10, 20, 50 | Measure-Command -Expression {for($i=0; $i - lt $_;$i++) {$i} }
+10, 20, 50 | Measure-Command -Expression {for($i=0; $i -lt $_;$i++) {$i} }
 ```
 
 ```output
@@ -103,6 +103,10 @@ TotalMinutes      : 0.000204453333333333
 TotalSeconds      : 0.0122672
 TotalMilliseconds : 12.2672
 ```
+
+### Example 4: Displaying output of measured command
+
+To display output of expression in `Measure-Command` you can use a pipe to `Out-Default`.
 
 ```powershell
 # Perform the same operation as above adding Out-Default to every execution.
@@ -189,5 +193,3 @@ You can pipe an object to `Measure-Command`.
 [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md)
 
 [Trace-Command](Trace-Command.md)
-
-
