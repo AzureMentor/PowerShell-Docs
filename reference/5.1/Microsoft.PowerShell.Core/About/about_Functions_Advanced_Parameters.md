@@ -1,9 +1,10 @@
 ---
+keywords: powershell,cmdlet
+locale: en-us
 ms.date: 05/20/2019
-schema:  2.0.0
-locale:  en-us
-keywords:  powershell,cmdlet
-title:  about_Functions_Advanced_Parameters
+online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-5.1&WT.mc_id=ps-gethelp
+schema: 2.0.0
+title: about_Functions_Advanced_Parameters
 ---
 
 # About Functions Advanced Parameters
@@ -788,7 +789,7 @@ The syntax is as follows:
 Param(
     [Parameter(Mandatory)]
     [ArgumentCompleter({
-        param ($commandName, $wordToComplete, $commandAst, $fakeBoundParameter)
+        param ($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
         # Perform calculation of tab completed values here.
     })]
 )
