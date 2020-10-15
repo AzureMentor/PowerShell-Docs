@@ -1,7 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
+Module Name: Microsoft.PowerShell.Utility
 ms.date: 02/19/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/write-progress?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
@@ -56,7 +57,7 @@ for($I = 1; $I -lt 101; $I++ )
 }
 ```
 
-```powershell
+```Output
 Updating
 Progress ->
  [ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo]
@@ -113,6 +114,32 @@ The **PercentComplete** parameter value is calculated by dividing the number of 
 been processed `$I` by the total number of events retrieved `$Events.count` and then multiplying
 that result by 100.
 
+### Example 4: Display progress for each level of a nested process
+
+```powershell
+foreach ( $i in 1..10 ) {
+  Write-Progress -Id 0 "Step $i"
+  foreach ( $j in 1..10 ) {
+    Write-Progress -Id 1 -ParentId 0 "Step $i - Substep $j"
+    foreach ( $k in 1..10 ) {
+      Write-Progress -Id 2  -ParentId 1 "Step $i - Substep $j - iteration $k"; start-sleep -m 150
+    }
+  }
+}
+```
+
+```Output
+Step 1
+     Processing
+    Step 1 - Substep 2
+         Processing
+        Step 1 - Substep 2 - Iteration 3
+             Processing
+```
+
+In this example you can use the **ParentId** parameter to have indented output to show parent/child
+relationships in the progress of each step.
+
 ## PARAMETERS
 
 ### -Activity
@@ -121,7 +148,7 @@ Specifies the first line of text in the heading above the status bar.
 This text describes the activity whose progress is being reported.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -138,7 +165,7 @@ Indicates whether the progress bar is visible.
 If this parameter is omitted, `Write-Progress` displays progress information.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -155,7 +182,7 @@ Specifies the line of text below the progress bar.
 This text describes the operation that is currently taking place.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -173,7 +200,7 @@ are creating more than one progress bar in a single command. If the progress bar
 different IDs, they are superimposed instead of being displayed in a series.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -190,7 +217,7 @@ Specifies the parent activity of the current activity.
 Use the value -1 if the current activity has no parent activity.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -207,7 +234,7 @@ Specifies the percentage of the activity that is completed.
 Use the value -1 if the percentage complete is unknown or not applicable.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -224,7 +251,7 @@ Specifies the projected number of seconds remaining until the activity is comple
 Use the value -1 if the number of seconds remaining is unknown or not applicable.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -237,10 +264,11 @@ Accept wildcard characters: False
 
 ### -SourceId
 
-Specifies the source of the record.
+Specifies the source of the record. You can use this in place of **Id** but cannot be used with
+other parameters like **ParentId**.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -257,7 +285,7 @@ Specifies the second line of text in the heading above the status bar.
 This text describes current state of the activity.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 

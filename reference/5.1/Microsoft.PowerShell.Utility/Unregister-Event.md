@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/unregister-event?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -17,11 +17,13 @@ Cancels an event subscription.
 ## SYNTAX
 
 ### BySource (Default)
+
 ```
 Unregister-Event [-SourceIdentifier] <String> [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ById
+
 ```
 Unregister-Event [-SubscriptionId] <Int32> [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
@@ -38,6 +40,7 @@ To delete events, use the Remove-Event cmdlet.
 ## EXAMPLES
 
 ### Example 1: Cancel an event subscription by source identifier
+
 ```
 PS C:\> Unregister-Event -SourceIdentifier "ProcessStarted"
 ```
@@ -48,6 +51,7 @@ To find the source identifier of an event, use the Get-Event cmdlet.
 To find the source identifier of an event subscription, use the **Get-EventSubscriber** cmdlet.
 
 ### Example 2: Cancel an event subscription by subscription identifier
+
 ```
 PS C:\> Unregister-Event -SubscriptionId 2
 ```
@@ -57,6 +61,7 @@ This command cancels the event subscription that has a subscription identifier o
 To find the subscription identifier of an event subscription, use the **Get-EventSubscriber** cmdlet.
 
 ### Example 3: Cancel all event subscriptions
+
 ```
 PS C:\> Get-EventSubscriber -Force | Unregister-Event -Force
 ```
@@ -74,7 +79,7 @@ To complete the task, the *Force* parameter is also required on **Unregister-Eve
 Cancels all event subscriptions, including subscriptions that were hidden by using the *SupportEvent* parameter of **Register-ObjectEvent**, **Register-WmiEvent**, and **Register-EngineEvent**.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -91,7 +96,7 @@ Specifies a source identifier that this cmdlet cancels event subscriptions.
 A *SourceIdentifier* or *SubscriptionId* parameter must be included in every command.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: BySource
 Aliases:
 
@@ -108,7 +113,7 @@ Specifies a source identifier ID that this cmdlet cancels event subscriptions.
 A *SourceIdentifier* or *SubscriptionId* parameter must be included in every command.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: ById
 Aliases:
 
@@ -123,7 +128,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -139,7 +144,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -164,6 +169,7 @@ You can pipe the output from Get-EventSubscriber to **Unregister-Event**.
 This cmdlet does not return any output.
 
 ## NOTES
+
 * Events, event subscriptions, and the event queue exist only in the current session. If you close the current session, the event queue is discarded and the event subscription is canceled.
 
   **Unregister-Event** cannot delete events created by using the New-Event cmdlet unless you have subscribed to the event by using the **Register-EngineEvent** cmdlet.
@@ -188,5 +194,3 @@ To delete a custom event from the session, you must remove it programmatically o
 [Unregister-Event](Unregister-Event.md)
 
 [Wait-Event](Wait-Event.md)
-
-

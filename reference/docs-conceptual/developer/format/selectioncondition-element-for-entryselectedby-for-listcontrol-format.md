@@ -1,13 +1,6 @@
 ---
 title: "SelectionCondition Element for EntrySelectedBy for ListControl (Format) | Microsoft Docs"
-ms.custom: ""
 ms.date: "09/13/2016"
-ms.reviewer: ""
-ms.suite: ""
-ms.tgt_pltfrm: ""
-ms.topic: "article"
-ms.assetid: 7649d5d0-2b56-49b5-a670-dde46caca343
-caps.latest.revision: 11
 ---
 # SelectionCondition Element for EntrySelectedBy for ListControl (Format)
 
@@ -78,6 +71,6 @@ For more information about other components of a list view, see [Creating a List
 
 [SelectionSetName Element for EntrySelectedBy for ListEntry (Format)](./selectionsetname-element-for-entryselectedby-for-listcontrol-format.md)
 
-[TypeName Element for EntrySelectedBy for ListEntry (Format)](/powershell/developer/format/typename-element-for-entryselectedby-for-listcontrol-format)
+[TypeName Element for EntrySelectedBy for ListEntry (Format)](/powershell/scripting/developer/format/typename-element-for-entryselectedby-for-listcontrol-format)
 
 [Writing a PowerShell Formatting File](./writing-a-powershell-formatting-file.md)

@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.Powershell.LocalAccounts.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.LocalAccounts
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.localaccounts/disable-localuser?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -17,16 +17,19 @@ Disables a local user account.
 ## SYNTAX
 
 ### InputObject
+
 ```
 Disable-LocalUser [-InputObject] <LocalUser[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Default
+
 ```
 Disable-LocalUser [-Name] <String[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### SecurityIdentifier
+
 ```
 Disable-LocalUser [-SID] <SecurityIdentifier[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
@@ -36,9 +39,14 @@ The **Disable-LocalUser** cmdlet disables local user accounts.
 When a user account is disabled, the user cannot log on.
 When a user account is enabled, the user can log on.
 
+> [!NOTE]
+> The Microsoft.PowerShell.LocalAccounts module is not available in 32-bit PowerShell on a 64-bit
+> system.
+
 ## EXAMPLES
 
 ### Example 1: Disable an account by specifying a name
+
 ```
 PS C:\> Disable-LocalUser -Name "Admin02"
 ```
@@ -46,6 +54,7 @@ PS C:\> Disable-LocalUser -Name "Admin02"
 This command disables the user account named Admin02.
 
 ### Example 2: Disable an account by using the pipeline
+
 ```
 PS C:\> Get-LocalUser Guest | Disable-LocalUser
 ```
@@ -60,7 +69,7 @@ Specifies an array of user accounts that this cmdlet disables.
 To obtain a user account, use the Get-LocalUser cmdlet.
 
 ```yaml
-Type: LocalUser[]
+Type: Microsoft.PowerShell.Commands.LocalUser[]
 Parameter Sets: InputObject
 Aliases:
 
@@ -75,7 +84,7 @@ Accept wildcard characters: False
 Specifies an array of names of the user accounts that this cmdlet disables.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: Default
 Aliases:
 
@@ -90,7 +99,7 @@ Accept wildcard characters: False
 Specifies an array of user accounts that this cmdlet disables.
 
 ```yaml
-Type: SecurityIdentifier[]
+Type: System.Security.Principal.SecurityIdentifier[]
 Parameter Sets: SecurityIdentifier
 Aliases:
 
@@ -105,7 +114,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -121,7 +130,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -146,6 +155,7 @@ You can pipe a local user, a string, or a SID to this cmdlet.
 This cmdlet does not generate any output.
 
 ## NOTES
+
 * The **PrincipalSource** property is a property on **LocalUser**, **LocalGroup**, and **LocalPrincipal** objects that describes the source of the object. The possible sources are as follows:
 
 - Local
@@ -168,5 +178,3 @@ This cmdlet does not generate any output.
 [Rename-LocalUser](Rename-LocalUser.md)
 
 [Set-LocalUser](Set-LocalUser.md)
-
-

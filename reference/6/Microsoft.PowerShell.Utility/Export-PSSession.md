@@ -1,25 +1,29 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 04/23/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/export-pssession?view=powershell-6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Export-PSSession
 ---
+
 # Export-PSSession
 
 ## SYNOPSIS
+
 Exports commands from another session and saves them in a PowerShell module.
 
 ## SYNTAX
 
+### All
+
 ```
-Export-PSSession [-Session] <PSSession> [-OutputModule] <string> [[-CommandName] <string[]>]
- [[-FormatTypeName] <string[]>] [-Force] [-Encoding <Encoding>] [-AllowClobber]
- [-ArgumentList <Object[]>] [-CommandType <CommandTypes>] [-Module <string[]>]
- [-FullyQualifiedModule <ModuleSpecification[]>] [-Certificate <X509Certificate2>]
+Export-PSSession [-OutputModule] <String> [-Force] [-Encoding <Encoding>]
+ [[-CommandName] <String[]>] [-AllowClobber] [-ArgumentList <Object[]>]
+ [-CommandType <CommandTypes>] [-Module <String[]>] [-FullyQualifiedModule <ModuleSpecification[]>]
+ [[-FormatTypeName] <String[]>] [-Certificate <X509Certificate2>] [-Session] <PSSession>
  [<CommonParameters>]
 ```
 
@@ -66,13 +70,13 @@ formatting data into the Server01 module.
 This example exports all of the `Get` and `Set` commands from a server.
 
 ```powershell
-$S = New-PSSession -ConnectionUri http://exchange.microsoft.com/mailbox -Credential exchangeadmin01@hotmail.com -Authentication Negotiate
-Export-PSSession -Session $R -Module exch* -CommandName Get-*, Set-* -FormatTypeName * -OutputModule $pshome\Modules\Exchange -Encoding ASCII
+$S = New-PSSession -ConnectionUri https://exchange.microsoft.com/mailbox -Credential exchangeadmin01@hotmail.com -Authentication Negotiate
+Export-PSSession -Session $S -Module exch* -CommandName Get-*, Set-* -FormatTypeName * -OutputModule $PSHOME\Modules\Exchange -Encoding ASCII
 ```
 
 These commands export the `Get` and `Set` commands from a Microsoft Exchange Server snap-in on a
-remote computer to an Exchange module in the `$pshome`\Modules directory on the local computer.
-Placing the module in the `$pshome`\Modules directory makes it accessible to all users of the
+remote computer to an Exchange module in the `$PSHOME\Modules` directory on the local computer.
+Placing the module in the `$PSHOME\Modules` directory makes it accessible to all users of the
 computer.
 
 ### Example 3: Export commands from a remote computer
@@ -165,7 +169,7 @@ command hides or replaces the original commands. For more information, see
 [about_Command_Precedence](../Microsoft.PowerShell.Core/About/about_Command_Precedence.md).
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -182,10 +186,10 @@ Exports the variant of the command that results from using the specified argumen
 values).
 
 For example, to export the variant of the `Get-Item` command in the certificate (Cert:) drive in
-the PSSession in `$S`, type `export-pssession -session $S -command get-item -argumentlist cert:`.
+the PSSession in `$S`, type `Export-PSSession -Session $S -Command Get-Item -ArgumentList cert:`.
 
 ```yaml
-Type: Object[]
+Type: System.Object[]
 Parameter Sets: (All)
 Aliases: Args
 
@@ -207,7 +211,7 @@ Certificate (Cert:) drive. If the certificate is not valid or does not have suff
 the command fails.
 
 ```yaml
-Type: X509Certificate2
+Type: System.Security.Cryptography.X509Certificates.X509Certificate2
 Parameter Sets: (All)
 Aliases:
 
@@ -233,7 +237,7 @@ unless you use the **FormatTypeName** parameter. Similarly, if you use the **For
 parameter, no commands are exported unless you use the **CommandName** parameter.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases: Name
 
@@ -264,7 +268,7 @@ The acceptable values for this parameter are as follows:
 - Workflow. A PowerShell workflow. For more information, see [about_Workflows](/powershell/module/psworkflow/about/about_workflows?view=powershell-5.1).
 
 ```yaml
-Type: CommandTypes
+Type: System.Management.Automation.CommandTypes
 Parameter Sets: (All)
 Aliases: Type
 Accepted values: Alias, All, Application, Cmdlet, Configuration, ExternalScript, Filter, Function, Script, Workflow
@@ -278,19 +282,19 @@ Accept wildcard characters: False
 
 ### -Encoding
 
-Specifies the type of encoding for the target file. The default value is **UTF8NoBOM**.
+Specifies the type of encoding for the target file. The default value is `utf8NoBOM`.
 
 The acceptable values for this parameter are as follows:
 
-- **ASCII**: Uses the encoding for the ASCII (7-bit) character set.
-- **BigEndianUnicode**: Encodes in UTF-16 format using the big-endian byte order.
-- **OEM**: Uses the default encoding for MS-DOS and console programs.
-- **Unicode**: Encodes in UTF-16 format using the little-endian byte order.
-- **UTF7**: Encodes in UTF-7 format.
-- **UTF8**: Encodes in UTF-8 format.
-- **UTF8BOM**: Encodes in UTF-8 format with Byte Order Mark (BOM)
-- **UTF8NoBOM**: Encodes in UTF-8 format without Byte Order Mark (BOM)
-- **UTF32**: Encodes in UTF-32 format.
+- `ascii`: Uses the encoding for the ASCII (7-bit) character set.
+- `bigendianunicode`: Encodes in UTF-16 format using the big-endian byte order.
+- `oem`: Uses the default encoding for MS-DOS and console programs.
+- `unicode`: Encodes in UTF-16 format using the little-endian byte order.
+- `utf7`: Encodes in UTF-7 format.
+- `utf8`: Encodes in UTF-8 format.
+- `utf8BOM`: Encodes in UTF-8 format with Byte Order Mark (BOM)
+- `utf8NoBOM`: Encodes in UTF-8 format without Byte Order Mark (BOM)
+- `utf32`: Encodes in UTF-32 format.
 
 Beginning with PowerShell 6.2, the **Encoding** parameter also allows numeric IDs of registered code
 pages (like `-Encoding 1251`) or string names of registered code pages (like
@@ -298,7 +302,7 @@ pages (like `-Encoding 1251`) or string names of registered code pages (like
 [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
 
 ```yaml
-Type: Encoding
+Type: System.Text.Encoding
 Parameter Sets: (All)
 Aliases:
 Accepted values: ASCII, BigEndianUnicode, OEM, Unicode, UTF7, UTF8, UTF8BOM, UTF8NoBOM, UTF32
@@ -315,7 +319,7 @@ Accept wildcard characters: False
 Overwrites one or more existing output files, even if the file has the read-only attribute.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -343,7 +347,7 @@ If you use the **CommandName** parameter, the formatting files for the commands 
 unless you use the **FormatTypeName** parameter.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -357,7 +361,7 @@ Accept wildcard characters: False
 ### -FullyQualifiedModule
 
 Specifies modules with names that are specified in the form of **ModuleSpecification** objects.
-See the Remarks section of [ModuleSpecification Constructor (Hashtable)](https://msdn.microsoft.com/library/jj136290).
+See the Remarks section of [ModuleSpecification Constructor (Hashtable)](/dotnet/api/microsoft.powershell.commands.modulespecification.-ctor#Microsoft_PowerShell_Commands_ModuleSpecification__ctor_System_Collections_Hashtable_).
 
 For example, the **FullyQualifiedModule** parameter accepts a module name that is specified in
 either of these formats:
@@ -371,7 +375,7 @@ either of these formats:
 parameters are mutually exclusive.
 
 ```yaml
-Type: ModuleSpecification[]
+Type: Microsoft.PowerShell.Commands.ModuleSpecification[]
 Parameter Sets: (All)
 Aliases:
 
@@ -391,7 +395,7 @@ For more information, see `Import-Module` and
 [about_PSSnapins](/powershell/module/microsoft.powershell.core/about/about_pssnapins?view=powershell-5.1).
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases: PSSnapin
 
@@ -411,7 +415,7 @@ If the module subdirectory or any of the files that `Export-PSSession` creates a
 command fails. To overwrite existing files, use the **Force** parameter.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases: PSPath, ModuleName
 
@@ -429,7 +433,7 @@ session object or a command that gets a session object, such as a `Get-PSSession
 parameter is required.
 
 ```yaml
-Type: PSSession
+Type: System.Management.Automation.Runspaces.PSSession
 Parameter Sets: (All)
 Aliases:
 

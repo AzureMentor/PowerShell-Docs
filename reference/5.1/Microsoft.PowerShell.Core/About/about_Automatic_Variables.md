@@ -1,7 +1,8 @@
 ---
+description:  Describes variables that store state information for PowerShell. These variables are created and maintained by PowerShell. 
 keywords: powershell,cmdlet
-locale: en-us
-ms.date: 08/12/2019
+Locale: en-US
+ms.date: 08/14/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Automatic_Variables
@@ -28,8 +29,40 @@ Contains the last token in the last line received by the session.
 
 ### $?
 
-Contains the execution status of the last operation. It contains **True** if
-the last operation succeeded and **False** if it failed.
+Contains the execution status of the last command. It contains **True** if
+the last command succeeded and **False** if it failed.
+
+For cmdlets and advanced functions that are run at multiple stages in a
+pipeline, for example in both `process` and `end` blocks, calling
+`this.WriteError()` or `$PSCmdlet.WriteError()` respectively at any point will
+set `$?` to **False**, as will `this.ThrowTerminatingError()` and
+`$PSCmdlet.ThrowTerminatingError()`.
+
+The `Write-Error` cmdlet always sets `$?` to **False** immediately after it is
+executed, but will not set `$?` to **False** for a function calling it:
+
+```powershell
+function Test-WriteError
+{
+    Write-Error "Bad"
+    $? # $false
+}
+
+Test-WriteError
+$? # $true
+```
+
+For the latter purpose, `$PSCmdlet.WriteError()` should be used instead.
+
+For native commands (executables), `$?` is set to **True** when `$LASTEXITCODE`
+is 0, and set to **False** when `$LASTEXITCODE` is any other value.
+
+> [!NOTE]
+> Until PowerShell 7, containing a statement within parentheses `(...)`,
+> subexpression syntax `$(...)` or array expression `@(...)` always reset
+> `$?` to **True**, so that `(Write-Error)` shows `$?` as **True**.
+> This has been changed in PowerShell 7, so that `$?` will always reflect
+> the actual success of the last command run in these expressions.
 
 ### $^
 
@@ -156,9 +189,14 @@ blocks (which are unnamed functions).
   > You cannot use the `$input` variable inside both the Process block and the
   > End block in the same function or script block.
 
+Since `$input` is an enumerator, accessing any of it's properties causes
+`$input` to no longer be available. You can store `$input` in another variable to
+reuse the `$input` properties.
+
 Enumerators contain properties and methods you can use to retrieve loop values
 and change the current loop iteration. For more information, see
 [Using Enumerators](#using-enumerators).
+
 
 ### $LastExitCode
 
@@ -380,12 +418,11 @@ variable is valid in all scripts.
 
 ### $PSCulture
 
-Contains the name of the culture currently in use in the operating system.
-The culture determines the display format of items such as numbers,
-currency, and dates. This is the value of the
-**System.Globalization.CultureInfo.CurrentCulture.Name** property of the
-system. To get the **System.Globalization.CultureInfo** object for the system,
-use the `Get-Culture` cmdlet.
+Contains the name of the culture currently in use in the operating system. The
+culture determines the display format of items such as numbers, currency, and
+dates, and is stored in a **System.Globalization.CultureInfo** object. Use
+`Get-Culture` to display the computer's culture. `$PSCulture` contains the
+**Name** property's value.
 
 ### $PSDebugContext
 
@@ -502,6 +539,9 @@ and change the current loop iteration. For more information, see
 In a script block that defines a script property or script method, the
 `$this` variable refers to the object that is being extended.
 
+In a custom class, the `$this` variable refers to the class object itself
+allowing access to properties and methods defined in the class.
+
 ### $true
 
 Contains **True**. You can use this variable to represent **True** in commands
@@ -534,7 +574,7 @@ the enumerator has passed the end of the collection.
 > [!NOTE]
 > The **Boolean** value returned my **MoveNext** is sent to the output stream.
 > You can suppress the output by typecasting it to `[void]` or piping it to
-> [Out-Null](../Out-Null.md).
+> [Out-Null](xref:Microsoft.PowerShell.Core.Out-Null).
 >
 > ```powershell
 > $input.MoveNext() | Out-Null

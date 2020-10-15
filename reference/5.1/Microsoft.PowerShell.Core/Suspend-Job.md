@@ -1,7 +1,7 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Core
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/suspend-job?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -17,31 +17,37 @@ Temporarily stops workflow jobs.
 ## SYNTAX
 
 ### SessionIdParameterSet (Default)
+
 ```
 Suspend-Job [-Force] [-Wait] [-Id] <Int32[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### JobParameterSet
+
 ```
 Suspend-Job [-Job] <Job[]> [-Force] [-Wait] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### NameParameterSet
+
 ```
 Suspend-Job [-Force] [-Wait] [-Name] <String[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### InstanceIdParameterSet
+
 ```
 Suspend-Job [-Force] [-Wait] [-InstanceId] <Guid[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### FilterParameterSet
+
 ```
 Suspend-Job [-Force] [-Wait] [-Filter] <Hashtable> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### StateParameterSet
+
 ```
 Suspend-Job [-Force] [-Wait] [-State] <JobState> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
@@ -75,6 +81,7 @@ This cmdlet was introduced in Windows PowerShell 3.0.
 ## EXAMPLES
 
 ### Example 1: Suspend a workflow job by name
+
 ```
 The first command creates the Get-SystemLog workflow. The workflow uses the CheckPoint-Workflow activity to define a checkpoint in the workflow.
 #Sample WorkflowWorkflow Get-SystemLog
@@ -103,6 +110,7 @@ Id     Name              PSJobTypeName   State       HasMoreData     Location   
 This example shows how to suspend a workflow job.
 
 ### Example 2: Suspend and resume a workflow job
+
 ```
 The first command suspends the LogWorkflowJob job.The command returns immediately. The output shows that the workflow job is still running, even though it is being suspended.
 PS C:\> Suspend-Job -Name LogWorkflowJob
@@ -126,6 +134,7 @@ Id     Name          PSJobTypeName      State         HasMoreData     Location  
 This example shows how to suspend and resume a workflow job.
 
 ### Example 3: Suspend a workflow job on a remote computer
+
 ```
 PS C:\> Invoke-Command -ComputerName Srv01 -Scriptblock {Suspend-Job -Filter @{CustomID="031589"}
 ```
@@ -135,6 +144,7 @@ The value of the *Filter* parameter is a hash table that specifies a CustomID va
 This **CustomID** is job metadata (**PSPrivateMetadata**).
 
 ### Example 4: Wait for the workflow job to suspend
+
 ```
 PS C:\> Suspend-Job VersionCheck -Wait
 Id     Name          PSJobTypeName      State         HasMoreData     Location             Command
@@ -147,6 +157,7 @@ The command uses the *Wait* parameter to wait until the workflow job is suspende
 When the workflow job runs to the next checkpoint and is suspended, the command finishes and returns the job object.
 
 ### Example 5: Force a workflow job to suspend
+
 ```
 PS C:\> Suspend-Job Maintenance -Force
 ```
@@ -163,7 +174,7 @@ This cmdlet suspends jobs that satisfy all of the conditions.
 Enter a hash table where the keys are job properties and the values are job property values.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: FilterParameterSet
 Aliases:
 
@@ -182,7 +193,7 @@ By default, **Suspend-Job** lets the workflow job run until the next checkpoint 
 You can also use this parameter to suspend workflow jobs that do not have checkpoints.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: F
 
@@ -202,7 +213,7 @@ You can type one or more IDs, separated by commas.
 To find the ID of a job, use the Get-Job cmdlet.
 
 ```yaml
-Type: Int32[]
+Type: System.Int32[]
 Parameter Sets: SessionIdParameterSet
 Aliases:
 
@@ -221,7 +232,7 @@ An instance ID is a GUID that uniquely identifies the job on the computer.
 To find the instance ID of a job, use **Get-Job**.
 
 ```yaml
-Type: Guid[]
+Type: System.Guid[]
 Parameter Sets: InstanceIdParameterSet
 Aliases:
 
@@ -238,7 +249,7 @@ Enter a variable that contains the workflow jobs or a command that gets the work
 You can also pipe workflow jobs to the **Suspend-Job** cmdlet.
 
 ```yaml
-Type: Job[]
+Type: System.Management.Automation.Job[]
 Parameter Sets: JobParameterSet
 Aliases:
 
@@ -255,7 +266,7 @@ Enter one or more workflow job names.
 Wildcard characters are supported.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: NameParameterSet
 Aliases:
 
@@ -287,7 +298,7 @@ The acceptable values for this parameter are:
 For more information about job states, see [JobState Enumeration](https://msdn.microsoft.com/library/system.management.automation.jobstate) in the MSDN library.
 
 ```yaml
-Type: JobState
+Type: System.Management.Automation.JobState
 Parameter Sets: StateParameterSet
 Aliases:
 Accepted values: NotStarted, Running, Completed, Failed, Stopped, Blocked, Suspended, Disconnected, Suspending, Stopping, AtBreakpoint
@@ -306,7 +317,7 @@ By default, **Suspend-Job** returns immediately, even if the workflow job is not
 The *Wait* parameter is equivalent to piping a **Suspend-Job** command to the **Wait-Job** cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -321,7 +332,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -337,7 +348,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -363,6 +374,7 @@ However, if **Suspend-Job** gets a job of an unsupported type, it returns a term
 This cmdlet returns the jobs that it suspended.
 
 ## NOTES
+
 * The mechanism and location for saving a suspended job might vary depending on the job type. For example, suspended workflow jobs are saved in a flat file store by default, but can also be saved in a database.
 * If you submit a workflow job that is not in the Running state, **Suspend-Job** displays a warning message. To suppress the warning, use the *WarningAction* common parameter with a value of SilentlyContinue.
 
@@ -388,6 +400,3 @@ This cmdlet returns the jobs that it suspended.
 [Suspend-Job](Suspend-Job.md)
 
 [Wait-Job](Wait-Job.md)
-
-
-

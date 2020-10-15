@@ -1,9 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/26/2019
+ms.date: 08/22/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/select-string?view=powershell-6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Select-String
@@ -19,24 +19,24 @@ Finds text in strings and files.
 ### File (Default)
 
 ```
-Select-String [-Pattern] <string[]> [-Path] <string[]> [-SimpleMatch] [-CaseSensitive] [-Quiet]
- [-List] [-Include <string[]>] [-Exclude <string[]>] [-NotMatch] [-AllMatches]
+Select-String [-Pattern] <String[]> [-Path] <String[]> [-SimpleMatch] [-CaseSensitive] [-Quiet]
+ [-List] [-Include <String[]>] [-Exclude <String[]>] [-NotMatch] [-AllMatches]
  [-Encoding <Encoding>] [-Context <Int32[]>] [<CommonParameters>]
 ```
 
 ### Object
 
 ```
-Select-String [-Pattern] <string[]> -InputObject <psobject> [-SimpleMatch] [-CaseSensitive] [-Quiet]
- [-List] [-Include <string[]>] [-Exclude <string[]>] [-NotMatch] [-AllMatches]
+Select-String -InputObject <PSObject> [-Pattern] <String[]> [-SimpleMatch] [-CaseSensitive] [-Quiet]
+ [-List] [-Include <String[]>] [-Exclude <String[]>] [-NotMatch] [-AllMatches]
  [-Encoding <Encoding>] [-Context <Int32[]>] [<CommonParameters>]
 ```
 
 ### LiteralFile
 
 ```
-Select-String [-Pattern] <string[]> -LiteralPath <string[]> [-SimpleMatch] [-CaseSensitive] [-Quiet]
- [-List] [-Include <string[]>] [-Exclude <string[]>] [-NotMatch] [-AllMatches]
+Select-String [-Pattern] <String[]> -LiteralPath <String[]> [-SimpleMatch] [-CaseSensitive] [-Quiet]
+ [-List] [-Include <String[]>] [-Exclude <String[]>] [-NotMatch] [-AllMatches]
  [-Encoding <Encoding>] [-Context <Int32[]>] [<CommonParameters>]
 ```
 
@@ -86,7 +86,7 @@ output displays the lines in those files that include the specified string.
 ```powershell
 Get-Alias | Out-File -FilePath .\Alias.txt
 Get-Command | Out-File -FilePath .\Command.txt
-Select-String -Path .\*.txt -Pattern 'Get'
+Select-String -Path .\*.txt -Pattern 'Get-'
 ```
 
 ```Output
@@ -310,11 +310,18 @@ Indicates that the cmdlet searches for more than one match in each line of text.
 parameter, `Select-String` finds only the first match in each line of text.
 
 When `Select-String` finds more than one match in a line of text, it still emits only one
-**MatchInfo** object for the line, but the **Matches** property of the object contains all of the
+**MatchInfo** object for the line, but the **Matches** property of the object contains all the
 matches.
 
+> [!NOTE]
+> This parameter is ignored when used in combination with the **SimpleMatch** parameter. If you wish
+> to return all matches and the pattern that you are searching for contains regular expression
+> characters, you must escape those characters rather than using **SimpleMatch**. See
+> [about_Regular_Expressions](../Microsoft.PowerShell.Core/About/about_Regular_Expressions.md) for
+> more information about escaping regular expressions.
+
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -330,7 +337,7 @@ Accept wildcard characters: False
 Indicates that the cmdlet matches are case-sensitive. By default, matches aren't case-sensitive.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -367,7 +374,7 @@ When the context includes a match, the **MatchInfo** object for each match inclu
 lines, but the overlapping lines appear only once in the display.
 
 ```yaml
-Type: Int32[]
+Type: System.Int32[]
 Parameter Sets: (All)
 Aliases:
 
@@ -380,19 +387,19 @@ Accept wildcard characters: False
 
 ### -Encoding
 
-Specifies the type of encoding for the target file. The default value is **UTF8NoBOM**.
+Specifies the type of encoding for the target file. The default value is `utf8NoBOM`.
 
 The acceptable values for this parameter are as follows:
 
-- **ASCII**: Uses the encoding for the ASCII (7-bit) character set.
-- **BigEndianUnicode**: Encodes in UTF-16 format using the big-endian byte order.
-- **OEM**: Uses the default encoding for MS-DOS and console programs.
-- **Unicode**: Encodes in UTF-16 format using the little-endian byte order.
-- **UTF7**: Encodes in UTF-7 format.
-- **UTF8**: Encodes in UTF-8 format.
-- **UTF8BOM**: Encodes in UTF-8 format with Byte Order Mark (BOM)
-- **UTF8NoBOM**: Encodes in UTF-8 format without Byte Order Mark (BOM)
-- **UTF32**: Encodes in UTF-32 format.
+- `ascii`: Uses the encoding for the ASCII (7-bit) character set.
+- `bigendianunicode`: Encodes in UTF-16 format using the big-endian byte order.
+- `oem`: Uses the default encoding for MS-DOS and console programs.
+- `unicode`: Encodes in UTF-16 format using the little-endian byte order.
+- `utf7`: Encodes in UTF-7 format.
+- `utf8`: Encodes in UTF-8 format.
+- `utf8BOM`: Encodes in UTF-8 format with Byte Order Mark (BOM)
+- `utf8NoBOM`: Encodes in UTF-8 format without Byte Order Mark (BOM)
+- `utf32`: Encodes in UTF-32 format.
 
 Beginning with PowerShell 6.2, the **Encoding** parameter also allows numeric IDs of registered code
 pages (like `-Encoding 1251`) or string names of registered code pages (like
@@ -400,7 +407,7 @@ pages (like `-Encoding 1251`) or string names of registered code pages (like
 [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
 
 ```yaml
-Type: Encoding
+Type: System.Text.Encoding
 Parameter Sets: (All)
 Aliases:
 Accepted values: ASCII, BigEndianUnicode, OEM, Unicode, UTF7, UTF8, UTF8BOM, UTF8NoBOM, UTF32
@@ -418,7 +425,7 @@ Exclude the specified items. The value of this parameter qualifies the **Path** 
 path element or pattern, such as `*.txt`. Wildcards are permitted.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -435,7 +442,7 @@ Includes the specified items. The value of this parameter qualifies the **Path**
 path element or pattern, such as `*.txt`. Wildcards are permitted.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -462,8 +469,8 @@ the collection as a single combined string. `Select-String` returns the strings 
 finds the search text in any string.
 
 ```yaml
-Type: PSObject
-Parameter Sets: Object
+Type: System.Management.Automation.PSObject
+Parameter Sets: ObjectRaw, Object
 Aliases:
 
 Required: True
@@ -476,12 +483,12 @@ Accept wildcard characters: False
 ### -List
 
 Only the first instance of matching text is returned from each input file. This is the most
-efficient way to retrieve a list files that have contents matching the regular expression.
+efficient way to retrieve a list of files that have contents matching the regular expression.
 
 By default, `Select-String` returns a **MatchInfo** object for each match it finds.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -500,9 +507,9 @@ characters, enclose it in single quotation marks. Single quotation marks tell Po
 interpret any characters as escape sequences. For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: LiteralFile
-Aliases: PSPath
+Aliases: PSPath, LP
 
 Required: True
 Position: Named
@@ -516,7 +523,7 @@ Accept wildcard characters: False
 The **NotMatch** parameter finds text that doesn't match the specified pattern.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -536,7 +543,7 @@ Specify files in the directory, such as `log1.txt`, `*.doc`, or `*.*`. If you sp
 directory, the command fails.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: File
 Aliases:
 
@@ -549,13 +556,12 @@ Accept wildcard characters: True
 
 ### -Pattern
 
-Specifies the text to find on each line. Type a string or regular expression. If you type a string,
-use the **SimpleMatch** parameter.
+Specifies the text to find on each line. The pattern value is treated as a regular expression.
 
 To learn about regular expressions, see [about_Regular_Expressions](../Microsoft.PowerShell.Core/About/about_Regular_Expressions.md).
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -572,7 +578,7 @@ Indicates that the cmdlet returns a Boolean value (True or False), instead of a 
 object. The value is True if the pattern is found; otherwise the value is False.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -589,8 +595,14 @@ Indicates that the cmdlet uses a simple match rather than a regular expression m
 match, `Select-String` searches the input for the text in the **Pattern** parameter. It doesn't
 interpret the value of the **Pattern** parameter as a regular expression statement.
 
+Also, when **SimpleMatch** is used, the **Matches** property of the **MatchInfo** object returned is
+empty.
+
+> [!NOTE]
+> When this parameter is used with the **AllMatches** parameter, the **AllMatches** is ignored.
+
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -627,7 +639,7 @@ the **Quiet** parameter, the output is a Boolean value indicating whether the pa
 The **sls** alias for the `Select-String` cmdlet was introduced in PowerShell 3.0.
 
 > [!NOTE]
-> According to [Approved Verbs for PowerShell Commands](/powershell/developer/cmdlet/approved-verbs-for-windows-powershell-commands),
+> According to [Approved Verbs for PowerShell Commands](/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands),
 > the official alias prefix for `Select-*` cmdlets is `sc`, not `sl`. Therefore, the proper alias
 > for `Select-String` should be `scs`, not `sls`. This is an exception to this rule.
 
@@ -640,8 +652,9 @@ parameter. To specify the text to be searched, use the following criteria:
 - If the text is stored in files, use the **Path** parameter to specify the path to the files.
 
 By default, `Select-String` interprets the value of the **Pattern** parameter as a regular
-expression. (For more information, see [about_Regular_Expressions](../Microsoft.PowerShell.Core/About/about_Regular_Expressions.md).
-You can use the **SimpleMatch** parameter to override the regular expression matching. The
+expression. For more information, see
+[about_Regular_Expressions](../Microsoft.PowerShell.Core/About/about_Regular_Expressions.md). You
+can use the **SimpleMatch** parameter to override the regular expression matching. The
 **SimpleMatch** parameter finds instances of the value of the **Pattern** parameter in the input.
 
 The default output of `Select-String` is a **MatchInfo** object, which includes detailed information
@@ -654,7 +667,7 @@ If you don't need the information in the **MatchInfo** object, use the **Quiet**
 instead of a **MatchInfo** object.
 
 When matching phrases, `Select-String` uses the current culture that is set for the system. To find
-the current culture, use the Get-Culture cmdlet.
+the current culture, use the `Get-Culture` cmdlet.
 
 To find the properties of a **MatchInfo** object, type the following command:
 

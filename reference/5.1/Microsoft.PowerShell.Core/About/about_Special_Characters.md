@@ -1,7 +1,8 @@
 ---
+description:  Describes the special character sequences that control how PowerShell interprets the next characters in the sequence. 
 keywords: powershell,cmdlet
-locale: en-us
-ms.date: 08/05/2019
+Locale: en-US
+ms.date: 04/04/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_special_characters?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Special_Characters
@@ -11,31 +12,44 @@ title: about_Special_Characters
 
 ## Short description
 
-Describes the special characters that you can use to control how PowerShell
-interprets the next character in a command or parameter.
+Describes the special character sequences that control how PowerShell
+interprets the next characters in the sequence.
 
 ## Long description
 
 PowerShell supports a set of special character sequences that are used to
-represent characters that aren't part of the standard character set.
+represent characters that aren't part of the standard character set. The
+sequences are commonly known as _escape sequences_.
 
-PowerShell's special characters are only interpreted when they're enclosed in
-double-quoted (`"`) strings. Special characters begin with the backtick
-character, known as the grave accent (ASCII 96), and are case-sensitive.
+Escape sequences begin with the backtick character, known as the grave accent
+(ASCII 96), and are case-sensitive. The backtick character can also be referred
+to as the _escape character_.
 
-PowerShell recognizes these special characters:
+Escape sequences are only interpreted when contained in double-quoted (`"`)
+strings.
 
-| Character | Description             |
-| --------- | ----------------------- |
-| `` `0 ``  | Null                    |
-| `` `a ``  | Alert                   |
-| `` `b ``  | Backspace               |
-| `` `f ``  | Form feed               |
-| `` `n ``  | New line                |
-| `` `r ``  | Carriage return         |
-| `` `t ``  | Horizontal tab          |
-| `` `v ``  | Vertical tab            |
-| `--%`     | Stop parsing            |
+PowerShell recognizes these escape sequences:
+
+|  Sequence   |       Description       |
+| ----------- | ----------------------- |
+| `` `0 ``    | Null                    |
+| `` `a ``    | Alert                   |
+| `` `b ``    | Backspace               |
+| `` `f ``    | Form feed               |
+| `` `n ``    | New line                |
+| `` `r ``    | Carriage return         |
+| `` `t ``    | Horizontal tab          |
+| `` `v ``    | Vertical tab            |
+
+PowerShell also has a special token to mark where you want parsing to stop. All
+characters that follow this token are used as literal values that aren't
+interpreted.
+
+Special parsing token:
+
+| Sequence |            Description             |
+| -------- | ---------------------------------- |
+| `--%`    | Stop parsing anything that follows |
 
 ## Null (`0)
 
@@ -97,19 +111,21 @@ between the words.
 
 ## Carriage return (`r)
 
-The carriage return (`` `r ``) character eliminates the entire line before the
-character's insertion point. The carriage returns functions as though the prior
-text were on a different line.
+The carriage return (`` `r ``) character moves the output cursor to the
+beginning of the current line and continues writing. Any characters on the
+current line are overwritten.
 
-In this example, the text before the carriage return is removed from the
-output.
+In this example, the text before the carriage return is overwritten.
 
 ```powershell
-Write-Host "Let's not move`rDelete everything before this point."
+Write-Host "These characters are overwritten.`rI want this text instead "
 ```
 
+Notice that the text before the `` `r `` character is not deleted, it is
+overwritten.
+
 ```Output
-Delete everything before this point.
+I want this text instead written.
 ```
 
 ## Horizontal tab (`t)
@@ -131,30 +147,64 @@ Column1         Column2         Column3
 ## Vertical tab (`v)
 
 The horizontal tab (`` `v ``) character advances to the next vertical tab stop
-and writes all subsequent output beginning at that point. The vertical tab
-character only affects printed documents. It doesn't affect screen output.
+and writes the remaining output at that point. This has no effect in the
+default Windows console.
 
-## Stop parsing  (--%)
+```powershell
+Write-Host "There is a vertical tab`vbetween the words."
+```
 
-The stop-parsing (`--%`) symbol prevents PowerShell from interpreting arguments
-in program calls as PowerShell commands and expressions.
+The following example shows the output you would get on a printer or in a
+different console host.
 
-Place the stop-parsing symbol after the program name and before program
+```Output
+There is a vertical tab
+                       between the words.
+```
+
+## Stop-parsing token (--%)
+
+The stop-parsing (`--%`) token prevents PowerShell from interpreting strings as
+PowerShell commands and expressions. This allows those strings to be passed to
+other programs for interpretation.
+
+Place the stop-parsing token after the program name and before program
 arguments that might cause errors.
 
-In this example, the `Icacls` command uses the stop-parsing symbol.
+In this example, the `Icacls` command uses the stop-parsing token.
 
 ```powershell
 icacls X:\VMS --% /grant Dom\HVAdmin:(CI)(OI)F
 ```
 
-PowerShell sends the following command to `Icacls`.
+PowerShell sends the following string to `Icacls`.
 
-```Output
+```
 X:\VMS /grant Dom\HVAdmin:(CI)(OI)F
 ```
 
-For more information about the stop-parsing symbol, see [about_Parsing](about_Parsing.md).
+Here is another example. The **showArgs** function outputs the values passed to
+it. In this example, we pass the variable named `$HOME` to the function twice.
+
+```powershell
+function showArgs {
+  "`$args = " + ($args -join '|')
+}
+
+showArgs $HOME --% $HOME
+```
+
+You can see in the output that, for the first parameter, the variable `$HOME`
+is interpreted by PowerShell so that the value of the variable is passed to the
+function. The second use of `$HOME` comes after the stop-parsing token, so the
+string "$HOME" is passed to the function without interpretation.
+
+```Output
+$args = C:\Users\username|--%|$HOME
+```
+
+For more information about the stop-parsing token, see
+[about_Parsing](about_Parsing.md).
 
 ## See also
 

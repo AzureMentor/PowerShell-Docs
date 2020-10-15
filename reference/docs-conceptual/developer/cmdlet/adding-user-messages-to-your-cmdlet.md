@@ -1,11 +1,6 @@
 ---
 title: "Adding User Messages to Your Cmdlet | Microsoft Docs"
-ms.custom: ""
 ms.date: "09/13/2016"
-ms.reviewer: ""
-ms.suite: ""
-ms.tgt_pltfrm: ""
-ms.topic: "article"
 helpviewer_keywords:
   - "WriteWarning"
   - "notifications, writing"
@@ -29,8 +24,6 @@ helpviewer_keywords:
   - "warning"
   - "code sample, user notifications"
   - "user notifications"
-ms.assetid: 14c13acb-f0b7-4613-bc7d-c361d14da1a2
-caps.latest.revision: 8
 ---
 # Adding User Messages to Your Cmdlet
 
@@ -222,7 +215,7 @@ When your cmdlet has been registered with Windows PowerShell, you can test it by
     PS> stop-proc -Name notepad -Verbose -Debug
     ```
 
-The following output appears.
+    The following output appears.
 
     ```
     VERBOSE: Attempting to stop process " notepad ".
@@ -243,7 +236,7 @@ The following output appears.
 
 [Create a Cmdlet that Modifies the System](./creating-a-cmdlet-that-modifies-the-system.md)
 
-[How to Create a Windows PowerShell Cmdlet](/powershell/developer/cmdlet/writing-a-windows-powershell-cmdlet)
+[How to Create a Windows PowerShell Cmdlet](/powershell/scripting/developer/cmdlet/writing-a-windows-powershell-cmdlet)
 
 [Extending Object Types and Formatting](/previous-versions//ms714665(v=vs.85))
 

@@ -8,7 +8,6 @@ title:  JEA Prerequisites
 Just Enough Administration is a feature included in PowerShell 5.0 and higher. This article
 describes the prerequisites that must be satisfied to start using JEA.
 
-
 ## Check which version of PowerShell is installed
 
 To check which version of PowerShell is installed on your system, check the `$PSVersionTable`
@@ -60,7 +59,7 @@ You can also use JEA on your home or work computer:
 ### Install Windows Management Framework
 
 If you're running an older version of PowerShell, you may need to update your system with the latest
-Windows Management Framework (WMF) update. For more information, see the [WMF documentation](/powershell/wmf/overview).
+Windows Management Framework (WMF) update. For more information, see the [WMF documentation](/powershell/scripting/wmf/overview).
 
 It's recommended that you test your workload's compatibility with WMF before upgrading all of your
 servers.

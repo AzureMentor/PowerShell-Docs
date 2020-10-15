@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Management
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/split-path?view=powershell-6&WT.mc_id=ps-gethelp
@@ -18,13 +18,15 @@ Returns the specified part of a path.
 ### ParentSet (Default)
 
 ```
-Split-Path [-Path] <String[]> [-Parent] [-Resolve] [-Credential <PSCredential>] [<CommonParameters>]
+Split-Path [-Path] <String[]> [-Parent] [-Resolve] [-Credential <PSCredential>]
+ [<CommonParameters>]
 ```
 
-### ExtensionSet
+### QualifierSet
 
 ```
-Split-Path [-Path] <String[]> [-Extension] [-Resolve] [-Credential <PSCredential>] [<CommonParameters>]
+Split-Path [-Path] <String[]> [[-Qualifier]] [-Resolve] [-Credential <PSCredential>]
+ [<CommonParameters>]
 ```
 
 ### LeafSet
@@ -36,25 +38,29 @@ Split-Path [-Path] <String[]> [-Leaf] [-Resolve] [-Credential <PSCredential>] [<
 ### LeafBaseSet
 
 ```
-Split-Path [-Path] <String[]> [-LeafBase] [-Resolve] [-Credential <PSCredential>] [<CommonParameters>]
+Split-Path [-Path] <String[]> [-LeafBase] [-Resolve] [-Credential <PSCredential>]
+ [<CommonParameters>]
 ```
 
-### QualifierSet
+### ExtensionSet
 
 ```
-Split-Path [-Path] <String[]> [-Qualifier] [-Resolve] [-Credential <PSCredential>] [<CommonParameters>]
+Split-Path [-Path] <String[]> [-Extension] [-Resolve] [-Credential <PSCredential>]
+ [<CommonParameters>]
 ```
 
 ### NoQualifierSet
 
 ```
-Split-Path [-Path] <String[]> [-NoQualifier] [-Resolve] [-Credential <PSCredential>] [<CommonParameters>]
+Split-Path [-Path] <String[]> [-NoQualifier] [-Resolve] [-Credential <PSCredential>]
+ [<CommonParameters>]
 ```
 
 ### IsAbsoluteSet
 
 ```
-Split-Path [-Path] <String[]> [-Resolve] [-IsAbsolute] [-Credential <PSCredential>] [<CommonParameters>]
+Split-Path [-Path] <String[]> [-Resolve] [-IsAbsolute] [-Credential <PSCredential>]
+ [<CommonParameters>]
 ```
 
 ### LiteralPathSet
@@ -154,7 +160,7 @@ The path is enclosed in quotation marks to indicate that it is a single token.
 > use [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md).
 
 ```yaml
-Type: PSCredential
+Type: System.Management.Automation.PSCredential
 Parameter Sets: (All)
 Aliases:
 
@@ -173,7 +179,7 @@ For example, in the path `C:\Test\Logs\Pass1.log`, it returns only `.log`.
 This parameter was introduced in PowerShell 6.0.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: ExtensionSet
 Aliases:
 
@@ -190,7 +196,7 @@ Indicates that this cmdlet returns $True if the path is absolute and $False if i
 An absolute path has a length greater than zero and does not use a dot (.) to indicate the current path.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: IsAbsoluteSet
 Aliases:
 
@@ -207,7 +213,7 @@ Indicates that this cmdlet returns only the last item or container in the path.
 For example, in the path `C:\Test\Logs\Pass1.log`, it returns only Pass1.log.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: LeafSet
 Aliases:
 
@@ -226,7 +232,7 @@ For example, in the path `C:\Test\Logs\Pass1.log`, it returns only `Pass1`.
 This parameter was introduced in PowerShell 6.0.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: LeafBaseSet
 Aliases:
 
@@ -246,9 +252,9 @@ If the path includes escape characters, enclose it in single quotation marks.
 Single quotation marks tell PowerShell not to interpret any characters as escape sequences.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: LiteralPathSet
-Aliases: PSPath
+Aliases: PSPath, LP
 
 Required: True
 Position: Named
@@ -264,7 +270,7 @@ For the FileSystem or registry providers, the qualifier is the drive of the prov
 For example, in the path `C:\Test\Logs\Pass1.log`, it returns only \Test\Logs\Pass1.log.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: NoQualifierSet
 Aliases:
 
@@ -282,7 +288,7 @@ For example, in the path `C:\Test\Logs\Pass1.log`, it returns C:\Test\Logs.
 The *Parent* parameter is the default split location parameter.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: ParentSet
 Aliases:
 
@@ -301,8 +307,8 @@ If the path includes spaces, enclose it in quotation marks.
 You can also pipe a path to this cmdlet.
 
 ```yaml
-Type: String[]
-Parameter Sets: ParentSet, ExtensionSet, LeafSet, LeafBaseSet, QualifierSet, NoQualifierSet, IsAbsoluteSet
+Type: System.String[]
+Parameter Sets: ParentSet, LeafSet, LeafBaseSet, ExtensionSet, QualifierSet, NoQualifierSet, IsAbsoluteSet
 Aliases:
 
 Required: True
@@ -318,7 +324,7 @@ Indicates that this cmdlet returns only the qualifier of the specified path.
 For the FileSystem or registry providers, the qualifier is the drive of the provider path, such as C: or HKCU:.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: QualifierSet
 Aliases:
 
@@ -334,7 +340,7 @@ Accept wildcard characters: False
 Indicates that this cmdlet displays the items that are referenced by the resulting split path instead of displaying the path elements.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -379,8 +385,6 @@ These include the FileSystem, Registry, and Certificate providers.
 To list the providers available in your session, type `Get-PSProvider`.
 For more information, see about_Providers.
 
-*
-
 ## RELATED LINKS
 
 [Convert-Path](Convert-Path.md)
@@ -390,5 +394,3 @@ For more information, see about_Providers.
 [Resolve-Path](Resolve-Path.md)
 
 [Test-Path](Test-Path.md)
-
-

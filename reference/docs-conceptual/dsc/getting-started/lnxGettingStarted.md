@@ -9,25 +9,14 @@ This topic explains how to get started using PowerShell Desired State Configurat
 
 ## Supported Linux operation system versions
 
-The following Linux operating system versions are supported for DSC for Linux.
+The following Linux operating system versions are supported by DSC for Linux.
 
 - CentOS 5, 6, and 7 (x86/x64)
 - Debian GNU/Linux 6, 7 and 8 (x86/x64)
 - Oracle Linux 5, 6 and 7 (x86/x64)
 - Red Hat Enterprise Linux Server 5, 6 and 7 (x86/x64)
 - SUSE Linux Enterprise Server 10, 11 and 12 (x86/x64)
-- Ubuntu Server 12.04 LTS, 14.04 LTS and 16.04 LTS (x86/x64)
-
-The following table describes the required package dependencies for DSC for Linux.
-
-|  Required package |  Description |  Minimum version |
-|---|---|---|
-| glibc| GNU Library| 2…4 – 31.30|
-| python| Python| 2.4 – 3.4|
-| omiserver| Open Management Infrastructure| 1.0.8.1|
-| openssl| OpenSSL Libraries| 0.9.8 or 1.0|
-| ctypes| Python CTypes library| Must match Python version|
-| libcurl| cURL http client library| 7.15.1|
+- Ubuntu Server 12.04 LTS, 14.04 LTS, 16.04 LTS (x86/x64)
 
 ## Installing DSC for Linux
 
@@ -122,7 +111,7 @@ $Sess=New-CimSession -Credential $credential -ComputerName $Node -Port 5986 -Aut
 > [!NOTE]
 > For "Push" mode, the user credential must be the root user on the Linux computer.
 > Only SSL/TLS connections are supported for DSC for Linux, the `New-CimSession` must be used with the –UseSSL parameter set to $true.
-> The SSL certificate used by OMI (for DSC) is specified in the file: `/opt/omi/etc/omiserver.conf` with the properties: pemfile and keyfile.
+> The SSL certificate used by OMI (for DSC) is specified in the file: `/etc/opt/omi/conf/omiserver.conf` with the properties: pemfile and keyfile.
 > If this certificate is not trusted by the Windows computer that you are running the [New-CimSession](/powershell/module/CimCmdlets/New-CimSession) cmdlet on, you can choose to ignore certificate validation with the CIMSession Options: `-SkipCACheck $true -SkipCNCheck $true -SkipRevocationCheck $true`
 
 Run the following command to push the DSC configuration to the Linux node.

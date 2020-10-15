@@ -1,13 +1,14 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 10/28/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/out-printer?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Out-Printer
 ---
+
 # Out-Printer
 
 ## SYNOPSIS
@@ -30,12 +31,12 @@ specified.
 
 ## EXAMPLES
 
-### Example 1 - send a file to be printed on the default printer
+### Example 1 - Send a file to be printed on the default printer
 
 This example shows how to print a file, even though `Out-Printer` does not have a **Path** parameter.
 
 ```powershell
-Get-Help ./readme.txt | Out-Printer
+Get-Content -Path ./readme.txt | Out-Printer
 ```
 
 `Get-Content`gets the contents of the `readme.txt` file in the current directory and pipes it to
@@ -71,7 +72,7 @@ Specifies the objects to be sent to the printer. Enter a variable that contains 
 a command or expression that gets the objects.
 
 ```yaml
-Type: PSObject
+Type: System.Management.Automation.PSObject
 Parameter Sets: (All)
 Aliases:
 
@@ -87,7 +88,7 @@ Accept wildcard characters: False
 Sends the output to the specified printer. The parameter name **Name** is optional.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases: PrinterName
 

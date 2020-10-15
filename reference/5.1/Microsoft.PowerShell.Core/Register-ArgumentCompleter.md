@@ -1,7 +1,7 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Core
 ms.date: 5/20/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/register-argumentcompleter?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -12,6 +12,7 @@ title: Register-ArgumentCompleter
 # Register-ArgumentCompleter
 
 ## SYNOPSIS
+
 Registers a custom argument completer.
 
 ## SYNTAX
@@ -78,15 +79,15 @@ cmdlet and only returns running services.
 ```powershell
 $s = {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
-    $services = Get-Service | Where-Object {$_.Status -eq "Running" }
-    $services | Where-Object { $_.Name -like "$wordToComplete*" } | ForEach-Object {
-        New-Object -Type System.Management.Automation.CompletionResult -ArgumentList $_,
-            $_,
+    $services = Get-Service | Where-Object {$_.Status -eq "Running" -and $_.Name -like "$wordToComplete*"}
+    $services | ForEach-Object {
+        New-Object -Type System.Management.Automation.CompletionResult -ArgumentList $_.Name,
+            $_.Name,
             "ParameterValue",
-            $_
+            $_.Name
     }
 }
-Register-ArgumentCompleter -CommandName dotnet -Native -ScriptBlock $s
+Register-ArgumentCompleter -CommandName Stop-Service -ParameterName Name -ScriptBlock $s
 ```
 
 The first command creates a script block which takes the required parameters which are passed in
@@ -123,11 +124,11 @@ example adds tab-completion for the `dotnet` Command Line Interface (CLI).
 
 ```powershell
 $scriptblock = {
-     param($commandName, $wordToComplete, $cursorPosition)
-         dotnet complete --position $cursorPosition "$wordToComplete" | ForEach-Object {
+    param($wordToComplete, $commandAst, $cursorPosition)
+        dotnet complete --position $cursorPosition $commandAst.ToString() | ForEach-Object {
             [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
-         }
- }
+        }
+}
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock $scriptblock
 ```
 
@@ -147,14 +148,15 @@ to create a new **CompletionResult** object for each value.
 Specifies the name of the commands as an array.
 
 ```yaml
-Accept pipeline input: False
-Position: Named
-Accept wildcard characters: False
+Type: System.String[]
 Parameter Sets: NativeSet, PowerShellSet
-Required: True (NativeSet), False (PowerShellSet)
-Default value: None
 Aliases:
-Type: String[]
+
+Required: True (NativeSet), False (PowerShellSet)
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
 ### -Native
@@ -163,7 +165,7 @@ Indicates that the argument completer is for a native command where PowerShell c
 parameter names.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: NativeSet
 Aliases:
 
@@ -182,7 +184,7 @@ cannot be an enumerated value, such as the **ForegroundColor** parameter of the 
 For more information on enums, see [about_Enum](./About/about_Enum.md).
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: PowerShellSet
 Aliases:
 
@@ -221,11 +223,12 @@ When you specify the **Native** parameter, the script block must take the follow
 the specified order. The names of the parameters aren't important because PowerShell passes in the
 values by position.
 
-- `$commandName` (Position 0) - This parameter is set to the name of the
-  command for which the script block is providing tab completion.
-- `$wordToComplete` (Position 1) - This parameter is set to value the user has
-  provided before they pressed <kbd>Tab</kbd>. Your script block should use this value
-  to determine tab completion values.
+- `$wordToComplete` (Position 0) - This parameter is set to value the user has provided before they
+  pressed <kbd>Tab</kbd>. Your script block should use this value to determine tab completion
+  values.
+- `$commandAst` (Position 1) - This parameter is set to the Abstract Syntax
+  Tree (AST) for the current input line. For more information, see
+  [Ast Class](/dotnet/api/system.management.automation.language.ast).
 - `$cursorPosition` (Position 2) - This parameter is set to the position of the cursor when the user
   pressed <kbd>Tab</kbd>.
 
@@ -233,7 +236,7 @@ You can also provide an **ArgumentCompleter** as a parameter attribute. For more
 [about_Functions_Advanced_Parameters](./About/about_Functions_Advanced_Parameters.md).
 
 ```yaml
-Type: ScriptBlock
+Type: System.Management.Automation.ScriptBlock
 Parameter Sets: (All)
 Aliases:
 

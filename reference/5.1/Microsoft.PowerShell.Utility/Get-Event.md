@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-event?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -17,11 +17,13 @@ Gets the events in the event queue.
 ## SYNTAX
 
 ### BySource (Default)
+
 ```
 Get-Event [[-SourceIdentifier] <String>] [<CommonParameters>]
 ```
 
 ### ById
+
 ```
 Get-Event [-EventIdentifier] <Int32> [<CommonParameters>]
 ```
@@ -40,6 +42,7 @@ To get those events, use Get-WinEvent or Get-EventLog.
 ## EXAMPLES
 
 ### Example 1: Get all events
+
 ```
 PS C:\> Get-Event
 ```
@@ -47,6 +50,7 @@ PS C:\> Get-Event
 This command gets all events in the event queue.
 
 ### Example 2: Get events by source identifier
+
 ```
 PS C:\> Get-Event -SourceIdentifier "PowerShell.ProcessCreated"
 ```
@@ -54,6 +58,7 @@ PS C:\> Get-Event -SourceIdentifier "PowerShell.ProcessCreated"
 This command gets events in which the value of the SourceIdentifier property is PowerShell.ProcessCreated.
 
 ### Example 3: Get an event based on the time it was generated
+
 ```
 PS C:\> $Events = Get-Event
 PS C:\> $Events[0] | Format-List -Property *
@@ -88,6 +93,7 @@ This allows you to examine the properties of the event object.
 The third command shows how to use the Where-Object cmdlet to get an event based on the time that it was generated.
 
 ### Example 4: Get an event by its identifier
+
 ```
 PS C:\> Get-Event -EventIdentifier 2
 ```
@@ -100,7 +106,7 @@ This command gets the event with an event identifier of 2.
 Specifies the event identifiers for which this cmdlet gets events.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: ById
 Aliases: Id
 
@@ -117,7 +123,7 @@ The default is all events in the event queue.
 Wildcards are not permitted.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: BySource
 Aliases:
 
@@ -143,6 +149,7 @@ You cannot pipe input to this cmdlet.
 To see a description of this object, type `Get-Help Get-Event -Full` and see the Notes section of the help topic.
 
 ## NOTES
+
 * Events, event subscriptions, and the event queue exist only in the current session. If you close the current session, the event queue is discarded and the event subscription is canceled.
 
   The **Get-Event** cmdlet returns a **PSEventArgs** object (**System.Management.Automation.PSEventArgs**) with the following properties:
@@ -200,5 +207,3 @@ In the value of the *Action* parameter, the MessageData property of the $Event a
 [Unregister-Event](Unregister-Event.md)
 
 [Wait-Event](Wait-Event.md)
-
-

@@ -1,11 +1,6 @@
 ---
 title: "Cmdlet Parameters | Microsoft Docs"
-ms.custom: ""
 ms.date: "09/13/2016"
-ms.reviewer: ""
-ms.suite: ""
-ms.tgt_pltfrm: ""
-ms.topic: "article"
 helpviewer_keywords:
   - "optional parameters [PowerShell SDK]"
   - "aliases [PowerShell SDK]"
@@ -14,8 +9,6 @@ helpviewer_keywords:
   - "mandatory parameters [PowerShell SDK]"
   - "positional parameters [PowerShell SDK]"
   - "cmdlets [PowerShell SDK], parameters"
-ms.assetid: 3f1cca5f-5b95-4bce-94a6-a22db1aefd47
-caps.latest.revision: 23
 ---
 # Cmdlet Parameters
 
@@ -30,7 +23,7 @@ Provides basic information you must understand before you declare the parameters
 Describes the different types of parameters that you can declare in cmdlets.
 
 [Cmdlet Parameter Name and Functionality Guidelines](./standard-cmdlet-parameter-names-and-types.md)
-Discuses the names, recommended data type, and functionality of standard parameters.
+Discusses the names, recommended data type, and functionality of standard parameters.
 
 [Parameter Aliases](./parameter-aliases.md)
 Discusses the aliases that you can define for parameters.

@@ -1,9 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/26/2019
+ms.date: 09/04/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/add-type?view=powershell-6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Add-Type
@@ -64,7 +64,7 @@ class is available in all PowerShell sessions.
 
 You can specify the type by specifying an existing assembly or source code files, or you can specify
 the source code inline or saved in a variable. You can even specify only a method and `Add-Type`
-will define and generate the class. On Windows, you can use this feature to make Platform Invoke
+defines and generates the class. On Windows, you can use this feature to make Platform Invoke
 (P/Invoke) calls to unmanaged functions in PowerShell. If you specify source code, `Add-Type`
 compiles the specified source code and generates an in-memory assembly that contains the new .NET
 Core types.
@@ -222,8 +222,9 @@ $ShowWindowAsync::ShowWindowAsync((Get-Process -Id $Pid).MainWindowHandle, 4)
 ```
 
 The `$Signature` variable stores the C# signature of the `ShowWindowAsync` function. To ensure that
-the resulting method will be visible in a PowerShell session, the `public` keyword was added to the
-standard signature. For more information, see [ShowWindowAsync function](/windows/win32/api/winuser/nf-winuser-showwindowasync).
+the resulting method is visible in a PowerShell session, the `public` keyword was added to the
+standard signature. For more information, see
+[ShowWindowAsync function](/windows/win32/api/winuser/nf-winuser-showwindowasync).
 
 The `$ShowWindowAsync` variable stores the object created by the `Add-Type` **PassThru** parameter.
 The `Add-Type` cmdlet adds the `ShowWindowAsync` function to the PowerShell session as a static
@@ -257,11 +258,11 @@ Enter the full or simple name, also known as the partial name, of an assembly. W
 are permitted in the assembly name. If you enter a simple or partial name, `Add-Type` resolves it to
 the full name, and then uses the full name to load the assembly.
 
-This parameter doesn't accept a path or a file name. To enter the path to the assembly dynamic-link
+This parameter doesn't accept a path or a filename. To enter the path to the assembly dynamic-link
 library (DLL) file, use the **Path** parameter.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: FromAssemblyName
 Aliases: AN
 
@@ -283,7 +284,7 @@ set command-line options, such as the `/unsafe` option.
 You can't use the **CompilerOptions** and **ReferencedAssemblies** parameters in the same command.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: FromSource, FromMember, FromPath, FromLiteralPath
 Aliases:
 
@@ -300,8 +301,8 @@ Ignores compiler warnings. Use this parameter to prevent `Add-Type` from handlin
 as errors.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: FromSource, FromMember, FromPath, FromLiteralPath
 Aliases:
 
 Required: False
@@ -317,7 +318,7 @@ Specifies the language that is used in the source code. The acceptable value for
 **CSharp**.
 
 ```yaml
-Type: Language
+Type: Microsoft.PowerShell.Commands.Language
 Parameter Sets: FromSource, FromMember
 Aliases:
 Accepted values: CSharp
@@ -337,9 +338,9 @@ are interpreted as wildcards. If the path includes escape characters, enclose it
 marks. Single quotation marks tell PowerShell not to interpret any characters as escape sequences.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: FromLiteralPath
-Aliases: PSPath
+Aliases: PSPath, LP
 
 Required: True
 Position: Named
@@ -357,7 +358,7 @@ On Windows, you can use this feature to make Platform Invoke (P/Invoke) calls to
 in PowerShell.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: FromMember
 Aliases:
 
@@ -378,7 +379,7 @@ To change the code for a type, you must change the name or start a new PowerShel
 Otherwise, the command fails.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: FromMember
 Aliases:
 
@@ -399,7 +400,7 @@ in the command with an empty string value or a value of `$Null`, the type is gen
 namespace.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: FromMember
 Aliases: NS
 
@@ -413,11 +414,11 @@ Accept wildcard characters: False
 ### -OutputAssembly
 
 Generates a DLL file for the assembly with the specified name in the location. Enter an optional
-path and file name. Wildcard characters are permitted. By default, `Add-Type` generates the assembly
+path and filename. Wildcard characters are permitted. By default, `Add-Type` generates the assembly
 only in memory.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: FromSource, FromMember, FromPath, FromLiteralPath
 Aliases: OA
 
@@ -440,8 +441,12 @@ The acceptable values for this parameter are as follows:
 - Library
 - WindowsApplication
 
+> [!IMPORTANT]
+> The `ConsoleApplication` and `WindowsApplication` values don't produce working output and should
+> not be used.
+
 ```yaml
-Type: OutputAssemblyType
+Type: Microsoft.PowerShell.Commands.OutputAssemblyType
 Parameter Sets: FromSource, FromMember, FromPath, FromLiteralPath
 Aliases: OT
 Accepted values: ConsoleApplication, Library, WindowsApplication
@@ -459,7 +464,7 @@ Returns a **System.Runtime** object that represents the types that were added. B
 cmdlet doesn't generate any output.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -475,14 +480,14 @@ Accept wildcard characters: False
 Specifies the path to source code files or assembly DLL files that contain the types.
 
 If you submit source code files, `Add-Type` compiles the code in the files and creates an in-memory
-assembly of the types. The file name extension specified in the value of **Path** determines the
-compiler that `Add-Type` uses.
+assembly of the types. The file extension specified in the value of **Path** determines the compiler
+that `Add-Type` uses.
 
 If you submit an assembly file, `Add-Type` takes the types from the assembly. To specify an
 in-memory assembly or the global assembly cache, use the **AssemblyName** parameter.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: FromPath
 Aliases:
 
@@ -505,7 +510,7 @@ must include a specific reference to them in the value passed to this parameter.
 You can't use the **CompilerOptions** and **ReferencedAssemblies** parameters in the same command.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: FromSource, FromMember, FromPath, FromLiteralPath
 Aliases: RA
 
@@ -528,7 +533,7 @@ unintentional overwrite. For example, if you define a type called **Exception**,
 **Exception** as the shortcut for **System.Exception** will fail.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: FromSource
 Aliases:
 
@@ -550,7 +555,7 @@ namespaces that you add by using the **UsingNamespace** parameter are referenced
 default namespaces.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: FromMember
 Aliases: Using
 
@@ -583,11 +588,22 @@ the new type. Otherwise, this cmdlet doesn't generate any output.
 ## NOTES
 
 The types that you add exist only in the current session. To use the types in all sessions, add them
-to your PowerShell profile. For more information about the profile, see [about_Profiles](../Microsoft.PowerShell.Core/About/about_Profiles.md).
+to your PowerShell profile. For more information about the profile, see
+[about_Profiles](../Microsoft.PowerShell.Core/About/about_Profiles.md).
 
 Type names and namespaces must be unique within a session. You can't unload a type or change it. If
 you need to change the code for a type, you must change the name or start a new PowerShell session.
 Otherwise, the command fails.
+
+In Windows PowerShell (version 5.1 and below), you need to use `Add-Type` for anything that isn't
+already loaded. Most commonly, this applies to assemblies found in the Global Assembly Cache (GAC).
+In PowerShell 6 and higher, there is no GAC, so PowerShell installs its own assemblies in `$PSHome`.
+These assemblies are automatically loaded on request, so there's no need to use `Add-Type` to load
+them. However, using `Add-Type` is still permitted to allow scripts to be implicitly compatible with
+any version of PowerShell.
+
+Assemblies in the GAC can be loaded by type name, rather than by path. Loading assemblies from an
+arbitrary path requires `Add-Type`, since those assemblies cannot not be loaded automatically.
 
 ## RELATED LINKS
 

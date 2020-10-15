@@ -1,8 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Diagnostics.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
-ms.date: 3/18/2019
+Locale: en-US
+Module Name: Microsoft.PowerShell.Diagnostics
+ms.date: 11/20/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.diagnostics/get-winevent?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-WinEvent
@@ -313,13 +314,15 @@ and uses the **Events** property to get objects. The objects are sent down the p
 This example shows how to get information about a log's contents using event object properties.
 Event objects are stored in a variable and then grouped and counted by **Event Id** and **Level**.
 
+```powershell
+$Event = Get-WinEvent -LogName 'Windows PowerShell'
+$Event.Count
+$Event | Group-Object -Property Id -NoElement | Sort-Object -Property Count -Descending
+$Event | Group-Object -Property LevelDisplayName -NoElement
 ```
-PS> $Event = Get-WinEvent -LogName 'Windows PowerShell'
 
-PS> $Event.Count
+```Output
 195
-
-PS> $Event | Group-Object -Property Id -NoElement | Sort-Object -Property Count -Descending
 
 Count  Name
 -----  ----
@@ -329,8 +332,6 @@ Count  Name
     3  403
     2  103
 
-PS> $Event | Group-Object -Property LevelDisplayName -NoElement
-
 Count  Name
 -----  ----
     2  Warning
@@ -338,18 +339,16 @@ Count  Name
 ```
 
 The `Get-WinEvent` cmdlet uses the **LogName** parameter to specify the **Windows PowerShell** event
-log. The event objects are stored in the `$Event` variable.
-
-`$Event.Count` uses the `$Event` variable's **Count** property to display the total number of logged
-events.
+log. The event objects are stored in the `$Event` variable. The **Count** property of `$Event`shows
+the total number of logged events.
 
 The `$Event` variable is sent down the pipeline to the `Group-Object` cmdlet. `Group-Object` uses
-the **Property** parameter to specify the **Id** property and counts the objects by **Id**. The
-**NoElement** parameter removes other properties from the objects output. The grouped objects are
-sent down the pipeline to the `Sort-Object` cmdlet. `Sort-Object` uses the **Property** parameter to
-sort the objects by **Count**. The **Descending** parameter displays the output by count, from
-highest to lowest. In the output, the **Count** column contains the total number of each event. The
-**Name** column contains the grouped **Id** numbers.
+the **Property** parameter to specify the **Id** property and counts the objects by the event Id
+value. The **NoElement** parameter removes other properties from the objects output. The grouped
+objects are sent down the pipeline to the `Sort-Object` cmdlet. `Sort-Object` uses the **Property**
+parameter to sort the objects by **Count**. The **Descending** parameter displays the output by
+count, from highest to lowest. In the output, the **Count** column contains the total number of each
+event. The **Name** column contains the grouped event Id numbers.
 
 The `$Event` variable is sent down the pipeline to the `Group-Object` cmdlet. `Group-Object` uses
 the **Property** parameter to specify the **LevelDisplayName** property and counts the objects by
@@ -364,7 +363,9 @@ This example uses a comma-separated string of log names. The output is grouped b
 error or warning and the log name.
 
 ```powershell
-Get-WinEvent -LogName  *PowerShell*, Microsoft-Windows-Kernel-WHEA* | Group-Object -Property LevelDisplayName, LogName -NoElement | Format-Table -AutoSize
+Get-WinEvent -LogName *PowerShell*, Microsoft-Windows-Kernel-WHEA* |
+  Group-Object -Property LevelDisplayName, LogName -NoElement |
+    Format-Table -AutoSize
 ```
 
 ```Output
@@ -419,9 +420,11 @@ These commands get a specific number of events from an archived event log. `Get-
 parameters that can get a maximum number of events or the oldest events. This sample uses an
 archived PowerShell log that is stored in **C:\Test\PowerShellCore Operational.evtx**.
 
+```powershell
+Get-WinEvent -Path 'C:\Test\PowerShellCore Operational.evtx' -MaxEvents 100
 ```
-PS> Get-WinEvent -Path 'C:\Test\PowerShellCore Operational.evtx' -MaxEvents 100
 
+```Output
    ProviderName: PowerShellCore
 
 TimeCreated                 Id   LevelDisplayName  Message
@@ -436,7 +439,7 @@ TimeCreated                 Id   LevelDisplayName  Message
 ```
 
 The `Get-WinEvent` cmdlet gets log information from the computer. The **Path** parameter specifies
-the directory and file name. The **MaxEvents** parameter specifies that 100 records are displayed,
+the directory and filename. The **MaxEvents** parameter specifies that 100 records are displayed,
 from newest to oldest.
 
 ### Example 13: Event Tracing for Windows
@@ -446,8 +449,10 @@ the order of oldest to newest. An archived ETW file is saved as an `.etl` such a
 The events are listed in the order in which they are written to the log, so the *Oldest* parameter
 is required.
 
-```
-PS> Get-WinEvent -Path 'C:\Tracing\TraceLog.etl' -Oldest | Sort-Object -Property TimeCreated -Descending | Select-Object -First 100
+```powershell
+Get-WinEvent -Path 'C:\Tracing\TraceLog.etl' -Oldest |
+  Sort-Object -Property TimeCreated -Descending |
+    Select-Object -First 100
 ```
 
 The `Get-WinEvent` cmdlet gets log information from the archived file. The **Path** parameter
@@ -465,8 +470,9 @@ Because the files contain the same type of **.NET Framework** object, **EventLog
 filter them with the same properties. The command requires the **Oldest** parameter because it is
 reading from an `.etl` file, but the **Oldest** parameter applies to each file.
 
-```
-PS> Get-WinEvent -Path 'C:\Tracing\TraceLog.etl', 'C:\Test\Windows PowerShell.evtx' -Oldest | Where-Object { $_.Id -eq '403' }
+```powershell
+Get-WinEvent -Path 'C:\Tracing\TraceLog.etl', 'C:\Test\Windows PowerShell.evtx' -Oldest |
+  Where-Object { $_.Id -eq '403' }
 ```
 
 The `Get-WinEvent` cmdlet gets log information from the archived files. The **Path** parameter uses
@@ -484,26 +490,35 @@ The filter methods are more efficient than using the `Where-Object` cmdlet. Filt
 the objects are retrieved. `Where-Object` retrieves all of the objects, then applies filters to all
 of the objects.
 
-```
+```powershell
 # Using the Where-Object cmdlet:
-PS> $Yesterday = (Get-Date) - (New-TimeSpan -Day 1)
-PS> Get-WinEvent -LogName 'Windows PowerShell' | Where-Object { $_.TimeCreated -ge $Yesterday }
+$Yesterday = (Get-Date) - (New-TimeSpan -Day 1)
+Get-WinEvent -LogName 'Windows PowerShell' | Where-Object { $_.TimeCreated -ge $Yesterday }
 
 # Using the FilterHashtable parameter:
-PS> $Yesterday = (Get-Date) - (New-TimeSpan -Day 1)
-PS> Get-WinEvent -FilterHashtable @{ LogName='Windows PowerShell'; Level=3; StartTime=$Yesterday }
+$Yesterday = (Get-Date) - (New-TimeSpan -Day 1)
+Get-WinEvent -FilterHashtable @{ LogName='Windows PowerShell'; Level=3; StartTime=$Yesterday }
 
 # Using the FilterXML parameter:
-PS> Get-WinEvent -FilterXML "<QueryList><Query><Select Path='Windows PowerShell'>*[System[Level=3 and TimeCreated[timediff(@SystemTime)&lt;= 86400000]]]</Select></Query></QueryList>"
+$xmlQuery = @'
+<QueryList>
+  <Query Id="0" Path="Windows PowerShell">
+    <Select Path="System">*[System[(Level=3) and
+        TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]</Select>
+  </Query>
+</QueryList>
+'@
+Get-WinEvent -FilterXML $xmlQuery
 
 # Using the FilterXPath parameter:
-PS> Get-WinEvent -LogName 'Windows PowerShell' -FilterXPath "*[System[Level=3 and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]"
+$XPath = '*[System[Level=3 and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]'
+Get-WinEvent -LogName 'Windows PowerShell' -FilterXPath $XPath
 ```
 
 ### Example 16: Use FilterHashtable to get events from the Application log
 
 This example uses the **FilterHashtable** parameter to get events from the **Application** log. The
-hash table uses **key-value** pairs. For more information about the **FilterHashtable** parameter,
+hash table uses **key/value** pairs. For more information about the **FilterHashtable** parameter,
 see [Creating Get-WinEvent queries with FilterHashtable](/powershell/scripting/samples/Creating-Get-WinEvent-queries-with-FilterHashtable).
 For more information about hash tables, see [about_Hash_Tables](../Microsoft.PowerShell.Core/about/about_hash_tables.md).
 
@@ -526,7 +541,12 @@ that occurred within the last week.
 
 ```powershell
 $StartTime = (Get-Date).AddDays(-7)
-Get-WinEvent -FilterHashtable @{ Logname='Application'; ProviderName='Application Error'; Data='iexplore.exe'; StartTime=$StartTime }
+Get-WinEvent -FilterHashtable @{
+  Logname='Application'
+  ProviderName='Application Error'
+  Data='iexplore.exe'
+  StartTime=$StartTime
+}
 ```
 
 The `Get-Date` cmdlet uses the **AddDays** method to get a date that is seven days before the
@@ -542,9 +562,8 @@ the value **iexplore.exe** The **StartTime** key uses the value stored in `$Star
 ### -ComputerName
 
 Specifies the name of the computer that this cmdlet gets events from the event logs. Type the
-NetBIOS name, an Internet Protocol (IP) address, or the fully qualified domain name (FQDN) of the
-computer. The default value is the local computer, **localhost**. This parameter accepts only one
-computer name at a time.
+NetBIOS name, an IP address, or the fully qualified domain name (FQDN) of the computer. The default
+value is the local computer, **localhost**. This parameter accepts only one computer name at a time.
 
 To get event logs from remote computers, configure the firewall port for the event log service to
 allow remote access.
@@ -553,7 +572,7 @@ This cmdlet does not rely on PowerShell remoting. You can use the **ComputerName
 your computer is not configured to run remote commands.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: GetLogSet, ListLogSet, ListProviderSet, GetProviderSet, HashQuerySet, XmlQuerySet
 Aliases: Cn
 
@@ -571,11 +590,11 @@ current user.
 
 Type a user name, such as **User01** or **Domain01\User01**. Or, enter a **PSCredential** object,
 such as one generated by the `Get-Credential` cmdlet. If you type a user name, you are prompted for
-a password. If you type only the parameter name, you are prompted for both a user name and a
+a password. If you type only the parameter name, you are prompted for both a username and a
 password.
 
 ```yaml
-Type: PSCredential
+Type: System.Management.Automation.PSCredential
 Parameter Sets: (All)
 Aliases:
 
@@ -589,7 +608,7 @@ Accept wildcard characters: False
 ### -FilterHashtable
 
 Specifies a query in hash table format to select events from one or more event logs. The query
-contains a hash table with one or more **key-value** pairs.
+contains a hash table with one or more **key/value** pairs.
 
 Hash table queries have the following rules:
 
@@ -604,10 +623,10 @@ Hash table queries have the following rules:
 - The **Data** value takes event data in an unnamed field. For example, events in classic event
   logs.
 
-When `Get-WinEvent` cannot interpret a **key-value** pair, it interprets the key as a case-sensitive
+When `Get-WinEvent` cannot interpret a **key/value** pair, it interprets the key as a case-sensitive
 name for the event data in the event.
 
-The valid `Get-WinEvent` **key-value** pairs are as follows:
+The valid `Get-WinEvent` **key/value** pairs are as follows:
 
 - **LogName**=`<String[]>`
 - **ProviderName**=`<String[]>`
@@ -621,12 +640,31 @@ The valid `Get-WinEvent` **key-value** pairs are as follows:
 - **Data**=`<String[]>`
 
 ```yaml
-Type: Hashtable[]
+Type: System.Collections.Hashtable[]
 Parameter Sets: HashQuerySet
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilterXPath
+
+Specifies an XPath query that this cmdlet select events from one or more logs.
+
+For more information about the XPath language, see [XPath Reference](/previous-versions/dotnet/netframework-4.0/ms256115(v=vs.100))
+and the Selection Filters section of [Event Selection](/previous-versions/aa385231(v=vs.85)).
+
+```yaml
+Type: System.String
+Parameter Sets: GetLogSet, GetProviderSet, FileSet
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -644,37 +682,16 @@ Help.
 
 Use an XML query to create a complex query that contains several XPath statements. The XML format
 also allows you to use a **Suppress XML** element that excludes events from the query. For more
-information about the XML schema for event log queries, see [Query Schema](https://msdn.microsoft.com/library/aa385760)
-and the XML Event Queries section of the [Event Selection](https://msdn.microsoft.com/library/aa385231)
-in the MSDN library.
+information about the XML schema for event log queries, see [Query Schema](/windows/win32/wes/queryschema-schema)
+and the XML Event Queries section of [Event Selection](/previous-versions/aa385231(v=vs.85)).
 
 ```yaml
-Type: XmlDocument
+Type: System.Xml.XmlDocument
 Parameter Sets: XmlQuerySet
 Aliases:
 
 Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterXPath
-
-Specifies an XPath query that this cmdlet select events from one or more logs.
-
-For more information about the XPath language, see [XPath Reference](https://msdn.microsoft.com/library/ms256115)
-and the Selection Filters section of the [Event Selection](https://msdn.microsoft.com/library/aa385231)
-in the MSDN library.
-
-```yaml
-Type: String
-Parameter Sets: GetLogSet, GetProviderSet, FileSet
-Aliases:
-
-Required: False
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -689,7 +706,7 @@ By default, the `Get-WinEvent` cmdlet excludes these logs unless you specify the
 debug or analytic log.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: GetLogSet, ListLogSet, GetProviderSet, HashQuerySet
 Aliases:
 
@@ -706,12 +723,12 @@ Specifies the event logs. Enter the event log names in a comma-separated list. W
 permitted. To get all the logs, use the asterisk (`*`) wildcard.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: ListLogSet
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: True
@@ -726,12 +743,12 @@ Enter the provider names in a comma-separated list. Wildcards are permitted. To 
 all the event logs on the computer, use the asterisk (`*`) wildcard.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: ListProviderSet
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: True
@@ -743,13 +760,19 @@ Specifies the event logs that this cmdlet get events from. Enter the event log n
 comma-separated list. Wildcards are permitted. You can also pipe log names to the `Get-WinEvent`
 cmdlet.
 
+> [!NOTE]
+> PowerShell does not limit the amount of logs you can request. However, the `Get-WinEvent` cmdlet
+> queries the Windows API which has a limit of 256. This can make it difficult to filter through all
+> of your logs at one time. You can work around this by using a `foreach` loop to iterate through each
+> log like this: `Get-WinEvent -ListLog * | ForEach-Object{ Get-WinEvent -LogName $_.Logname }`
+
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: GetLogSet
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: True
@@ -761,7 +784,7 @@ Specifies the maximum number of events that are returned. Enter an integer such 
 is to return all the events in the logs or files.
 
 ```yaml
-Type: Int64
+Type: System.Int64
 Parameter Sets: GetLogSet, GetProviderSet, FileSet, HashQuerySet, XmlQuerySet
 Aliases:
 
@@ -782,7 +805,7 @@ logs. In these files, events are recorded in oldest-first order, and the events 
 in oldest-first order.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: GetLogSet, GetProviderSet, FileSet, HashQuerySet, XmlQuerySet
 Aliases:
 
@@ -802,12 +825,12 @@ log files in a comma-separated list, or use wildcard characters to create file p
 include events from different files and file types in the same command.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: FileSet
 Aliases: PSPath
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: True
@@ -823,12 +846,12 @@ An event log provider is a program or service that writes events to the event lo
 PowerShell provider.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: GetProviderSet
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: True
@@ -862,11 +885,9 @@ With all other parameters, `Get-WinEvent` returns
 
 ## NOTES
 
-`Get-WinEvent` runs on Windows Vista, Windows Server 2008 R2, and later versions of Windows.
-
 `Get-WinEvent` is designed to replace the `Get-EventLog` cmdlet on computers running Windows Vista
 and later versions of Windows. `Get-EventLog` gets events only in classic event logs. `Get-EventLog`
-is retained in versions prior to PowerShell 6 for backward compatibility.
+is retained for backward compatibility.
 
 The `Get-WinEvent` and `Get-EventLog` cmdlets are not supported in Windows Pre-installation
 Environment (Windows PE).

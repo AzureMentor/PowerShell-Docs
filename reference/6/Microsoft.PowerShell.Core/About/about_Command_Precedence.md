@@ -1,6 +1,7 @@
 ---
+description: Describes how PowerShell determines which command to run. 
 keywords: powershell,cmdlet
-ms.date: 05/20/2019
+ms.date: 02/13/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_command_precedence?view=powershell-6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Command_Precedence
@@ -106,12 +107,12 @@ For more information about how PowerShell uses wildcards, see [about_Wildcards](
 > few guarantees that the file will be found.
 
 If you do not specify a path, PowerShell uses the following precedence order
-when it runs commands:
+when it runs commands for all items loaded in the current session:
 
   1. Alias
   2. Function
   3. Cmdlet
-  4. Native Windows commands
+  4. External executable files (programs and non-PowerShell scripts)
 
 Therefore, if you type "help", PowerShell first looks for an alias named
 `help`, then a function named `Help`, and finally a cmdlet named `Help`. It
@@ -119,6 +120,15 @@ runs the first `help` item that it finds.
 
 For example, if your session contains a cmdlet and a function, both named
 `Get-Map`, when you type `Get-Map`, PowerShell runs the function.
+
+> [!NOTE]
+> This only applies to loaded commands. If there is a `build` executable and an
+> Alias `build` for a function with the name of `Invoke-Build` inside a module
+> that is not loaded into the current session, PowerShell runs the `build`
+> executable instead. It does not auto-load modules if it finds the external
+> executable in this case. It is only when no external executable is found that
+> an alias, function, or cmdlet with the given name is invoked, thereby
+> triggering auto-loading of its module.
 
 When the session contains items of the same type that have the same name,
 PowerShell runs the newer item.
@@ -151,13 +161,13 @@ accessible.
 
 ### Finding hidden commands
 
-The **All** parameter of the [Get-Command](../../Microsoft.PowerShell.Core/Get-Command.md)
+The **All** parameter of the [Get-Command](xref:Microsoft.PowerShell.Core.Get-Command)
 cmdlet gets all commands with the specified name, even if they are hidden
 or replaced. Beginning in PowerShell 3.0, by default, `Get-Command`
 gets only the commands that run when you type the command name.
 
 In the following examples, the session includes a `Get-Date` function and a
-[Get-Date](../../Microsoft.PowerShell.Utility/Get-Date.md) cmdlet.
+[Get-Date](xref:Microsoft.PowerShell.Utility.Get-Date) cmdlet.
 
 The following command gets the `Get-Date` command that runs when you type
 `Get-Date`.
@@ -242,9 +252,9 @@ Microsoft.PowerShell.Utility
 #### Call operator
 
 You can also use the `Call` operator `&` to run hidden commands by combining
-it with a call to [Get-ChildItem](../../Microsoft.PowerShell.Management/Get-ChildItem.md)
+it with a call to [Get-ChildItem](xref:Microsoft.PowerShell.Management.Get-ChildItem)
 (the alias is "dir"), `Get-Command` or
-[Get-Module](../../Microsoft.PowerShell.Core/Get-Module.md).
+[Get-Module](xref:Microsoft.PowerShell.Core.Get-Module).
 
 The call operator executes strings and script blocks in a child scope. For more information, see [about_Operators](about_Operators.md).
 
@@ -292,9 +302,9 @@ name acronym to the nouns in your commands.
 
 Also, when you import commands into your session from a PowerShell
 module or from another session, use the `Prefix` parameter of the
-[Import-Module](../../Microsoft.PowerShell.Core/Import-Module.md) or
+[Import-Module](xref:Microsoft.PowerShell.Core.Import-Module) or
 
-[Import-PSSession](../../Microsoft.PowerShell.Utility/Import-PSSession.md)
+[Import-PSSession](xref:Microsoft.PowerShell.Utility.Import-PSSession)
 cmdlet to add a prefix to the nouns in the names of commands.
 
 For example, the following command avoids any conflict with the `Get-Date`
@@ -314,6 +324,6 @@ For more information, see `Import-Module` and `Import-PSSession` below.
 - [about_Functions](about_Functions.md)
 - [Alias-Provider](../../Microsoft.PowerShell.Core/About/about_Alias_Provider.md)
 - [Function-Provider](../../Microsoft.PowerShell.Core/About/about_Function_Provider.md)
-- [Get-Command](../../Microsoft.PowerShell.Core/Get-Command.md)
-- [Import-Module](../../Microsoft.PowerShell.Core/Import-Module.md)
-- [Import-PSSession](../../Microsoft.PowerShell.Utility/Import-PSSession.md)
+- [Get-Command](xref:Microsoft.PowerShell.Core.Get-Command)
+- [Import-Module](xref:Microsoft.PowerShell.Core.Import-Module)
+- [Import-PSSession](xref:Microsoft.PowerShell.Utility.Import-PSSession)

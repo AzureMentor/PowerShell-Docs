@@ -1,7 +1,7 @@
 ---
 external help file: PSModule-help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: PowerShellGet
 ms.date: 10/03/2019
 online version: https://docs.microsoft.com/powershell/module/powershellget/publish-module?view=powershell-6&WT.mc_id=ps-gethelp
@@ -22,7 +22,8 @@ Publishes a specified module from the local computer to an online gallery.
 Publish-Module -Name <String> [-RequiredVersion <String>] [-NuGetApiKey <String>]
  [-Repository <String>] [-Credential <PSCredential>] [-FormatVersion <Version>]
  [-ReleaseNotes <String[]>] [-Tags <String[]>] [-LicenseUri <Uri>] [-IconUri <Uri>]
- [-ProjectUri <Uri>] [-Force] [-AllowPrerelease] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-ProjectUri <Uri>] [-Exclude <String[]>] [-Force] [-AllowPrerelease] [-SkipAutomaticTags]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ModulePathParameterSet
@@ -30,8 +31,8 @@ Publish-Module -Name <String> [-RequiredVersion <String>] [-NuGetApiKey <String>
 ```
 Publish-Module -Path <String> [-NuGetApiKey <String>] [-Repository <String>]
  [-Credential <PSCredential>] [-FormatVersion <Version>] [-ReleaseNotes <String[]>]
- [-Tags <String[]>] [-LicenseUri <Uri>] [-IconUri <Uri>] [-ProjectUri <Uri>] [-Force] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [-Tags <String[]>] [-LicenseUri <Uri>] [-IconUri <Uri>] [-ProjectUri <Uri>] [-Force]
+ [-SkipAutomaticTags] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,6 +45,12 @@ When you specify a module by name, `Publish-Module` publishes the first module t
 by running `Get-Module -ListAvailable <Name>`. If you specify a minimum version of a module to
 publish, `Publish-Module` publishes the first module with a version that is greater than or equal to
 the minimum version that you have specified.
+
+Publishing a module requires metadata that is displayed on the gallery page for the module. Required
+metadata includes the module name, version, description, and author. Although most metadata is taken
+from the module manifest, some metadata must be specified in `Publish-Module` parameters, such as
+**Tag**, **ReleaseNote**, **IconUri**, **ProjectUri**, and **LicenseUri**, because these parameters
+match fields in a NuGet-based gallery.
 
 ## EXAMPLES
 
@@ -76,9 +83,25 @@ Publish-Module -Name "MyDscModule" -NuGetApiKey "11e4b435-6cb4-4bf7-8611-5162ed7
 Allows modules marked as prerelease to be published.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: ModuleNameParameterSet
 Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the `Publish-Module`.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
@@ -93,7 +116,7 @@ Specifies a user account that has rights to publish a module for a specified pac
 source.
 
 ```yaml
-Type: PSCredential
+Type: System.Management.Automation.PSCredential
 Parameter Sets: (All)
 Aliases:
 
@@ -104,12 +127,28 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+### -Exclude
+
+Defines files to exclude from the published module.
+
+```yaml
+Type: System.String[]
+Parameter Sets: ModuleNameParameterSet
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Force
 
 Forces the command to run without asking for user confirmation.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -124,11 +163,11 @@ Accept wildcard characters: False
 
 Accepts only valid values specified by the **ValidateSet** attribute.
 
-For more information, see [ValidateSet Attribute Declaration](/powershell/developer/cmdlet/validateset-attribute-declaration)
+For more information, see [ValidateSet Attribute Declaration](/powershell/scripting/developer/cmdlet/validateset-attribute-declaration)
 and [ValidateSetAttribute](/dotnet/api/system.management.automation.validatesetattribute).
 
 ```yaml
-Type: Version
+Type: System.Version
 Parameter Sets: (All)
 Aliases:
 Accepted values: 2.0
@@ -146,7 +185,7 @@ Specifies the URL of an icon for the module. The specified icon is displayed on 
 for the module.
 
 ```yaml
-Type: Uri
+Type: System.Uri
 Parameter Sets: (All)
 Aliases:
 
@@ -162,7 +201,7 @@ Accept wildcard characters: False
 Specifies the URL of licensing terms for the module you want to publish.
 
 ```yaml
-Type: Uri
+Type: System.Uri
 Parameter Sets: (All)
 Aliases:
 
@@ -179,7 +218,7 @@ Specifies the name of the module that you want to publish. `Publish-Module` sear
 specified module name in `$Env:PSModulePath`.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ModuleNameParameterSet
 Aliases:
 
@@ -197,7 +236,7 @@ part of your profile in the online gallery, and can be found on your user accoun
 gallery. The API key is NuGet-specific functionality.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -214,7 +253,7 @@ Specifies the path to the module that you want to publish. This parameter accept
 folder that contains the module.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ModulePathParameterSet
 Aliases:
 
@@ -230,7 +269,7 @@ Accept wildcard characters: False
 Specifies the URL of a webpage about this project.
 
 ```yaml
-Type: Uri
+Type: System.Uri
 Parameter Sets: (All)
 Aliases:
 
@@ -247,7 +286,7 @@ Specifies a string containing release notes or comments that you want to be avai
 this version of the module.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -265,7 +304,7 @@ Specifies the friendly name of a repository that has been registered by running
 The **PublishLocation** can be set by running `Set-PSRepository`.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -281,7 +320,7 @@ Accept wildcard characters: False
 Specifies the exact version of a single module to publish.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ModuleNameParameterSet
 Aliases:
 
@@ -292,13 +331,30 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SkipAutomaticTags
+
+Removes commands and resources from being included as tags. Skips automatically adding tags to a
+module.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Tags
 
 Adds one or more tags to the module that you are publishing. Example tags include
 DesiredStateConfiguration, DSC, DSCResourceKit, or PSModule. Separate multiple tags with commas.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -309,28 +365,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Confirm
-
-Prompts you for confirmation before running the `Publish-Module`.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 
 Shows what would happen if the `Publish-Module` runs. The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -349,13 +389,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### PSModuleInfo
+### System.String
+
+### System.Management.Automation.PSCredential
 
 ## OUTPUTS
 
-### None
-
-`Publish-Module` shows no output if a module is published successfully.
+### System.Object
 
 ## NOTES
 

@@ -1,11 +1,6 @@
 ---
 title: Creating a Cmdlet to Access a Data Store
-ms.custom:
 ms.date: 09/13/2016
-ms.reviewer:
-ms.suite:
-ms.tgt_pltfrm:
-ms.topic: article
 ---
 # Creating a Cmdlet to Access a Data Store
 
@@ -1206,7 +1201,7 @@ When your cmdlet has been registered with Windows PowerShell, you can test it by
 
 ## See Also
 
-[How to Create a Windows PowerShell Cmdlet](/powershell/developer/cmdlet/writing-a-windows-powershell-cmdlet)
+[How to Create a Windows PowerShell Cmdlet](/powershell/scripting/developer/cmdlet/writing-a-windows-powershell-cmdlet)
 
 [Creating Your First Cmdlet](./creating-a-cmdlet-without-parameters.md)
 

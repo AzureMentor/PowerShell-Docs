@@ -1,16 +1,18 @@
 ---
 external help file: Microsoft.PowerShell.Utility-help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 04/25/2019
+ms.date: 01/17/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/format-hex?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Format-Hex
 ---
+
 # Format-Hex
 
 ## SYNOPSIS
+
 Displays a file or other input as hexadecimal.
 
 ## SYNTAX
@@ -88,30 +90,57 @@ Format-Hex -Path .\File.t7f
 ```
 
 The `Format-Hex` cmdlet uses the **Path** parameter to specify a filename in the current directory,
-**File.t7f**. The file extension **.t7f** is uncommon, but the hexadecimal output **%PDF** shows
+`File.t7f`. The file extension `.t7f` is uncommon, but the hexadecimal output `%PDF` shows
 that it is a PDF file.
+
+### Example 3: Display raw hexadecimal output
+
+By default `Format-Hex` opts for compact output of numeric data types: single-byte or double-byte
+sequences are used if the value is small enough. The **Raw** parameter deactivates this behavior.
+
+```
+PS> 1,2,3,1000 | Format-Hex
+
+           Path:
+
+           00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+
+00000000   01 02 03 E8 03                                   ...è.
+
+
+PS> 1,2,3,1000 | Format-Hex -Raw
+
+           Path:
+
+           00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+
+00000000   01 00 00 00 02 00 00 00 03 00 00 00 E8 03 00 00  ............è...
+```
+
+Notice the difference in output. The **Raw** parameter displays the numbers as 4-byte values, true
+to their **Int32** types.
 
 ## PARAMETERS
 
 ### -Encoding
 
 Specifies the encoding of the output. This only applies to `[string]` input. The parameter has no
-effect on numeric types. The default value is **ASCII**.
+effect on numeric types. The default value is `ASCII`.
 
 The acceptable values for this parameter are as follows:
 
-- **ASCII** Uses ASCII (7-bit) character set.
-- **BigEndianUnicode** Uses UTF-16 with the big-endian byte order.
-- **Unicode** Uses UTF-16 with the little-endian byte order.
-- **UTF7** Uses UTF-7.
-- **UTF8** Uses UTF-8.
-- **UTF32** Uses UTF-32 with the little-endian byte order.
+- `Ascii` Uses ASCII (7-bit) character set.
+- `BigEndianUnicode` Uses UTF-16 with the big-endian byte order.
+- `Unicode` Uses UTF-16 with the little-endian byte order.
+- `UTF7` Uses UTF-7.
+- `UTF8` Uses UTF-8.
+- `UTF32` Uses UTF-32 with the little-endian byte order.
 
 Non-ASCII characters in the input are output as literal `?` characters resulting in a loss of
 information.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ByInputObject
 Aliases:
 Accepted values: ASCII, BigEndianUnicode, Unicode, UTF7, UTF8, UTF32
@@ -136,7 +165,7 @@ The supported scalar types are:
 - `[long]`, `[int64]`
 
 ```yaml
-Type: Object
+Type: System.Object
 Parameter Sets: ByInputObject
 Aliases:
 
@@ -156,7 +185,7 @@ single quotation marks. PowerShell does not interpret any characters in a single
 escape sequences. For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: LiteralPath
 Aliases: PSPath
 
@@ -175,7 +204,7 @@ includes escape characters, enclose the path in single quotation marks. To speci
 files, separate the paths with a comma.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: Path
 Aliases:
 
@@ -188,10 +217,11 @@ Accept wildcard characters: True
 
 ### -Raw
 
-This parameter no longer does anything. It is retained for script compatibility.
+By default `Format-Hex` opts for compact output of numeric data types: single-byte or double-byte
+sequences are used if the value is small enough. The **Raw** parameter deactivates this behavior.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: ByInputObject
 Aliases:
 

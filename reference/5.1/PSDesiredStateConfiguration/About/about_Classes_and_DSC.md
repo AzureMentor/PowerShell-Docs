@@ -1,6 +1,7 @@
 ---
+description:  Describes how you can use classes to develop in PowerShell with Desired State Configuration (DSC). 
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 ms.date: 1/11/2019
 online version: https://docs.microsoft.com/powershell/module/psdesiredstateconfiguration/about/about_classes_and_dsc?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
@@ -455,7 +456,7 @@ following configuration references the MyDSCResource module. Save the
 configuration as a script, MyResource.ps1.
 
 For information about how to run a DSC configuration,
-see [Windows PowerShell Desired State Configuration Overview](/powershell/dsc/overview/overview).
+see [Windows PowerShell Desired State Configuration Overview](/powershell/scripting/dsc/overview/dscforengineers).
 
 Before you run the configuration, create `C:\test.txt`. The configuration
 checks if the file exists at `c:\test\test.txt`. If the file does not exist,
@@ -982,4 +983,4 @@ function Html ([HTML] $doc) { return $doc }
 
 [about_Methods](../../Microsoft.PowerShell.Core/About/about_Methods.md)
 
-[Build Custom Windows PowerShell Desired State Configuration Resources](/powershell/dsc/resources/authoringResource)
+[Build Custom Windows PowerShell Desired State Configuration Resources](/powershell/scripting/dsc/resources/authoringResource)

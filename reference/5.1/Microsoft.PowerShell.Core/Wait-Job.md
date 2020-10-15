@@ -1,7 +1,7 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Core
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/wait-job?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -17,31 +17,37 @@ Suppresses the command prompt until one or all of the Windows PowerShell backgro
 ## SYNTAX
 
 ### SessionIdParameterSet (Default)
+
 ```
 Wait-Job [-Any] [-Timeout <Int32>] [-Force] [-Id] <Int32[]> [<CommonParameters>]
 ```
 
 ### JobParameterSet
+
 ```
 Wait-Job [-Job] <Job[]> [-Any] [-Timeout <Int32>] [-Force] [<CommonParameters>]
 ```
 
 ### NameParameterSet
+
 ```
 Wait-Job [-Any] [-Timeout <Int32>] [-Force] [-Name] <String[]> [<CommonParameters>]
 ```
 
 ### InstanceIdParameterSet
+
 ```
 Wait-Job [-Any] [-Timeout <Int32>] [-Force] [-InstanceId] <Guid[]> [<CommonParameters>]
 ```
 
 ### StateParameterSet
+
 ```
 Wait-Job [-Any] [-Timeout <Int32>] [-Force] [-State] <JobState> [<CommonParameters>]
 ```
 
 ### FilterParameterSet
+
 ```
 Wait-Job [-Any] [-Timeout <Int32>] [-Force] [-Filter] <Hashtable> [<CommonParameters>]
 ```
@@ -62,6 +68,7 @@ For information about a particular custom job type, see the documentation of the
 ## EXAMPLES
 
 ### Example 1: Wait for all jobs
+
 ```
 PS C:\> Get-Job | Wait-Job
 ```
@@ -69,6 +76,7 @@ PS C:\> Get-Job | Wait-Job
 This command waits for all of the background jobs running in the session to finish.
 
 ### Example 2: Wait for jobs started on remote computers by using Start-Job
+
 ```
 PS C:\> $s = New-PSSession Server01, Server02, Server03
 PS C:\> Invoke-Command -Session $s -ScriptBlock {Start-Job -Name Date1 -ScriptBlock {Get-Date}}
@@ -94,6 +102,7 @@ It stores the resulting collection (array) of job objects in the $done variable.
 The fourth command uses the **Count** property of the array of job objects in the $done variable to determine how many of the jobs are finished.
 
 ### Example 3: Determine when the first background job finishes
+
 ```
 PS C:\> $s = New-PSSession (Get-Content Machines.txt)
 PS C:\> $c = 'Get-EventLog -LogName System | where {$_.EntryType -eq "error" --and $_.Source -eq "LSASRV"} | Out-File Errors.txt'
@@ -121,6 +130,7 @@ The fourth command uses **Invoke-Command** to run a **Wait-Job** command in the 
 It uses the *Any* parameter to wait until the first job on the remote computers is completed.
 
 ### Example 4: Set a wait time for jobs on remote computers
+
 ```
 PS C:\> $s = New-PSSession Server01, Server02, Server03
 PS C:\> $jobs = Invoke-Command -Session $s -ScriptBlock {Start-Job -ScriptBlock {Get-Date}}
@@ -144,6 +154,7 @@ In this case, after 30 seconds, only the command on the Server02 computer has co
 The $done variable contains a job object that represents the job that ran on Server02.
 
 ### Example 5: Wait until one of several jobs finishes
+
 ```
 PS C:\> Wait-Job -id 1,2,5 -Any
 ```
@@ -152,6 +163,7 @@ This command identifies three jobs by their IDs and waits until any one of them 
 The command prompt returns when the first job finishes.
 
 ### Example 6: Wait for a period, then allow job to continue in background
+
 ```
 PS C:\> Wait-Job -Name "DailyLog" -Timeout 120
 ```
@@ -160,6 +172,7 @@ This command waits 120 seconds (two minutes) for the DailyLog job to finish.
 If the job does not finish in the next two minutes, the command prompt returns anyway, and the job continues to run in the background.
 
 ### Example 7: Wait for a job by name
+
 ```
 PS C:\> Wait-Job -Name "Job3"
 ```
@@ -167,6 +180,7 @@ PS C:\> Wait-Job -Name "Job3"
 This command uses the job name to identify the job for which to wait.
 
 ### Example 8: Wait for jobs on local computer started with Start-Job
+
 ```
 PS C:\> $j = Start-Job -ScriptBlock {Get-ChildItem *.ps1| where {$_lastwritetime -gt ((Get-Date) - (New-TimeSpan -Days 7))}}
 PS C:\> $j | Wait-Job
@@ -183,6 +197,7 @@ The third command uses **Wait-Job** to wait until the job is completed.
 When the job finishes, the command displays the job object, which contains information about the job.
 
 ### Example 9: Wait for jobs started on remote computers by using Invoke-Command
+
 ```
 PS C:\> $s = New-PSSession Server01, Server02, Server03
 PS C:\> $j = Invoke-Command -Session $s -ScriptBlock {Get-Process} -AsJob
@@ -204,6 +219,7 @@ The third command uses a pipeline operator (|) to send the job object in $j to t
 An **Invoke-Command** command is not required in this case, because the job resides on the local computer.
 
 ### Example 10: Wait for a job that has an ID
+
 ```
 PS C:\> Get-Job
 
@@ -224,7 +240,7 @@ Indicates that this cmdlet displays the command prompt, and returns the job obje
 By default, **Wait-Job** waits until all of the specified jobs are complete before it displays the prompt.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -247,7 +263,7 @@ For information about support for this parameter, see the help topic for the job
 This parameter was introduced in Windows PowerShell 3.0.
 
 ```yaml
-Type: Hashtable
+Type: System.Collections.Hashtable
 Parameter Sets: FilterParameterSet
 Aliases:
 
@@ -271,7 +287,7 @@ By default, **Wait-Job** returns, or ends  the wait, when jobs are in one of the
 This parameter was introduced in Windows PowerShell 3.0.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -291,7 +307,7 @@ You can type one or more IDs, separated by commas.
 To find the ID of a job, type `Get-Job`.
 
 ```yaml
-Type: Int32[]
+Type: System.Int32[]
 Parameter Sets: SessionIdParameterSet
 Aliases:
 
@@ -310,7 +326,7 @@ An instance ID is a GUID that uniquely identifies the job on the computer.
 To find the instance ID of a job, use **Get-Job**.
 
 ```yaml
-Type: Guid[]
+Type: System.Guid[]
 Parameter Sets: InstanceIdParameterSet
 Aliases:
 
@@ -328,7 +344,7 @@ You can also use a pipeline operator to send job objects to the **Wait-Job** cmd
 By default, **Wait-Job** waits for all jobs created in the current session.
 
 ```yaml
-Type: Job[]
+Type: System.Management.Automation.Job[]
 Parameter Sets: JobParameterSet
 Aliases:
 
@@ -343,7 +359,7 @@ Accept wildcard characters: False
 Specifies friendly names of jobs for which this cmdlet waits.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: NameParameterSet
 Aliases:
 
@@ -373,7 +389,7 @@ The acceptable values for this parameter are:
 For more information about job states, see [JobState Enumeration](https://msdn.microsoft.com/library/system.management.automation.jobstate) in the MSDN library.
 
 ```yaml
-Type: JobState
+Type: System.Management.Automation.JobState
 Parameter Sets: StateParameterSet
 Aliases:
 Accepted values: NotStarted, Running, Completed, Failed, Stopped, Blocked, Suspended, Disconnected, Suspending, Stopping, AtBreakpoint
@@ -394,7 +410,7 @@ If this time is exceeded, the wait ends and the command prompt returns, even if 
 The command does not display any error message.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: TimeoutSec
 
@@ -420,6 +436,7 @@ This cmdlet returns job objects that represent the completed jobs.
 If the wait ends because the value of the *Timeout* parameter is exceeded, **Wait-Job** does not return any objects.
 
 ## NOTES
+
 * By default, **Wait-Job** returns, or ends the wait, when jobs are in one of the following states:
 
 - Completed
@@ -445,6 +462,3 @@ If the wait ends because the value of the *Timeout* parameter is exceeded, **Wai
 [Stop-Job](Stop-Job.md)
 
 [Suspend-Job](Suspend-Job.md)
-
-
-

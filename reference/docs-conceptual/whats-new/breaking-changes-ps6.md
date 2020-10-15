@@ -1,19 +1,33 @@
 ---
-ms.date:  05/17/2018
+ms.date: 02/03/2020
 keywords:  powershell,core
 title:  Breaking Changes for PowerShell 6.0
 ---
 
-# Breaking Changes for PowerShell 6.0
+# Breaking Changes for PowerShell 6.x
 
 ## Features no longer available in PowerShell Core
 
+### Modules not shipped for PowerShell 6.x
+
+For various compatibility reasons, the following modules are not included in PowerShell 6.
+
+- ISE
+- Microsoft.PowerShell.LocalAccounts
+- Microsoft.PowerShell.ODataUtils
+- Microsoft.PowerShell.Operation.Validation
+- PSScheduledJob
+- PSWorkflow
+- PSWorkflowUtility
+
 ### PowerShell Workflow
 
-[PowerShell Workflow][workflow] is a feature in Windows PowerShell that builds on top of [Windows Workflow Foundation (WF)][workflow-foundation] that enables the creation of robust runbooks for long-running or parallelized tasks.
+[PowerShell Workflow][workflow] is a feature in Windows PowerShell that builds on top of
+[Windows Workflow Foundation (WF)][workflow-foundation] that enables the creation of robust runbooks
+for long-running or parallelized tasks.
 
-Due to the lack of support for Windows Workflow Foundation in .NET Core, we will not continue to
-support PowerShell Workflow in PowerShell Core.
+Due to the lack of support for Windows Workflow Foundation in .NET Core, we are not supporting
+PowerShell Workflow in PowerShell Core.
 
 In the future, we would like to enable native parallelism/concurrency in the PowerShell language
 without the need for PowerShell Workflow.
@@ -22,8 +36,8 @@ If there is a need to use checkpoints to resume a script after the OS restarts, 
 using Task Scheduler to run a script on OS startup, but the script would need to maintain
 its own state (like persisting it to a file).
 
-[workflow]: https://docs.microsoft.com/powershell/scripting/core-powershell/workflows-guide
-[workflow-foundation]: https://docs.microsoft.com/dotnet/framework/windows-workflow-foundation/
+[workflow]: /previous-versions/powershell/scripting/components/workflows-guide
+[workflow-foundation]: /dotnet/framework/windows-workflow-foundation/
 
 ### Custom snap-ins
 
@@ -35,17 +49,18 @@ support custom snap-ins in PowerShell Core.
 
 Today, this breaks the `ActiveDirectory` and `DnsClient` modules in Windows and Windows Server.
 
-[snapin]: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_pssnapins
+[snapin]: /powershell/module/microsoft.powershell.core/about/about_pssnapins
 
 ### WMI v1 cmdlets
 
 Due to the complexity of supporting two sets of WMI-based modules, we removed the WMI v1 cmdlets
 from PowerShell Core:
 
-- `Get-WmiObject`
-- `Invoke-WmiMethod`
 - `Register-WmiEvent`
 - `Set-WmiInstance`
+- `Invoke-WmiMethod`
+- `Get-WmiObject`
+- `Remove-WmiObject`
 
 Instead, we recommend that you the use the CIM (aka WMI v2) cmdlets which provide the same
 functionality with new functionality and a redesigned syntax:
@@ -68,15 +83,57 @@ functionality with new functionality and a redesigned syntax:
 Due to the use of unsupported APIs, `Microsoft.PowerShell.LocalAccounts` has been removed from
 PowerShell Core until a better solution is found.
 
-### `*-Computer` cmdlets
+### `New-WebServiceProxy` cmdlet removed
 
-Due to the use of unsupported APIs, the following cmdlets have been removed from PowerShell Core until a
-better solution is found.
+.NET Core does not support the Windows Communication Framework, which provide services for using the
+SOAP protocol. This cmdlet was removed because it requires SOAP.
 
-- Add-Computer
-- Checkpoint-Computer
-- Remove-Computer
-- Restore-Computer
+### `*-Transaction` cmdlets removed
+
+These cmdlets had very limited usage. The decision was made to discontinue support for them.
+
+- `Complete-Transaction`
+- `Get-Transaction`
+- `Start-Transaction`
+- `Undo-Transaction`
+- `Use-Transaction`
+
+### Security cmdlets not available on non-Windows platforms
+
+- `Get-Acl`
+- `Set-Acl`
+- `Get-AuthenticodeSignature`
+- `Set-AuthenticodeSignature`
+- `Get-CmsMessage`
+- `Protect-CmsMessage`
+- `Unprotect-CmsMessage`
+- `New-FileCatalog`
+- `Test-FileCatalog`
+
+### `*-Computer`and other Windows-specific cmdlets
+
+Due to the use of unsupported APIs, the following cmdlets have been removed from PowerShell Core
+until a better solution is found.
+
+- `Get-Clipboard`
+- `Set-Clipboard`
+- `Add-Computer`
+- `Checkpoint-Computer`
+- `Remove-Computer`
+- `Restore-Computer`
+- `Reset-ComputerMachinePassword`
+- `Disable-ComputerRestore`
+- `Enable-ComputerRestore`
+- `Get-ComputerRestorePoint`
+- `Test-ComputerSecureChannel`
+- `Get-ControlPanelItem`
+- `Show-ControlPanelItem`
+- `Get-HotFix`
+- `Clear-RecycleBin`
+- `Update-List`
+- `Out-Printer`
+- `ConvertFrom-String`
+- `Convert-String`
 
 ### `*-Counter` cmdlets
 
@@ -88,6 +145,31 @@ better solution is found.
 Due to the use of unsupported APIs, the `*-EventLog` has been removed from PowerShell Core. until a
 better solution is found. `Get-WinEvent` and `Create-WinEvent` are available to get and create
 events on Windows.
+
+### Cmdlets that use WPF removed
+
+The Windows Presentation Framework is not supported on CoreCLR. The following cmdlets are affected:
+
+- `Show-Command`
+- `Out-GridView`
+- The **showwindow** parameter of `Get-Help`
+
+### Some DSC cmdlets removed
+
+- `Get-DscConfiguration`
+- `Publish-DscConfiguration`
+- `Restore-DscConfiguration`
+- `Start-DscConfiguration`
+- `Stop-DscConfiguration`
+- `Test-DscConfiguration`
+- `Update-DscConfiguration`
+- `Remove-DscConfigurationDocument`
+- `Get-DscConfigurationStatus`
+- `Disable-DscDebug`
+- `Enable-DscDebug`
+- `Get-DscLocalConfigurationManager`
+- `Set-DscLocalConfigurationManager`
+- `Invoke-DscResource`
 
 ## Engine/language changes
 
@@ -210,8 +292,8 @@ Previously, when creating a PowerShell runspace programmatically using the API y
 legacy [`RunspaceConfiguration`][runspaceconfig] or the newer [`InitialSessionState`][iss]. This
 change removed support for `RunspaceConfiguration` and only supports `InitialSessionState`.
 
-[runspaceconfig]: https://docs.microsoft.com/dotnet/api/system.management.automation.runspaces.runspaceconfiguration
-[iss]: https://docs.microsoft.com/dotnet/api/system.management.automation.runspaces.initialsessionstate
+[runspaceconfig]: /dotnet/api/system.management.automation.runspaces.runspaceconfiguration
+[iss]: /dotnet/api/system.management.automation.runspaces.initialsessionstate
 
 ### `CommandInvocationIntrinsics.InvokeScript` bind arguments to `$input` instead of `$args` [#4923](https://github.com/PowerShell/PowerShell/issues/4923)
 
@@ -375,3 +457,5 @@ Internet Explorer have resulted in several breaking changes within `Invoke-WebRe
   supply the `-AllowUnencryptedAuthentication` parameter to suppress the error.
 - `-MaximumRedirection` now produces a terminating error when redirection attempts exceed the
   provided limit instead of returning the results of the last redirection.
+- In PowerShell 6.2, a change was made to default to UTF-8 encoding for JSON responses. When a
+  charset is not supplied for a JSON response, the default encoding should be UTF-8 per RFC 8259.

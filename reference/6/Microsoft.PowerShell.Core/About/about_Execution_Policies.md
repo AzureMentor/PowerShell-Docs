@@ -1,7 +1,8 @@
 ---
+description: Describes the PowerShell execution policies and explains how to manage them. 
 keywords: powershell,cmdlet
-locale: en-us
-ms.date: 04/01/2019
+Locale: en-US
+ms.date: 08/10/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Execution_Policies
@@ -35,11 +36,15 @@ unintentionally.
 
 On non-Windows computers, the default execution policy is **Unrestricted** and
 cannot be changed. The `Set-ExecutionPolicy` cmdlet is available, but
-PowerShell displays a console message that it's not supported.
+PowerShell displays a console message that it's not supported. While
+`Get-ExecutionPolicy` returns **Unrestricted** on non-Windows platforms, the
+behavior really matches **Bypass** because those platforms do not implement the
+Windows Security Zones.
 
 ## PowerShell execution policies
 
-The PowerShell execution policies are as follows:
+Enforcement of these policies only occurs on Windows platforms. The PowerShell
+execution policies are as follows:
 
 ### AllSigned
 
@@ -75,7 +80,7 @@ The PowerShell execution policies are as follows:
 - Runs scripts that are downloaded from the internet and not signed, if the
   scripts are unblocked, such as by using the `Unblock-File` cmdlet.
 - Risks running unsigned scripts from sources other than the internet and
-  signed, but malicious, scripts.
+  signed scripts that could be malicious.
 
 ### Restricted
 
@@ -89,7 +94,8 @@ The PowerShell execution policies are as follows:
 
 - There is no execution policy set in the current scope.
 - If the execution policy in all scopes is **Undefined**, the effective
-  execution policy is **Restricted**, which is the default execution policy.
+  execution policy is **Restricted** for Windows clients and
+  **RemoteSigned** for Windows Server.
 
 ### Unrestricted
 
@@ -116,7 +122,7 @@ The **Scope** values are listed in precedence order. The policy that takes
 precedence is effective in the current session, even if a more restrictive
 policy was set at a lower level of precedence.
 
-For more information, see [Set-ExecutionPolicy](../../Microsoft.PowerShell.Security/Set-ExecutionPolicy.md).
+For more information, see [Set-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Set-ExecutionPolicy).
 
 ### MachinePolicy
 
@@ -337,9 +343,11 @@ evaluates the execution policies in the following precedence order:
 
 ## Manage signed and unsigned scripts
 
-If your PowerShell execution policy is **RemoteSigned**, PowerShell won't run
-unsigned scripts that are downloaded from the internet which includes email and
-instant messaging programs.
+In Windows, programs like Internet Explorer and Microsoft Edge add an alternate
+data stream to files that are downloaded. This marks the file as "coming from
+the Internet". If your PowerShell execution policy is **RemoteSigned**,
+PowerShell won't run unsigned scripts that are downloaded from the internet
+which includes email and instant messaging programs.
 
 You can sign the script or elect to run an unsigned script without changing the
 execution policy.
@@ -349,8 +357,16 @@ Beginning in PowerShell 3.0, you can use the **Stream** parameter of the
 from the internet. Use the `Unblock-File` cmdlet to unblock the scripts so that
 you can run them in PowerShell.
 
-For more information, see [about_Signing](about_Signing.md), [Get-Item](../../Microsoft.PowerShell.Management/Get-Item.md),
-and [Unblock-File](../../Microsoft.PowerShell.Utility/Unblock-File.md).
+For more information, see [about_Signing](about_Signing.md), [Get-Item](xref:Microsoft.PowerShell.Management.Get-Item),
+and [Unblock-File](xref:Microsoft.PowerShell.Utility.Unblock-File).
+
+> [!NOTE]
+> Other methods of downloading files may not mark the files as coming from the
+> Internet Zone. Some examples include:
+>
+> - `curl.exe`
+> - `Invoke-RestMethod`
+> - `Invoke-WebRequest`
 
 ## Execution policy on Windows Server Core and Window Nano Server
 
@@ -386,12 +402,12 @@ Zone check which avoids the problem.
 
 [about_Signing](about_Signing.md)
 
-[Get-ExecutionPolicy](../../Microsoft.PowerShell.Security/Get-ExecutionPolicy.md)
+[Get-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Get-ExecutionPolicy)
 
-[Get-Item](../../Microsoft.PowerShell.Management/Get-Item.md)
+[Get-Item](xref:Microsoft.PowerShell.Management.Get-Item)
 
 [Pwsh Console Help](about_pwsh.md)
 
-[Set-ExecutionPolicy](../../Microsoft.PowerShell.Security/Set-ExecutionPolicy.md)
+[Set-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Set-ExecutionPolicy)
 
-[Unblock-File](../../Microsoft.PowerShell.Utility/Unblock-File.md)
+[Unblock-File](xref:Microsoft.PowerShell.Utility.Unblock-File)

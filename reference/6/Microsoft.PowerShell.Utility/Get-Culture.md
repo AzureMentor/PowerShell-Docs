@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 03/28/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-culture?view=powershell-6&WT.mc_id=ps-gethelp
@@ -158,7 +158,7 @@ Retrieves all cultures supported by the current operating system.
 This parameter was introduced in PowerShell 6.2.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: ListAvailable
 Aliases:
 
@@ -176,7 +176,7 @@ Retrieve a specific culture based on the name.
 This parameter was introduced in PowerShell 6.2.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: Name
 Aliases:
 
@@ -194,7 +194,7 @@ Ignore user changes for current culture.
 This parameter was introduced in PowerShell 6.2.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: CurrentCulture, Name
 Aliases:
 

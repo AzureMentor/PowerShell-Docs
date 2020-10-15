@@ -1,16 +1,9 @@
 ---
 title: "Creating a Cmdlet without Parameters | Microsoft Docs"
-ms.custom: ""
 ms.date: "09/13/2016"
-ms.reviewer: ""
-ms.suite: ""
-ms.tgt_pltfrm: ""
-ms.topic: "article"
 helpviewer_keywords:
   - "cmdlets [PowerShell Programmers Guide], creating"
   - "cmdlets [PowerShell Programmers Guide], basic cmdlet"
-ms.assetid: 54236ef3-82db-45f8-9114-1ecb7ff65d3e
-caps.latest.revision: 8
 ---
 # Creating a Cmdlet without Parameters
 
@@ -256,7 +249,7 @@ When your cmdlet has been registered with Windows PowerShell, you can test it by
 
 [Creating a Cmdlet to Process Pipeline Input](./adding-parameters-that-process-pipeline-input.md)
 
-[How to Create a Windows PowerShell Cmdlet](/powershell/developer/cmdlet/writing-a-windows-powershell-cmdlet)
+[How to Create a Windows PowerShell Cmdlet](/powershell/scripting/developer/cmdlet/writing-a-windows-powershell-cmdlet)
 
 [Extending Object Types and Formatting](/previous-versions//ms714665(v=vs.85))
 

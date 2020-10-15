@@ -1,18 +1,11 @@
 ---
 title: "Creating a Cmdlet that Modifies the System | Microsoft Docs"
-ms.custom: ""
 ms.date: "09/13/2016"
-ms.reviewer: ""
-ms.suite: ""
-ms.tgt_pltfrm: ""
-ms.topic: "article"
 helpviewer_keywords:
   - "should process [PowerShell Programmer's Guide]"
   - "should continue [PowerShell Programmer's Guide]"
   - "user feedback [PowerShell Programmer's Guide]"
   - "confirm impact [PowerShell Programmer's Guide]"
-ms.assetid: 59be4120-1700-4d92-a308-ef4a32ccf11a
-caps.latest.revision: 8
 ---
 # Creating a Cmdlet that Modifies the System
 
@@ -288,7 +281,7 @@ When your cmdlet has been registered with Windows PowerShell, you can test it by
     PS> stop-proc
     ```
 
-The following output appears.
+    The following output appears.
 
     ```
     Cmdlet stop-proc at command pipeline position 1
@@ -302,7 +295,7 @@ The following output appears.
     PS> stop-proc -Name notepad
     ```
 
-The following output appears.
+    The following output appears.
 
     ```
     Confirm
@@ -317,7 +310,7 @@ The following output appears.
     PS> stop-proc -Name Winlogon
     ```
 
-The following output appears.
+    The following output appears.
 
     ```output
     Confirm
@@ -335,7 +328,7 @@ The following output appears.
     PS> stop-proc -Name winlogon -Force
     ```
 
-The following output appears.
+    The following output appears.
 
     ```output
     Confirm

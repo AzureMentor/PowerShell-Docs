@@ -1,7 +1,7 @@
 ---
 title: PowerShell Remoting Over SSH
 description: Remoting in PowerShell Core using SSH
-ms.date: 09/30/2019
+ms.date: 07/23/2020
 ---
 
 # PowerShell remoting over SSH
@@ -26,9 +26,9 @@ support this new remoting connection.
 [-HostName <string>]  [-UserName <string>]  [-KeyFilePath <string>]
 ```
 
-To create a remote session, you specify the target computer with the `HostName` parameter and
-provide the user name with `UserName`. When running the cmdlets interactively, you're prompted for a
-password. You can also, use SSH key authentication using a private key file with the `KeyFilePath`
+To create a remote session, you specify the target computer with the **HostName** parameter and
+provide the user name with **UserName**. When running the cmdlets interactively, you're prompted for a
+password. You can also, use SSH key authentication using a private key file with the **KeyFilePath**
 parameter.
 
 ## General setup information
@@ -78,10 +78,13 @@ an SSH subsystem to host a PowerShell process on the remote computer. And, you m
    Create the SSH subsystem that hosts a PowerShell process on the remote computer:
 
    ```
-   Subsystem powershell c:/progra~1/powershell/6/pwsh.exe -sshs -NoLogo -NoProfile
+   Subsystem powershell c:/progra~1/powershell/7/pwsh.exe -sshs -NoLogo
    ```
 
    > [!NOTE]
+   > The default location of the PowerShell executable is `c:/progra~1/powershell/7/pwsh.exe`. The
+   > location can vary depending on how you installed PowerShell.
+   >
    > You must use the 8.3 short name for any file paths that contain spaces. There's a bug in
    > OpenSSH for Windows that prevents spaces from working in subsystem executable paths. For more
    > information, see this [GitHub issue](https://github.com/PowerShell/Win32-OpenSSH/issues/784).
@@ -139,8 +142,12 @@ an SSH subsystem to host a PowerShell process on the remote computer. And, you m
    Add a PowerShell subsystem entry:
 
    ```
-   Subsystem powershell /usr/bin/pwsh -sshs -NoLogo -NoProfile
+   Subsystem powershell /usr/bin/pwsh -sshs -NoLogo
    ```
+
+   > [!NOTE]
+   > The default location of the PowerShell executable is `/usr/bin/pwsh`. The location can vary
+   > depending on how you installed PowerShell.
 
    Optionally, enable key authentication:
 
@@ -182,8 +189,12 @@ an SSH subsystem to host a PowerShell process on the remote computer. And, you m
    Add a PowerShell subsystem entry:
 
    ```
-   Subsystem powershell /usr/local/bin/pwsh -sshs -NoLogo -NoProfile
+   Subsystem powershell /usr/local/bin/pwsh -sshs -NoLogo
    ```
+
+   > [!NOTE]
+   > The default location of the PowerShell executable is `/usr/local/bin/pwsh`. The location can
+   > vary depending on how you installed PowerShell.
 
    Optionally, enable key authentication:
 
@@ -209,6 +220,10 @@ scope of this documentation. Refer to documentation for SSH on how to correctly 
 multi-factor authentication and validate it works outside of PowerShell before attempting to use it
 with PowerShell remoting.
 
+> [!NOTE]
+> Users retain the same privileges in remote sessions. Meaning, Administrators have access to an
+> elevated shell, and normal users will not.
+
 ## PowerShell remoting example
 
 The easiest way to test remoting is to try it on a single computer. In this example, we create a
@@ -218,7 +233,6 @@ same thing on a Windows computer to ensure remoting is working. Then, remote bet
 changing the host name.
 
 ```powershell
-#
 # Linux to Linux
 #
 $session = New-PSSession -HostName UbuntuVM1 -UserName TestUser
@@ -271,7 +285,7 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName           
 Enter-PSSession -HostName WinVM1 -UserName PTestName
 ```
 
-```Output
+```
 PTestName@WinVM1s password:
 ```
 
@@ -340,9 +354,18 @@ GitCommitId                    v6.0.0-alpha.17
 [WinVM2]: PS C:\Users\PSRemoteUser\Documents>
 ```
 
-### Known issues
+### Limitations
 
-The **sudo** command doesn't work in a remote session to a Linux computer.
+- The **sudo** command doesn't work in a remote session to a Linux computer.
+
+- PSRemoting over SSH does not support Profiles and does not have access to `$PROFILE`. Once in a
+  session, you can load a profile by dot sourcing the profile with the full filepath. This is not
+  related to SSH profiles. You can configure the SSH server to use PowerShell as the default shell
+  and to load a profile through SSH. See the SSH documentation for more information.
+
+- Prior to PowerShell 7.1, remoting over SSH did not support second-hop remote sessions. This
+  capability was limited to sessions using WinRM. PowerShell 7.1 allows `Enter-PSSession` and
+  `Enter-PSHostProcess` to work from within any interactive remote session.
 
 ## See also
 

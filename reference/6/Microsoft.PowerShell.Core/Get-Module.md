@@ -1,7 +1,7 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Core
 ms.date: 5/15/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/get-module?view=powershell-6&WT.mc_id=ps-gethelp
@@ -381,7 +381,7 @@ manifest (.psd1) files, script module (.psm1) files, and binary module (.dll) fi
 Without this parameter, `Get-Module` gets only the default module in each module folder.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Loaded, Available
 Aliases:
 
@@ -403,7 +403,7 @@ operating system.
 This parameter was introduced in Windows PowerShell 3.0.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: CimSession
 Aliases:
 
@@ -425,7 +425,7 @@ operating system.
 This parameter was introduced in Windows PowerShell 3.0.
 
 ```yaml
-Type: Uri
+Type: System.Uri
 Parameter Sets: CimSession
 Aliases:
 
@@ -440,7 +440,7 @@ Accept wildcard characters: False
 
 Specifies a CIM session on the remote computer.
 Enter a variable that contains the CIM session or a command that gets the CIM session, such as a
-[Get-CimSession](https://docs.microsoft.com/powershell/module/cimcmdlets/get-cimsession) command.
+[Get-CimSession](/powershell/module/cimcmdlets/get-cimsession) command.
 
 `Get-Module` uses the CIM session connection to get modules from the remote computer.
 When you import the module by using the `Import-Module` cmdlet and use the commands from the
@@ -454,7 +454,7 @@ The **CimSession** parameter gets all modules in the **CIMSession**.
 However, you can import only CIM-based and Cmdlet Definition XML (CDXML)-based modules.
 
 ```yaml
-Type: CimSession
+Type: Microsoft.Management.Infrastructure.CimSession
 Parameter Sets: CimSession
 Aliases:
 
@@ -481,7 +481,7 @@ following formats:
 You cannot specify the **FullyQualifiedName** parameter in the same command as a **Name** parameter.
 
 ```yaml
-Type: ModuleSpecification[]
+Type: Microsoft.PowerShell.Commands.ModuleSpecification[]
 Parameter Sets: (All)
 Aliases:
 
@@ -502,14 +502,15 @@ Without this parameter, `Get-Module` gets only the modules that are both listed 
 **PSModulePath** environment variable, even if those modules are loaded in the current session.
 
 ```yaml
-Accept pipeline input: False
-Position: Named
-Accept wildcard characters: False
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Available, PsSession, CimSession
-Required: True (Available), False (PsSession, CimSession)
-Default value: None
 Aliases:
-Type: SwitchParameter
+
+Required: True (Available), False (PsSession, CimSession)
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
 ### -Name
@@ -523,7 +524,7 @@ You cannot specify the **FullyQualifiedName** parameter in the same command as a
 To return modules by specifying a GUID, use **FullyQualifiedName** instead.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -549,7 +550,7 @@ A `Get-Module` command that uses the **PSSession** parameter is equivalent to us
 This parameter was introduced in Windows PowerShell 3.0.
 
 ```yaml
-Type: PSSession
+Type: System.Management.Automation.Runspaces.PSSession
 Parameter Sets: PsSession
 Aliases:
 
@@ -575,7 +576,7 @@ When you specify the **Refresh** parameter in a command, you must specify **List
 This parameter was introduced in Windows PowerShell 3.0.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Available, PsSession, CimSession
 Aliases:
 
@@ -599,6 +600,7 @@ The Get-Module cmdlet checks **CompatiblePSEditions** property of **PSModuleInfo
 specified value and returns only those modules that have it set.
 
 > [!NOTE]
+>
 > - **Desktop Edition:** Built on .NET Framework, applies to Windows PowerShell 5.1 and below on
 > most Windows editions.
 > - **Core Edition:** Built on .NET Core, applies to PowerShell Core 6.0 and above, as well as some
@@ -606,7 +608,7 @@ specified value and returns only those modules that have it set.
 > The edition of the current PowerShell session can be found with the `$PSEdition` variable.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: Available, PsSession
 Aliases:
 
@@ -631,7 +633,7 @@ On macOS and Linux, this parameter does nothing.
 See [about_PowerShell_Editions](About/about_PowerShell_Editions.md) for more information.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Available, PsSession, CimSession
 Aliases:
 

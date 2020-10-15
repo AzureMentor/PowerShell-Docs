@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Security
 ms.date: 11/02/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/new-filecatalog?view=powershell-6&WT.mc_id=ps-gethelp
@@ -23,7 +23,7 @@ New-FileCatalog [-CatalogVersion <Int32>] [-CatalogFilePath] <String> [[-Path] <
 
 ## DESCRIPTION
 
-`New-FileCatalog` creates a [Windows catalog file](https://docs.microsoft.com/windows-hardware/drivers/install/catalog-files)
+`New-FileCatalog` creates a [Windows catalog file](/windows-hardware/drivers/install/catalog-files)
 for a set of folders and files.
 This catalog file contains hashes for all files in the provided paths.
 Users can then distribute the catalog with their files so that users can validate
@@ -57,7 +57,7 @@ A path to a file or folder where the catalog file (.cat) should be placed.
 If a folder path is specified, the default filename `catalog.cat` will be used.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -77,7 +77,7 @@ while `2.0` uses the secure SHA-256 algorithm
 However, `1.0` is the only supported algorithm on Windows 7 and Server 2008R2.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -90,8 +90,12 @@ Accept wildcard characters: False
 
 ### -Path
 
+Accepts a path or array of paths to files or folders that should be included
+in the catalog file.
+If a folder is specified, all the files in the folder will be included as well.
+
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -107,7 +111,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -118,31 +122,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-
-Accepts a path or array of paths to files or folders that should be included
-in the catalog file.
-If a folder is specified, all the files in the folder will be included as well.
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -173,6 +159,4 @@ The pipeline takes a string that is used as the catalog filename.
 
 [Test-FileCatalog](Test-FileCatalog.md)
 
-[PowerShellGet](/powershell/module/PowerShellGet)
-
-
+[PowerShellGet](/powerShell/module/powershellget)

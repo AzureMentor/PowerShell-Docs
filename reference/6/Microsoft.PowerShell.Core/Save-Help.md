@@ -1,7 +1,7 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Core
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/save-help?view=powershell-6&WT.mc_id=ps-gethelp
@@ -19,15 +19,17 @@ Downloads and saves the newest help files to a file system directory.
 
 ```
 Save-Help [-DestinationPath] <String[]> [[-Module] <PSModuleInfo[]>]
- [-FullyQualifiedModule <ModuleSpecification[]>] [[-UICulture] <CultureInfo[]>] [-Credential <PSCredential>]
- [-UseDefaultCredentials] [-Force] [<CommonParameters>]
+ [-FullyQualifiedModule <ModuleSpecification[]>] [[-UICulture] <CultureInfo[]>]
+ [-Credential <PSCredential>] [-UseDefaultCredentials] [-Force] [-Scope <UpdateHelpScope>]
+ [<CommonParameters>]
 ```
 
 ### LiteralPath
 
 ```
-Save-Help -LiteralPath <String[]> [[-Module] <PSModuleInfo[]>] [-FullyQualifiedModule <ModuleSpecification[]>]
- [[-UICulture] <CultureInfo[]>] [-Credential <PSCredential>] [-UseDefaultCredentials] [-Force]
+Save-Help -LiteralPath <String[]> [[-Module] <PSModuleInfo[]>]
+ [-FullyQualifiedModule <ModuleSpecification[]>] [[-UICulture] <CultureInfo[]>]
+ [-Credential <PSCredential>] [-UseDefaultCredentials] [-Force] [-Scope <UpdateHelpScope>]
  [<CommonParameters>]
 ```
 
@@ -196,7 +198,7 @@ object and the password is stored as a [SecureString](/dotnet/api/system.securit
 > [How secure is SecureString?](/dotnet/api/system.security.securestring#how-secure-is-securestring).
 
 ```yaml
-Type: PSCredential
+Type: System.Management.Automation.PSCredential
 Parameter Sets: (All)
 Aliases:
 
@@ -213,7 +215,7 @@ Specifies the path of the folder in which the help files are saved.
 Do not specify a file name or file name extension.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: Path
 Aliases: Path
 
@@ -235,7 +237,7 @@ The once-per-day limit protects the servers that host the help files, and makes 
 To save help for a module in multiple UI cultures without the *Force* parameter, include all UI cultures in the same command, such as: `Save-Help -Module PSScheduledJobs -UICulture en-US, fr-FR, pt-BR`
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -256,7 +258,7 @@ For example, the *FullyQualifiedModule* parameter accepts a module name that is 
 You cannot specify the *FullyQualifiedModule* parameter in the same command as a *Module* parameter.
 
 ```yaml
-Type: ModuleSpecification[]
+Type: Microsoft.PowerShell.Commands.ModuleSpecification[]
 Parameter Sets: (All)
 Aliases:
 
@@ -276,9 +278,9 @@ If the path includes escape characters, enclose it in single quotation marks.
 Single quotation marks tell PowerShell not to interpret any characters as escape sequences.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: LiteralPath
-Aliases: PSPath
+Aliases: PSPath, LP
 
 Required: True
 Position: Named
@@ -310,7 +312,7 @@ This includes modules that do not support Updatable Help.
 This value might generate errors when the command encounters modules that do not support Updatable Help.
 
 ```yaml
-Type: PSModuleInfo[]
+Type: System.Management.Automation.PSModuleInfo[]
 Parameter Sets: (All)
 Aliases: Name
 
@@ -333,7 +335,7 @@ By default, **Save-Help** gets help files in the UI culture set for Windows or i
 If you specify the *UICulture* parameter, **Save-Help** looks for help only for the specified UI culture, not in any fallback culture.
 
 ```yaml
-Type: CultureInfo[]
+Type: System.Globalization.CultureInfo[]
 Parameter Sets: (All)
 Aliases:
 
@@ -352,7 +354,7 @@ By default, the command runs without explicit credentials.
 This parameter is effective only when the web download uses NTLM, negotiate, or Kerberos-based authentication.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -360,6 +362,22 @@ Required: False
 Position: Named
 Default value: False
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Scope
+
+This paramater does nothing in this cmdlet.
+
+```yaml
+Type: Microsoft.PowerShell.Commands.UpdateHelpScope
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 

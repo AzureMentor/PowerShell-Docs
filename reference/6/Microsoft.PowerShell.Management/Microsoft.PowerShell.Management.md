@@ -1,8 +1,8 @@
 ---
 Download Help Link: https://go.microsoft.com/fwlink/?linkid=855958
-Help Version: 6.1.0.1
+Help Version: 6.2.5.0
 keywords: powershell,cmdlet
-locale: en-US
+Locale: en-US
 Module Guid: eefcb906-b326-4e99-9f54-8b4bb6ef3c6d
 Module Name: Microsoft.PowerShell.Management
 ms.date: 03/01/2019
@@ -74,7 +74,7 @@ Gets drives in the current session.
 Gets information about the specified PowerShell provider.
 
 ### [Get-Service](Get-Service.md)
-Gets the services on the local computer.
+Gets the services on the computer.
 
 ### [Get-TimeZone](Get-TimeZone.md)
 Gets the current time zone or a list of available time zones.
@@ -134,7 +134,7 @@ Renames a property of an item.
 Resolves the wildcard characters in a path, and displays the path contents.
 
 ### [Restart-Computer](Restart-Computer.md)
-Restarts ("reboots") the operating system on local and remote computers.
+Restarts the operating system on local and remote computers.
 
 ### [Restart-Service](Restart-Service.md)
 Stops and then starts one or more services.
@@ -182,7 +182,7 @@ Stops one or more running services.
 Suspends (pauses) one or more running services.
 
 ### [Test-Connection](Test-Connection.md)
-Sends ICMP echo request packets ("pings") to one or more computers.
+Sends ICMP echo request packets, or pings, to one or more computers.
 
 ### [Test-Path](Test-Path.md)
 Determines whether all elements of a path exist.

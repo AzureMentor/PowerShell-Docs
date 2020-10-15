@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.Management.Infrastructure.CimCmdlets.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: CimCmdlets
 ms.date: 02/21/2019
 online version: https://docs.microsoft.com/powershell/module/cimcmdlets/get-ciminstance?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -20,30 +20,32 @@ Gets the CIM instances of a class from a CIM server.
 
 ```
 Get-CimInstance [-ClassName] <String> [-ComputerName <String[]>] [-KeyOnly] [-Namespace <String>]
- [-OperationTimeoutSec <UInt32>] [-QueryDialect <String>] [-Shallow] [-Filter <String>] [-Property <String[]>]
- [<CommonParameters>]
+ [-OperationTimeoutSec <UInt32>] [-QueryDialect <String>] [-Shallow] [-Filter <String>]
+ [-Property <String[]>] [<CommonParameters>]
 ```
 
 ### ResourceUriSessionSet
 
 ```
 Get-CimInstance -CimSession <CimSession[]> -ResourceUri <Uri> [-KeyOnly] [-Namespace <String>]
- [-OperationTimeoutSec <UInt32>] [-Shallow] [-Filter <String>] [-Property <String[]>] [<CommonParameters>]
+ [-OperationTimeoutSec <UInt32>] [-Shallow] [-Filter <String>] [-Property <String[]>]
+ [<CommonParameters>]
 ```
 
 ### QuerySessionSet
 
 ```
 Get-CimInstance -CimSession <CimSession[]> [-ResourceUri <Uri>] [-Namespace <String>]
- [-OperationTimeoutSec <UInt32>] -Query <String> [-QueryDialect <String>] [-Shallow] [<CommonParameters>]
+ [-OperationTimeoutSec <UInt32>] -Query <String> [-QueryDialect <String>] [-Shallow]
+ [<CommonParameters>]
 ```
 
 ### ClassNameSessionSet
 
 ```
 Get-CimInstance -CimSession <CimSession[]> [-ClassName] <String> [-KeyOnly] [-Namespace <String>]
- [-OperationTimeoutSec <UInt32>] [-QueryDialect <String>] [-Shallow] [-Filter <String>] [-Property <String[]>]
- [<CommonParameters>]
+ [-OperationTimeoutSec <UInt32>] [-QueryDialect <String>] [-Shallow] [-Filter <String>]
+ [-Property <String[]>] [<CommonParameters>]
 ```
 
 ### CimInstanceSessionSet
@@ -64,14 +66,16 @@ Get-CimInstance [-ResourceUri <Uri>] [-ComputerName <String[]>] [-OperationTimeo
 
 ```
 Get-CimInstance -ResourceUri <Uri> [-ComputerName <String[]>] [-KeyOnly] [-Namespace <String>]
- [-OperationTimeoutSec <UInt32>] [-Shallow] [-Filter <String>] [-Property <String[]>] [<CommonParameters>]
+ [-OperationTimeoutSec <UInt32>] [-Shallow] [-Filter <String>] [-Property <String[]>]
+ [<CommonParameters>]
 ```
 
 ### QueryComputerSet
 
 ```
 Get-CimInstance [-ResourceUri <Uri>] [-ComputerName <String[]>] [-Namespace <String>]
- [-OperationTimeoutSec <UInt32>] -Query <String> [-QueryDialect <String>] [-Shallow] [<CommonParameters>]
+ [-OperationTimeoutSec <UInt32>] -Query <String> [-QueryDialect <String>] [-Shallow]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -100,82 +104,89 @@ If the **InputObject** parameter is specified, the cmdlet works in one of the fo
 
 ### Example 1: Get the CIM instances of a specified class
 
+This example retrieves the CIM instances of a class named **Win32_Process**.
+
 ```powershell
 Get-CimInstance -ClassName Win32_Process
 ```
 
-This command retrieves the CIM instances of a class named **Win32_Process**.
-
 ### Example 2: Get a list of namespaces from a WMI server
+
+This example retrieves a list of namespaces under the **Root** namespace on a WMI server.
 
 ```powershell
 Get-CimInstance -Namespace root -ClassName __Namespace
 ```
 
-This command retrieves a list of namespaces under the Root namespace on a WMI server.
-
 ### Example 3: Get instances of a class filtered by using a query
 
-```powershell
-Get-CimInstance -Query "SELECT * from Win32_Process WHERE name LIKE 'p%'"
-```
-
-This command retrieves all the CIM instances that start with the letter p of a class named
+This example retrieves all the CIM instances that start with the letter **P** of a class named
 **Win32_Process** using the query specified by a **Query** parameter.
+
+```powershell
+Get-CimInstance -Query "SELECT * from Win32_Process WHERE name LIKE 'P%'"
+```
 
 ### Example 4: Get instances of a class filtered by using a class name and a filter expression
 
-```powershell
-Get-CimInstance -ClassName Win32_Process -Filter "Name like 'p%'"
-```
-
-This command retrieves all the CIM instances that start with the letter "p" of a class named
+This example retrieves all the CIM instances that start with the letter **P** of a class named
 **Win32_Process** using the Filter parameter.
 
+```powershell
+Get-CimInstance -ClassName Win32_Process -Filter "Name like 'P%'"
+```
+
 ### Example 5: Get the CIM instances with only key properties filled in
+
+This example creates a new CIM instance in memory for a class named **Win32_Process** with
+the key property `@{ "Handle"=0 }` and stores it in a variable named `$x`. The variable is passed as
+a CIM instance to the `Get-CimInstance` cmdlet to get a particular instance.
 
 ```powershell
 $x = New-CimInstance -ClassName Win32_Process -Namespace root\cimv2 -Property @{ "Handle"=0 } -Key Handle -ClientOnly
 Get-CimInstance -CimInstance $x
 ```
 
-This set of commands creates a new CIM instance in memory for a class named **Win32_Process** with
-the key property `@{ "Handle"=0 }` and stores it in a variable named `$x`. The variable is passed as
-a CIM instance to the `Get-CimInstance` cmdlet to get a particular instance.
-
 ### Example 6: Retrieve CIM instances and reuse them
+
+This example gets the CIM instances of a class named **Win32_Process** and stores them in
+the variables `$x` and `$y`. The variable `$x` is then formatted in a table containing only the
+**Name** and **KernelModeTime** properties, the table set to **AutoSize**.
 
 ```powershell
 $x,$y = Get-CimInstance -ClassName Win32_Process
 $x | Format-Table -Property Name,KernelModeTime -AutoSize
-$x | Get-CimInstance | Format-Table -Property Name,KernelModeTime -AutoSize
 ```
 
-This set of commands gets the CIM instances of a class named **Win32_Process** and stores them in
-the variables `$x` and `$y`. The variable `$x` is then formatted in a table containing only the
-powershell and the powershell attributes, the table set to **AutoSize**.
+```Output
+Name                 KernelModeTime
+----                 --------------
+System Idle Process 157238797968750
+```
 
 ### Example 7: Get CIM instances from remote computer
+
+This example retrieves the CIM instances of a class named **Win32_ComputerSystem** from the remote
+computers named **Server01** and **Server02**.
 
 ```powershell
 Get-CimInstance -ClassName Win32_ComputerSystem -ComputerName Server01,Server02
 ```
 
-This command retrieves the CIM instances of a class named **Win32_ComputerSystem** from the remote
-computers named Server01 and Server02.
-
 ### Example 8: Getting only the key properties, instead of all properties
 
+This example retrieves only the key properties, which reduces the size of the object and network
+traffic.
+
 ```powershell
-Get-CimInstance -Class Win32_Process -KeyOnly
 $x = Get-CimInstance -Class Win32_Process -KeyOnly
 $x | Invoke-CimMethod -MethodName GetOwner
 ```
 
-This command retrieves only the key properties, which reduces the size of the object and network
-traffic.
-
 ### Example 9: Getting only a subset of properties, instead of all properties
+
+This example retrieves only a subset of properties, which reduces the size of the object and network
+traffic.
 
 ```powershell
 Get-CimInstance -Class Win32_Process -Property Name,KernelModeTime
@@ -183,23 +194,20 @@ $x = Get-CimInstance -Class Win32_Process -Property Name,KernelModeTime
 $x | Invoke-CimMethod -MethodName GetOwner
 ```
 
-The instance retrieved with the Property parameter can be used to perform other CIM operations, for
-example `Set-CimInstance` or `Invoke-CimMethod`.
-
-This command retrieves only a subset of properties, which reduces the size of the object and network
-traffic.
+The instance retrieved with the **Property** parameter can be used to perform other CIM operations,
+for example `Set-CimInstance` or `Invoke-CimMethod`.
 
 ### Example 10: Get the CIM instance using CIM session
+
+This example creates a CIM session on the computers named **Server01** and **Server02** using the
+`New-CimSession` cmdlet and stores the session information in a variable named `$s`. The contents of
+the variable are then passed to `Get-CimInstance` by using the **CimSession** parameter, to get the
+CIM instances of the class named **Win32_ComputerSystem**.
 
 ```powershell
 $s = New-CimSession -ComputerName Server01,Server02
 Get-CimInstance -ClassName Win32_ComputerSystem -CimSession $s
 ```
-
-This set of commands creates a CIM session on the computers named Server01 and Server02 using the
-`New-CimSession` cmdlet and stores the session information in a variable named `$s`. The contents of
-the variable are then passed to `Get-CimInstance` by using the **CimSession** parameter, to get the
-CIM instances of the class named **Win32_ComputerSystem**.
 
 ## PARAMETERS
 
@@ -210,7 +218,7 @@ a command that creates or gets the CIM session, such as the `New-CimSession` or 
 cmdlets. For more information, see [about_CimSession](../Microsoft.PowerShell.Core/About/about_CimSession.md).
 
 ```yaml
-Type: CimSession[]
+Type: Microsoft.Management.Infrastructure.CimSession[]
 Parameter Sets: ResourceUriSessionSet, QuerySessionSet, ClassNameSessionSet, CimInstanceSessionSet
 Aliases:
 
@@ -228,7 +236,7 @@ completion to browse the list of classes, because PowerShell gets a list of clas
 WMI server to provide a list of class names.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ClassNameComputerSet, ClassNameSessionSet
 Aliases:
 
@@ -252,7 +260,7 @@ If multiple operations are being performed on the same computer, connect using a
 better performance.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: ClassNameComputerSet, CimInstanceComputerSet, ResourceUriComputerSet, QueryComputerSet
 Aliases: CN, ServerName
 
@@ -266,12 +274,10 @@ Accept wildcard characters: False
 ### -Filter
 
 Specifies a where clause to use as a filter. Specify the clause in either the **WQL** or the **CQL**
-query language.
-
-Note: Do not include the where keyword in the value of the parameter.
+query language. Do not include the `WHERE` keyword in the value of the parameter.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ClassNameComputerSet, ResourceUriSessionSet, ClassNameSessionSet, ResourceUriComputerSet
 Aliases:
 
@@ -292,10 +298,11 @@ instance object as an input, `Get-CimInstance` returns the object from server us
 operation, instead of an enumerate or query operation. Using a get CIM operation is more efficient
 than retrieving all instances and then filtering them.
 
-If the CIM class does not implement the get operation, then specifying the **InputObject** parameter returns an error.
+If the CIM class does not implement the get operation, then specifying the **InputObject** parameter
+returns an error.
 
 ```yaml
-Type: CimInstance
+Type: Microsoft.Management.Infrastructure.CimInstance
 Parameter Sets: CimInstanceSessionSet, CimInstanceComputerSet
 Aliases: CimInstance
 
@@ -311,11 +318,11 @@ Accept wildcard characters: False
 Indicates that only objects with key properties populated are returned. Specifying the **KeyOnly**
 parameter reduces the amount of data transferred over the network.
 
-Use the KeyOnly parameter to return only a small portion of the object, which can be used for other
+Use the **KeyOnly** parameter to return only a small portion of the object, which can be used for other
 operations, such as the `Set-CimInstance` or `Get-CimAssociatedInstance` cmdlets.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: ClassNameComputerSet, ResourceUriSessionSet, ClassNameSessionSet, ResourceUriComputerSet
 Aliases:
 
@@ -335,7 +342,7 @@ namespaces, because PowerShell gets a list of namespaces from the local WMI serv
 list of namespaces.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ClassNameComputerSet, ResourceUriSessionSet, QuerySessionSet, ClassNameSessionSet, ResourceUriComputerSet, QueryComputerSet
 Aliases:
 
@@ -358,7 +365,7 @@ parameter are not recoverable, because the operation on the server times out bef
 reconnect.
 
 ```yaml
-Type: UInt32
+Type: System.UInt32
 Parameter Sets: (All)
 Aliases: OT
 
@@ -372,14 +379,12 @@ Accept wildcard characters: False
 ### -Property
 
 Specifies a set of instance properties to retrieve. Use this parameter when you need to reduce the
-size of the object returned, either in memory or over the network.
-
-The object returned always has key properties populated, irrespective of the set of properties
-listed by the Property parameter. Other properties of the class are present but they are not
-populated.
+size of the object returned, either in memory or over the network. The object returned also contains
+the key properties even if you have not listed them using the **Property** parameter. Other
+properties of the class are present but they are not populated.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: ClassNameComputerSet, ResourceUriSessionSet, ClassNameSessionSet, ResourceUriComputerSet
 Aliases: SelectProperties
 
@@ -398,14 +403,14 @@ backslash character. If the value specified uses the WQL **LIKE** operator, then
 the following characters by enclosing them in square brackets `[]`: percent `%`, underscore `_`,
 or opening square bracket `[`.
 
-You cannot use a metadata query to retrieve a list of classes or an event query.
-To retrieve a list of classes, use the `Get-CimClass` cmdlet.
-To retrieve an event query, use the `Register-CimIndicationEvent` cmdlet.
+You cannot use a metadata query to retrieve a list of classes or an event query. To retrieve a list
+of classes, use the `Get-CimClass` cmdlet. To retrieve an event query, use the
+`Register-CimIndicationEvent` cmdlet.
 
-You can specify the query dialect using the QueryDialect parameter.
+You can specify the query dialect using the **QueryDialect** parameter.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: QuerySessionSet, QueryComputerSet
 Aliases:
 
@@ -422,7 +427,7 @@ Specifies the query language used for the Query parameter. The acceptable values
 are: **WQL** or **CQL**. The default value is **WQL**.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ClassNameComputerSet, QuerySessionSet, ClassNameSessionSet, QueryComputerSet
 Aliases:
 
@@ -456,11 +461,11 @@ If both the **ResourceUri** parameter and the **Filter** parameter are specified
 parameter is ignored.
 
 ```yaml
-Type: Uri
+Type: System.Uri
 Parameter Sets: ResourceUriSessionSet, ResourceUriComputerSet, QuerySessionSet, QueryComputerSet, CimInstanceSessionSet, CimInstanceComputerSet
 Aliases:
 
-Required: True
+Required: True (ResourceUriSessionSet, ResourceUriComputerSet), False (QuerySessionSet, QueryComputerSet, CimInstanceSessionSet, CimInstanceComputerSet)
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -473,7 +478,7 @@ Indicates that the instances of a class are returned without including the insta
 classes. By default, the cmdlet returns the instances of a class and its child classes.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: ClassNameComputerSet, ResourceUriSessionSet, QuerySessionSet, ClassNameSessionSet, ResourceUriComputerSet, QueryComputerSet
 Aliases:
 
@@ -492,16 +497,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### CIM Instance
+### Microsoft.Management.Infrastructure.CimInstance
 
 This cmdlet accepts an input objects specified with the InputObject parameter.
 
 ## OUTPUTS
 
-### CIM Instance
+### Microsoft.Management.Infrastructure.CimInstance
 
-This cmdlet returns one or more CIM instance objects representing a snapshot of the CIM instances
-on the CIM server.
+This cmdlet returns one or more CIM instance objects representing a snapshot of the CIM instances on the CIM server.
 
 ## NOTES
 

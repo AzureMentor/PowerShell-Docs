@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Security
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/convertto-securestring?view=powershell-6&WT.mc_id=ps-gethelp
@@ -130,7 +130,7 @@ If you use this parameter to provide plain text as input, the system cannot prot
 To use this parameter, you must also specify the *Force* parameter.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: PlainText
 Aliases:
 
@@ -146,7 +146,7 @@ Accept wildcard characters: False
 Confirms that you understand the implications of using the *AsPlainText* parameter and still want to use it.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: PlainText
 Aliases:
 
@@ -159,11 +159,11 @@ Accept wildcard characters: False
 
 ### -Key
 
-Specifies the encryption key to use when converting a secure string into an encrypted standard string.
-Valid key lengths are 16, 24, and 32 bytes.
+Specifies the encryption key used to convert the original secure string into the encrypted standard string.
+Valid key lengths are 16, 24 and 32 bytes.
 
 ```yaml
-Type: Byte[]
+Type: System.Byte[]
 Parameter Sets: Open
 Aliases:
 
@@ -176,13 +176,13 @@ Accept wildcard characters: False
 
 ### -SecureKey
 
-Specifies the encryption key to use when converting a secure string into an encrypted standard string.
+Specifies the encryption key used to convert the original secure string into the encrypted standard string.
 The key must be provided in the format of a secure string.
-The secure string is converted to a byte array before being used as the key.
-Valid key lengths are 16, 24, and 32 bytes.
+The secure string will be converted to a byte array to be used as the key.
+Valid secure key lengths are 8, 12 and 16 code points.
 
 ```yaml
-Type: SecureString
+Type: System.Security.SecureString
 Parameter Sets: Secure
 Aliases:
 
@@ -198,7 +198,7 @@ Accept wildcard characters: False
 Specifies the string to convert to a secure string.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -227,8 +227,10 @@ ConvertTo-SecureString returns a **SecureString** object.
 
 ## NOTES
 
+Some characters, such as emoticons, correspond to several code points in the string that contains
+them. Avoid using these characters because they may cause problems and misunderstandings when used
+in a password.
+
 ## RELATED LINKS
 
 [ConvertFrom-SecureString](ConvertFrom-SecureString.md)
-
-

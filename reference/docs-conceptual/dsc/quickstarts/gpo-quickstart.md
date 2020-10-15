@@ -3,13 +3,13 @@ ms.date:  07/09/2019
 keywords:  dsc,gpo,powershell,configuration,setup
 title:  Quickstart - Convert Group Policy into DSC
 ---
+# Quickstart: Convert Group Policy into DSC
 
 > Applies To: Windows PowerShell 4.0, Windows PowerShell 5.0
 
-# Quickstart: Convert Group Policy into DSC
-
-You can generate a DSC configuration from a Group Policy or Azure Security Center baseline. The [BaselineManagement](https://www.powershellgallery.com/packages/BaselineManagement)
-module includes the following commands for accomplishing this task.
+You can generate a DSC configuration from a Group Policy or Azure Security Center baseline. The
+[BaselineManagement](https://www.powershellgallery.com/packages/BaselineManagement) module includes
+the following commands for accomplishing this task.
 
 - `ConvertFrom-GPO` - Converts Group Policies, stored as files. You can also specify a directory
   containing multiple policies that will be combined into one Configuration.
@@ -24,7 +24,7 @@ Configuration script (`.ps1`), that you can edit and recompile. The cmdlets dete
 errors for missing resources, or duplicate resource blocks. Resource blocks that would cause
 compilation errors are commented out.
 
-The following example converts a [Microsoft Security Baseline](https://www.microsoft.com/en-us/download/details.aspx?id=55319)
+The following example converts a [Microsoft Security Baseline](https://www.microsoft.com/download/details.aspx?id=55319)
 into a DSC configuration script (`.ps1`) and `.mof` file.
 
 ```powershell
@@ -61,6 +61,6 @@ Each managed node will also need the following two modules:
 
 ## Next steps
 
-- To upload your configuration script into Azure Automation State Configuration, see [Getting Started](/automation/automation-dsc-getting-started#importing-a-configuration-into-azure-automation).
+- To upload your configuration script into Azure Automation State Configuration, see [Getting Started](/azure/automation/automation-dsc-getting-started#importing-a-configuration-into-azure-automation).
 - Add the **SecurityPolicyDSC** and **AuditPolicyDSC** modules to your [Automation Account](/azure/automation/shared-resources/modules).
 - Find DSC configurations and resources in the [PowerShell Gallery](https://www.powershellgallery.com/).

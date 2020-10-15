@@ -1,9 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Diagnostics.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Diagnostics
-ms.date: 6/21/2019
+ms.date: 10/30/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.diagnostics/get-counter?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Counter
@@ -238,7 +238,7 @@ Timestamp                 CounterSamples
 ```
 
 The `Get-Random` cmdlet uses `Get-Content` to select 50 random computer names from the
-**Servers.txt** file. The remote computer names are stored in the `$Servers` variable. The
+`Servers.txt` file. The remote computer names are stored in the `$Servers` variable. The
 `\Processor(*)\% Processor Time` counter's path is stored in the `$Counter` variable. `Get-Counter`
 uses the **Counter** parameter to specify the counters in the `$Counter` variable. The
 **ComputerName** parameter specifies the computer names in the `$Servers` variable.
@@ -272,7 +272,7 @@ For more information, see [about_Automatic_Variables](../Microsoft.PowerShell.Co
 `Get-Counter` uses the **ListSet** parameter to specify the **Memory** counter set. The command is
 enclosed in parentheses so that the **Paths** property returns each path as a string. The objects
 are sent down the pipeline to `Where-Object`. `Where-Object` uses the variable `$_` to process each
-object and uses the **like** parameter to find matches for the string `*Cache*`. The asterisks (`*`)
+object and uses the `-like` operator to find matches for the string `*Cache*`. The asterisks (`*`)
 are wildcards for any characters.
 
 ### Example 9: Use the PathsWithInstances property to get formatted path names
@@ -458,7 +458,7 @@ local computer.
 if your computer isn't configured to run remote commands.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases: Cn
 
@@ -476,7 +476,7 @@ When the **Continuous** is specified, `Get-Counter` gets samples until you press
 counter. Use the **SampleInterval** parameter to increase the interval between continuous samples.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: GetCounterSet
 Aliases:
 
@@ -511,12 +511,12 @@ the computer name, `Get-Counter` uses the local computer.
 An asterisk (`*`) in the instance is a wildcard character to get all instances of the counter.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: GetCounterSet
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: True
@@ -540,12 +540,12 @@ For example to send each **Processor** counter path to `Get-Counter`:
 `Get-Counter -ListSet Processor | Get-Counter`
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: ListSetSet
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: True
@@ -563,7 +563,7 @@ To collect a large data set, run `Get-Counter` as a PowerShell background job. F
 see [about_Jobs](../Microsoft.PowerShell.Core/About/about_Jobs.md).
 
 ```yaml
-Type: Int64
+Type: System.Int64
 Parameter Sets: GetCounterSet
 Aliases:
 
@@ -580,7 +580,7 @@ Specifies the number of seconds between samples for each specified performance c
 **SampleInterval** parameter isn't specified, `Get-Counter` uses a one-second interval.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: GetCounterSet
 Aliases:
 

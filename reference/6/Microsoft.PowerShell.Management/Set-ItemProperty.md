@@ -1,7 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
+Module Name: Microsoft.PowerShell.Management
 ms.date: 5/14/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/set-itemproperty?view=powershell-6&WT.mc_id=ps-gethelp
 schema: 2.0.0
@@ -89,7 +90,7 @@ Set-ItemProperty -Path "HKLM:\Software\ContosoCompany" -Name "NoOfEmployees" -Va
 Get-ItemProperty -Path "HKLM:\Software\ContosoCompany"
 ```
 
-```output
+```Output
 PSPath        : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\software\contosocompany
 PSParentPath  : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\software
 PSChildName   : contosocompany
@@ -97,7 +98,6 @@ PSDrive       : HKLM
 PSProvider    : Microsoft.PowerShell.Core\Registry
 NoOfLocations : 2
 NoOfEmployees : 823
-
 ```
 
 ```powershell
@@ -105,7 +105,7 @@ Set-ItemProperty -Path "HKLM:\Software\ContosoCompany" -Name "NoOfEmployees" -Va
 Get-ItemProperty -Path "HKLM:\Software\ContosoCompany"
 ```
 
-```output
+```Output
 PSPath        : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\software\contosocompany
 PSParentPath  : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\software
 PSChildName   : contosocompany
@@ -157,7 +157,7 @@ Get-ChildItem weekly.txt | Set-ItemProperty -Name IsReadOnly -Value $True
 > use [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md).
 
 ```yaml
-Type: PSCredential
+Type: System.Management.Automation.PSCredential
 Parameter Sets: (All)
 Aliases:
 
@@ -177,7 +177,7 @@ command includes the contents of an item, such as `C:\Windows\*`, where the wild
 specifies the contents of the `C:\Windows` directory.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -197,7 +197,7 @@ Filters are more efficient than other parameters, because the provider applies t
 gets the objects rather than having PowerShell filter the objects after they are retrieved.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -215,7 +215,7 @@ Implementation varies from provider to provider.
 For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -235,7 +235,7 @@ command includes the contents of an item, such as `C:\Windows\*`, where the wild
 specifies the contents of the `C:\Windows` directory.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -252,7 +252,7 @@ Specifies the object that has the properties that this cmdlet changes.
 Enter a variable that contains the object or a command that gets the object.
 
 ```yaml
-Type: PSObject
+Type: System.Management.Automation.PSObject
 Parameter Sets: propertyPSObjectPathSet, propertyPSObjectLiteralPathSet
 Aliases:
 
@@ -273,9 +273,9 @@ as escape sequences.
 For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
-Type: String[]
-Parameter Sets: propertyValueLiteralPathSet, propertyPSObjectLiteralPathSet
-Aliases: PSPath
+Type: System.String[]
+Parameter Sets: propertyPSObjectLiteralPathSet, propertyValueLiteralPathSet
+Aliases: PSPath, LP
 
 Required: True
 Position: Named
@@ -289,7 +289,7 @@ Accept wildcard characters: False
 Specifies the name of the property.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: propertyValuePathSet, propertyValueLiteralPathSet
 Aliases: PSProperty
 
@@ -306,7 +306,7 @@ Returns an object that represents the item property.
 By default, this cmdlet does not generate any output.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -323,7 +323,7 @@ Specifies the path of the items with the property to modify.
 Wildcard characters are permitted.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: propertyValuePathSet, propertyPSObjectPathSet
 Aliases:
 
@@ -334,12 +334,43 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: True
 ```
 
+### -Type
+
+**Type** is a dynamic parameter that the Registry provider adds to the `Set-ItemProperty` cmdlet.
+This parameter only works in the registry drives.
+
+Specifies the type of property that this cmdlet adds.
+The acceptable values for this parameter are:
+
+- **String**: Specifies a null-terminated string. Equivalent to **REG_SZ**.
+- **ExpandString**: Specifies a null-terminated string that contains unexpanded references to
+  environment variables that are expanded when the value is retrieved. Equivalent to
+  **REG_EXPAND_SZ**.
+- **Binary**: Specifies binary data in any form. Equivalent to **REG_BINARY**.
+- **DWord**: Specifies a 32-bit binary number. Equivalent to **REG_DWORD**.
+- **MultiString**: Specifies an array of null-terminated strings terminated by two null characters.
+  Equivalent to **REG_MULTI_SZ**.
+- **Qword**: Specifies a 64-bit binary number. Equivalent to **REG_QWORD**.
+- **Unknown**: Indicates an unsupported registry data type, such as **REG_RESOURCE_LIST**.
+
+```yaml
+Type: Microsoft.Win32.RegistryValueKind
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
 ### -Value
 
 Specifies the value of the property.
 
 ```yaml
-Type: Object
+Type: System.Object
 Parameter Sets: propertyValuePathSet, propertyValueLiteralPathSet
 Aliases:
 
@@ -355,7 +386,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -372,7 +403,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -401,7 +432,7 @@ You can pipe objects to this cmdlet.
 ### None, System.Management.Automation.PSCustomObject
 
 This cmdlet generates a **PSCustomObject** object that represents the item that was changed and its
-new property value, if you specify the *PassThru* parameter.
+new property value, if you specify the **PassThru** parameter.
 Otherwise, this cmdlet does not generate any output.
 
 ## NOTES

@@ -1,7 +1,8 @@
 ---
+description:  Describes the PowerShell execution policies and explains how to manage them. 
 keywords: powershell,cmdlet
-locale: en-us
-ms.date: 04/01/2019
+Locale: en-US
+ms.date: 08/10/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Execution_Policies
@@ -72,7 +73,7 @@ The PowerShell execution policies are as follows:
 - Runs scripts that are downloaded from the internet and not signed, if the
   scripts are unblocked, such as by using the `Unblock-File` cmdlet.
 - Risks running unsigned scripts from sources other than the internet and
-  signed, but malicious, scripts.
+  signed scripts that could be malicious.
 
 ### Restricted
 
@@ -86,7 +87,8 @@ The PowerShell execution policies are as follows:
 
 - There is no execution policy set in the current scope.
 - If the execution policy in all scopes is **Undefined**, the effective
-  execution policy is **Restricted**, which is the default execution policy.
+  execution policy is **Restricted** for Windows clients and
+  **RemoteSigned** for Windows Server.
 
 ### Unrestricted
 
@@ -111,7 +113,7 @@ The **Scope** values are listed in precedence order. The policy that takes
 precedence is effective in the current session, even if a more restrictive
 policy was set at a lower level of precedence.
 
-For more information, see [Set-ExecutionPolicy](../../Microsoft.PowerShell.Security/Set-ExecutionPolicy.md).
+For more information, see [Set-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Set-ExecutionPolicy).
 
 ### MachinePolicy
 
@@ -333,9 +335,11 @@ evaluates the execution policies in the following precedence order:
 
 ## Manage signed and unsigned scripts
 
-If your PowerShell execution policy is **RemoteSigned**, PowerShell won't run
-unsigned scripts that are downloaded from the internet which includes email and
-instant messaging programs.
+In Windows, programs like Internet Explorer and Microsoft Edge add an alternate
+data stream to files that are downloaded. This marks the file as "coming from
+the Internet". If your PowerShell execution policy is **RemoteSigned**,
+PowerShell won't run unsigned scripts that are downloaded from the internet
+which includes email and instant messaging programs.
 
 You can sign the script or elect to run an unsigned script without changing the
 execution policy.
@@ -345,8 +349,42 @@ Beginning in PowerShell 3.0, you can use the **Stream** parameter of the
 from the internet. Use the `Unblock-File` cmdlet to unblock the scripts so that
 you can run them in PowerShell.
 
-For more information, see [about_Signing](about_Signing.md), [Get-Item](../../Microsoft.PowerShell.Management/Get-Item.md),
-and [Unblock-File](../../Microsoft.PowerShell.Utility/Unblock-File.md).
+For more information, see [about_Signing](about_Signing.md), [Get-Item](xref:Microsoft.PowerShell.Management.Get-Item),
+and [Unblock-File](xref:Microsoft.PowerShell.Utility.Unblock-File).
+
+> [!NOTE]
+> Other methods of downloading files may not mark the files as coming from the
+> Internet Zone. Some examples include:
+>
+> - `curl.exe`
+> - `Invoke-RestMethod`
+> - `Invoke-WebRequest`
+
+## Execution policy on Windows Server Core and Window Nano Server
+
+When PowerShell 5.1 is run on Windows Server Core or Windows Nano Server under
+certain conditions, execution policies can fail with the following error:
+
+```Output
+AuthorizationManager check failed.
+At line:1 char:1
++ C:\scriptpath\scriptname.ps1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+```
+
+PowerShell uses APIs in the Windows Desktop Shell (`explorer.exe`) to validate
+the Zone of a script file. The Windows Shell is not available on Windows Server
+Core and Windows Nano Server.
+
+You could also get this error on any Windows system if the Windows Desktop
+Shell is unavailable or unresponsive. For example, during sign on, a PowerShell
+logon script could start execution before the Windows Desktop is ready,
+resulting in failure.
+
+Using an execution policy of **ByPass** or **AllSigned** does not require a
+Zone check which avoids the problem.
 
 ## See Also
 
@@ -356,12 +394,12 @@ and [Unblock-File](../../Microsoft.PowerShell.Utility/Unblock-File.md).
 
 [about_Signing](about_Signing.md)
 
-[Get-ExecutionPolicy](../../Microsoft.PowerShell.Security/Get-ExecutionPolicy.md)
+[Get-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Get-ExecutionPolicy)
 
-[Get-Item](../../Microsoft.PowerShell.Management/Get-Item.md)
+[Get-Item](xref:Microsoft.PowerShell.Management.Get-Item)
 
-[PowerShell.exe Command-Line Help](/powershell/scripting/components/console/powershell.exe-command-line-help)
+[PowerShell.exe Command-Line Help](about_PowerShell_exe.md)
 
-[Set-ExecutionPolicy](../../Microsoft.PowerShell.Security/Set-ExecutionPolicy.md)
+[Set-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Set-ExecutionPolicy)
 
-[Unblock-File](../../Microsoft.PowerShell.Utility/Unblock-File.md)
+[Unblock-File](xref:Microsoft.PowerShell.Utility.Unblock-File)

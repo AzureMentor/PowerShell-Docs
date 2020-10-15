@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/import-pssession?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -57,6 +57,7 @@ It is equivalent to using **Import-PSSession** to import selected modules from a
 ## EXAMPLES
 
 ### Example 1: Import all commands from a PSSession
+
 ```
 PS C:\> $S = New-PSSession -ComputerName Server01
 PS C:\> Import-PSSession -Session $S
@@ -67,6 +68,7 @@ This command imports all commands from a PSSession on the Server01 computer into
 Because this command does not use the *CommandName* parameter, it also imports all of the formatting data required for the imported commands.
 
 ### Example 2: Import commands that end with a specific string
+
 ```
 PS C:\> $S = New-PSSession https://ps.testlabs.com/powershell
 PS C:\> Import-PSSession -Session $S -CommandName *-test -FormatTypeName *
@@ -87,6 +89,7 @@ Because imported commands are actually added to the current session, you use the
 You do not need to use the Invoke-Command cmdlet to run an imported command.
 
 ### Example 3: Import cmdlets from a PSSession
+
 ```
 PS C:\> $S1 = New-PSSession -ComputerName s1
 PS C:\> $S2 = New-PSSession -ComputerName s2
@@ -102,6 +105,7 @@ These commands import the New-Test and Get-Test cmdlets from a PSSession on the 
 Even though the cmdlets were imported from different PSSessions, you can pipe an object from one cmdlet to another without error.
 
 ### Example 4: Run an imported command as a background job
+
 ```
 PS C:\> $S = New-PSSession -ComputerName Server01
 PS C:\> Import-PSSession -Session $S -CommandName *-test* -FormatTypeName *
@@ -124,6 +128,7 @@ The command saves the job object that New-Test returns in the $batch variable.
 The fourth command uses the Receive-Job cmdlet to get the results of the job in the $batch variable.
 
 ### Example 5: Import cmdlets and functions from a Windows PowerShell module
+
 ```
 PS C:\> $S = New-PSSession -ComputerName Server01
 PS C:\> Invoke-Command -Session $S {Import-Module TestManagement}
@@ -141,6 +146,7 @@ Typically, the module would be added to all sessions by an **Import-Module** com
 The third command uses the *Module*  parameter of **Import-PSSession** to import the cmdlets and functions in the module into the current session.
 
 ### Example 6: Create a module in a temporary file
+
 ```
 PS C:\> Import-PSSession $S -CommandName Get-Date, SearchHelp -FormatTypeName * -AllowClobber
 
@@ -171,6 +177,7 @@ The value of the **Path** property shows that **Import-PSSession** created a scr
 The **ExportedFunctions** property shows that the **Get-Date** cmdlet and the SearchHelp function were both imported as functions.
 
 ### Example 7: Run a command that is hidden by an imported command
+
 ```
 PS C:\> Import-PSSession $S -CommandName Get-Date -FormatTypeName * -AllowClobber
 
@@ -212,6 +219,7 @@ The fifth command uses the snap-in-qualified name of the **Get-Date** cmdlet to 
 For more information about command precedence and hidden commands, see about_Command_Precedence.
 
 ### Example 8: Import commands that have a specific string in their names
+
 ```
 PS C:\> Import-PSSession -Session $S -CommandName *Item* -AllowClobber
 ```
@@ -222,6 +230,7 @@ Because the command includes the *CommandName* parameter but not the *FormatType
 Use this command when you are using **Import-PSSession** to run a command on a remote computer and you already have the formatting data for the command in the current session.
 
 ### Example 9: Use the Module parameter to discover which commands were imported into the session
+
 ```
 PS C:\> $M = Import-PSSession -Session $S -CommandName *bits* -FormatTypeName *bits*
 PS C:\> Get-Command -Module $M
@@ -260,7 +269,7 @@ For more information, see about_Command_Precedence.
 By default, **Import-PSSession** does not import commands that have the same name as commands in the current session.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -277,7 +286,7 @@ Specifies an array of commands that results from using the specified arguments (
 For instance, to import the variant of the Get-Item command in the certificate (Cert:) drive in the PSSession in $S, type `Import-PSSession -Session $S -Command Get-Item -ArgumentList cert:`.
 
 ```yaml
-Type: Object[]
+Type: System.Object[]
 Parameter Sets: (All)
 Aliases: Args
 
@@ -297,7 +306,7 @@ To find a certificate, use the Get-PfxCertificate cmdlet or use the Get-ChildIte
 If the certificate is not valid or does not have sufficient authority, the command fails.
 
 ```yaml
-Type: X509Certificate2
+Type: System.Security.Cryptography.X509Certificates.X509Certificate2
 Parameter Sets: (All)
 Aliases:
 
@@ -321,7 +330,7 @@ If you use the *CommandName* parameter, the formatting files for the commands ar
 Similarly, if you use the *FormatTypeName* parameter, no commands are imported unless you use the *CommandName* parameter.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases: Name
 
@@ -355,7 +364,7 @@ The Windows PowerShell functions in the remote session.
 The script blocks in the remote session.
 
 ```yaml
-Type: CommandTypes
+Type: System.Management.Automation.CommandTypes
 Parameter Sets: (All)
 Aliases: Type
 Accepted values: Alias, Function, Filter, Cmdlet, ExternalScript, Application, Script, Workflow, Configuration, All
@@ -380,7 +389,7 @@ The complete module is still imported, including the non-conforming commands.
 Although the message is displayed to module users, the naming problem should be fixed by the module author.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -406,7 +415,7 @@ If you use the *FormatTypeName* parameter, no commands are imported unless you u
 Similarly, if you use the *CommandName* parameter, the formatting files for the commands are not imported unless you use the *FormatTypeName* parameter.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -425,7 +434,7 @@ For example, the *FullyQualifiedModule* parameter accepts a module name that is 
 You cannot specify the *FullyQualifiedModule* parameter in the same command as a *Module* parameter; the two parameters are mutually exclusive.
 
 ```yaml
-Type: ModuleSpecification[]
+Type: Microsoft.PowerShell.Commands.ModuleSpecification[]
 Parameter Sets: (All)
 Aliases:
 
@@ -446,7 +455,7 @@ Wildcards are not permitted.
 For more information, see about_PSSnapins and [about_Modules](../Microsoft.PowerShell.Core/About/about_Modules.md).
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases: PSSnapin
 
@@ -465,7 +474,7 @@ Use this parameter to avoid name conflicts that might occur when different comma
 For instance, if you specify the prefix Remote and then import a Get-Date cmdlet, the cmdlet is known in the session as Get-RemoteDate, and it is not confused with the original **Get-Date** cmdlet.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -483,7 +492,7 @@ You can specify only one session.
 This parameter is required.
 
 ```yaml
-Type: PSSession
+Type: System.Management.Automation.Runspaces.PSSession
 Parameter Sets: (All)
 Aliases:
 
@@ -510,6 +519,7 @@ However, the imported module is temporary and exists only in the current session
 To create a permanent module on disk, use the Export-PSSession cmdlet.
 
 ## NOTES
+
 * **Import-PSSession** relies on the Windows PowerShell remoting infrastructure. To use this cmdlet, the computer must be configured for WS-Management remoting. For more information, see about_Remote and about_Remote_Requirements.
 * **Import-PSSession** does not import variables or Windows PowerShell providers.
 * When you import commands that have the same names as commands in the current session, the imported commands can hide aliases, functions, and cmdlets in the session and they can replace functions and variables in the session. To prevent name conflicts, use the *Prefix* parameter. For more information, see about_Command_Precedence.
@@ -525,5 +535,3 @@ To create a permanent module on disk, use the Export-PSSession cmdlet.
 ## RELATED LINKS
 
 [Export-PSSession](Export-PSSession.md)
-
-

@@ -35,6 +35,7 @@ Get-DscConfigurationStatus [-CimSession <CimSession[]>]
                            [-AsJob]
                            [<CommonParameters>]
 ```
+
 The following parameter set returns the status information for all previous configuration runs:
 
 ```
@@ -723,6 +724,19 @@ https://<serverfqdn>:8080/PSDSCPullServer.svc/Nodes(AgentId='<ID>') returned une
 This can occur when the certificate used on the server to encrypt traffic has a common name (CN)
 that is different than the DNS name used by the node to resolve the URL.
 Update the Windows Pull Server instance to use a certificate with a corrected name.
+
+## Error when running Sysprep after applying a DSC Configuration
+
+When attempting to run Sysprep to generalize a Windows Server after applying a DSC configuration,
+you might encounter the following error.
+
+```
+SYSPRP LaunchDll:Failure occurred while executing 'DscCore.dll,SysPrep_Cleanup', returned error code 0x2
+```
+
+Generalizing a server after it has been configured using Windows PowerShell Desired State Configuration is not
+a supported scenario.  Instead, apply configurations to Windows after the Specialize phase of Windows Setup has
+completed.
 
 ## See Also
 

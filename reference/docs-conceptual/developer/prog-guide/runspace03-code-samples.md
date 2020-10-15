@@ -1,13 +1,6 @@
 ---
 title: "RunSpace03 Code Samples | Microsoft Docs"
-ms.custom: ""
 ms.date: "09/13/2016"
-ms.reviewer: ""
-ms.suite: ""
-ms.tgt_pltfrm: ""
-ms.topic: "article"
-ms.assetid: a6b8303d-e868-4dd0-bbbb-ed2e6d8f2f76
-caps.latest.revision: 6
 ---
 # RunSpace03 Code Samples
 
@@ -18,7 +11,7 @@ Here are the code samples for the runspace described in "Creating a Console Appl
 > file (runspace03.vb) for this sample using the Microsoft Windows Software
 > Development Kit for Windows Vista and Microsoft .NET Framework 3.0 Runtime
 > Components. For download instructions, see
-> [How to Install Windows PowerShell and Download the Windows PowerShell SDK](/powershell/developer/installing-the-windows-powershell-sdk).
+> [How to Install Windows PowerShell and Download the Windows PowerShell SDK](/powershell/scripting/developer/installing-the-windows-powershell-sdk).
 > The downloaded source files are available in the **\<PowerShell Samples>**
 > directory.
 

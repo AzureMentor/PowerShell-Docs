@@ -1,7 +1,7 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Core
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/exit-pshostprocess?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -27,6 +27,7 @@ You run the **Exit-PSHostProcess** cmdlet from within the process, when you are 
 ## EXAMPLES
 
 ### Example 1: Exit a process
+
 ```
 PS C:\> [Process:1520]: PS C:\>  Exit-PSHostProcess
 PS C:\>
@@ -50,5 +51,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Enter-PSHostProcess](Enter-PSHostProcess.md)
-
-

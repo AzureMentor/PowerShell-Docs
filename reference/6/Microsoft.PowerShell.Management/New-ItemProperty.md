@@ -1,7 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
+Module Name: Microsoft.PowerShell.Management
 ms.date: 5/14/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/new-itemproperty?view=powershell-6&WT.mc_id=ps-gethelp
 schema: 2.0.0
@@ -83,10 +84,9 @@ registry entry ("NoOfLocations"), and its value (3), to the "MyCompany" key.
 Get-Item -Path "HKLM:\Software\MyCompany" | New-ItemProperty -Name NoOfLocations -Value 3
 ```
 
-This command works because the parameter-binding feature of PowerShell associates the path
-of the `RegistryKey` object that `Get-Item` returns with the **LiteralPath** parameter of
-`New-ItemProperty`.
-For more information, see [about_Pipelines](../Microsoft.PowerShell.Core/About/about_pipelines.md).
+This command works because the parameter-binding feature of PowerShell associates the path of the
+`RegistryKey` object that `Get-Item` returns with the **LiteralPath** parameter of
+`New-ItemProperty`. For more information, see [about_Pipelines](../Microsoft.PowerShell.Core/About/about_pipelines.md).
 
 ### Example 3: Create a MultiString value in the registry using a Here-String
 
@@ -128,7 +128,7 @@ a
 > use [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md).
 
 ```yaml
-Type: PSCredential
+Type: System.Management.Automation.PSCredential
 Parameter Sets: (All)
 Aliases:
 
@@ -148,7 +148,7 @@ command includes the contents of an item, such as `C:\Windows\*`, where the wild
 specifies the contents of the `C:\Windows` directory.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -168,7 +168,7 @@ Filters are more efficient than other parameters, because the provider applies t
 gets the objects rather than having PowerShell filter the objects after they are retrieved.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -186,7 +186,7 @@ Implementation varies from provider to provider.
 For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -206,7 +206,7 @@ command includes the contents of an item, such as `C:\Windows\*`, where the wild
 specifies the contents of the `C:\Windows` directory.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -227,9 +227,9 @@ as escape sequences.
 For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: LiteralPath
-Aliases: PSPath
+Aliases: PSPath, LP
 
 Required: True
 Position: Named
@@ -244,7 +244,7 @@ Specifies a name for the new property.
 If the property is a registry entry, this parameter specifies the name of the entry.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases: PSProperty
 
@@ -262,7 +262,7 @@ Wildcard characters are permitted.
 This parameter identifies the item to which this cmdlet adds the new property.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: Path
 Aliases:
 
@@ -278,29 +278,19 @@ Accept wildcard characters: True
 Specifies the type of property that this cmdlet adds.
 The acceptable values for this parameter are:
 
-- **String**:
-  Specifies a null-terminated string.
-  Equivalent to **REG_SZ**.
-- **ExpandString**:
-  Specifies a null-terminated string that contains unexpanded references to environment variables
-that are expanded when the value is retrieved.   Equivalent to **REG_EXPAND_SZ**.
-- **Binary**:
-  Specifies binary data in any form.
-  Equivalent to **REG_BINARY**.
-- **DWord**:
-  Specifies a 32-bit binary number.
-  Equivalent to **REG_DWORD**.
-- **MultiString**:
-  Specifies an array of null-terminated strings terminated by two null characters.
+- **String**: Specifies a null-terminated string. Equivalent to **REG_SZ**.
+- **ExpandString**: Specifies a null-terminated string that contains unexpanded references to
+  environment variables that are expanded when the value is retrieved. Equivalent to
+  **REG_EXPAND_SZ**.
+- **Binary**: Specifies binary data in any form. Equivalent to **REG_BINARY**.
+- **DWord**: Specifies a 32-bit binary number. Equivalent to **REG_DWORD**.
+- **MultiString**: Specifies an array of null-terminated strings terminated by two null characters.
   Equivalent to **REG_MULTI_SZ**.
-- **Qword**:
-  Specifies a 64-bit binary number.
-  Equivalent to **REG_QWORD**.
-- **Unknown**:
-  Indicates an unsupported registry data type, such as **REG_RESOURCE_LIST**.
+- **Qword**: Specifies a 64-bit binary number. Equivalent to **REG_QWORD**.
+- **Unknown**: Indicates an unsupported registry data type, such as **REG_RESOURCE_LIST**.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases: Type
 
@@ -317,7 +307,7 @@ Specifies the property value.
 If the property is a registry entry, this parameter specifies the value of the entry.
 
 ```yaml
-Type: Object
+Type: System.Object
 Parameter Sets: (All)
 Aliases:
 
@@ -333,7 +323,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -350,7 +340,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 

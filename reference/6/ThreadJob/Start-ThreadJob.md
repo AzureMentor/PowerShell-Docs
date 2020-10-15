@@ -1,7 +1,8 @@
 ---
 external help file: ThreadJob.dll-Help.xml
-Module Name: threadjob
-ms.date: 07/09/2019
+Locale: en-US
+Module Name: ThreadJob
+ms.date: 01/28/2020
 online version: https://docs.microsoft.com/powershell/module/threadjob/start-threadjob?view=powershell-6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Start-ThreadJob
@@ -30,7 +31,8 @@ Start-ThreadJob [-FilePath] <String> [-Name <String>] [-InitializationScript <Sc
 ## DESCRIPTION
 
 `Start-ThreadJob` creates background jobs similar to the `Start-Job` cmdlet. The main difference is
-that the jobs which are created run in separate threads within the local process.
+that the jobs which are created run in separate threads within the local process. By default, the
+jobs use the current working directory of the caller that started the job.
 
 The cmdlet also supports a **ThrottleLimit** parameter to limit the number of jobs running at one
 time. As more jobs are started, they are queued and wait until the current number of jobs drops
@@ -48,28 +50,63 @@ Get-Job
 ```
 
 ```Output
-Id     Name            PSJobTypeName   State         HasMoreData     Location             Command
---     ----            -------------   -----         -----------     --------             -------
-1      Job1            ThreadJob       Running       True            PowerShell            1..100 | % { sleep 1;...
-2      Job2            ThreadJob       Running       True            PowerShell            1..100 | % { sleep 1;...
-3      Job3            ThreadJob       NotStarted    False           PowerShell            1..100 | % { sleep 1;...
+Id   Name   PSJobTypeName   State        HasMoreData   Location     Command
+--   ----   -------------   -----        -----------   --------     -------
+1    Job1   ThreadJob       Running      True          PowerShell   1..100 | % { sleep 1;...
+2    Job2   ThreadJob       Running      True          PowerShell   1..100 | % { sleep 1;...
+3    Job3   ThreadJob       NotStarted   False         PowerShell   1..100 | % { sleep 1;...
 ```
 
 ### Example 2 - Compare the performance of Start-Job and Start-ThreadJob
 
-This example shows the difference between `Start-Job` and `Start-ThreadJob`.
+This example shows the difference between `Start-Job` and `Start-ThreadJob`. The jobs run the
+`Start-Sleep` cmdlet for 1 second. Since the jobs run in parallel, the total execution time
+is about 1 second, plus any time required to create the jobs.
 
 ```powershell
 # start five background jobs each running 1 second
-Measure-Command {1..5 | % {Start-Job {Sleep 1}} | Wait-Job} | Select TotalSeconds
-Measure-Command {1..5 | % {Start-ThreadJob {Sleep 1}} | Wait-Job} | Select TotalSeconds
+Measure-Command {1..5 | % {Start-Job {Start-Sleep 1}} | Wait-Job} | Select-Object TotalSeconds
+Measure-Command {1..5 | % {Start-ThreadJob {Start-Sleep 1}} | Wait-Job} | Select-Object TotalSeconds
 ```
 
 ```Output
 TotalSeconds
 ------------
-   5.7665849 # jobs creation time > 4.7 sec; results may vary
-   1.5735008 # jobs creation time < 0.6 sec (8 times less!)
+   5.7665849
+   1.5735008
+```
+
+After subtracting 1 second for execution time, you can see that `Start-Job` takes about 4.8 seconds
+to create five jobs. `Start-ThreadJob` is 8 times faster, taking about 0.6 seconds to create five
+jobs. The results may vary in your environment but the relative improvement should be the same.
+
+### Example 3 - Create jobs using InputObject
+
+In this example, the script block uses the `$input` variable to receive input from the
+**InputObject** parameter. This can also be done by piping objects to `Start-ThreadJob`.
+
+```powershell
+$j = Start-ThreadJob -InputObject (Get-Process pwsh) -ScriptBlock { $input | Out-String }
+$j | Wait-Job | Receive-Job
+```
+
+```Output
+ NPM(K)    PM(M)      WS(M)     CPU(s)      Id  SI ProcessName
+ ------    -----      -----     ------      --  -- -----------
+     94   145.80     159.02      18.31   18276   1 pwsh
+    101   163.30     222.05      29.00   35928   1 pwsh
+```
+
+```powershell
+$j = Get-Process pwsh | Start-ThreadJob -ScriptBlock { $input | Out-String }
+$j | Wait-Job | Receive-Job
+```
+
+```Output
+ NPM(K)    PM(M)      WS(M)     CPU(s)      Id  SI ProcessName
+ ------    -----      -----     ------      --  -- -----------
+     94   145.80     159.02      18.31   18276   1 pwsh
+    101   163.30     222.05      29.00   35928   1 pwsh
 ```
 
 ## PARAMETERS
@@ -77,7 +114,7 @@ TotalSeconds
 ### -ArgumentList
 
 Specifies an array of arguments, or parameter values, for the script that is specified by the
-**FilePath** parameter.
+**FilePath** or **ScriptBlock** parameters.
 
 **ArgumentList** must be the last parameter on the command line. All the values that follow the
 parameter name are interpreted values in the argument list.
@@ -116,7 +153,7 @@ Accept wildcard characters: False
 
 ### -InitializationScript
 
-Specifies commands that run before the job starts. Enclose the commands in braces ( { } ) to create
+Specifies commands that run before the job starts. Enclose the commands in braces (`{}`) to create
 a script block.
 
 Use this parameter to prepare the session in which the job runs. For example, you can use it to add
@@ -136,11 +173,8 @@ Accept wildcard characters: False
 
 ### -InputObject
 
-Specifies input to the command. Enter a variable that contains the objects, or type a command or
-expression that generates the objects.
-
-In the value of the **ScriptBlock** parameter, use the `$Input` automatic variable to represent the
-input objects.
+Specifies the objects used as input to the script block. It also allows for pipeline input. Use the
+`$input` automatic variable in the script block to access the input objects.
 
 ```yaml
 Type: System.Management.Automation.PSObject
@@ -176,9 +210,9 @@ Accept wildcard characters: False
 
 ### -ScriptBlock
 
-Specifies the commands to run in the background job. Enclose the commands in braces ( { } ) to
-create a script block. Use the `$Input` automatic variable to access the value of the
-**InputObject** parameter. This parameter is required.
+Specifies the commands to run in the background job. Enclose the commands in braces (`{}`) to create
+a script block. Use the `$Input` automatic variable to access the value of the **InputObject**
+parameter. This parameter is required.
 
 ```yaml
 Type: System.Management.Automation.ScriptBlock
@@ -194,8 +228,12 @@ Accept wildcard characters: False
 
 ### -ThrottleLimit
 
-This parameter limits the number of jobs running at one time. As more jobs are started, they are
-queued and wait until the current number of jobs drops below the throttle limit.
+This parameter limits the number of jobs running at one time. As jobs are started, they are queued
+and wait until a thread is available in the thread pool to run the job. The default limit is 5
+threads.
+
+The thread pool size is global to the PowerShell session. Specifying a **ThrottleLimit** in one
+call sets the limit for subsequent calls in the same session.
 
 ```yaml
 Type: System.Int32
@@ -204,7 +242,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 5
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -213,7 +251,8 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

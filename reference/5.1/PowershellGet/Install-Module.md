@@ -1,14 +1,13 @@
 ---
 external help file: PSModule-help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: PowerShellGet
-ms.date: 03/07/2019
+ms.date: 08/03/2020
 online version: https://docs.microsoft.com/powershell/module/powershellget/install-module?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Install-Module
 ---
-
 # Install-Module
 
 ## SYNOPSIS
@@ -22,7 +21,7 @@ Downloads one or more modules from a repository, and installs them on the local 
 Install-Module [-Name] <String[]> [-MinimumVersion <String>] [-MaximumVersion <String>]
  [-RequiredVersion <String>] [-Repository <String[]>] [-Credential <PSCredential>] [-Scope <String>]
  [-Proxy <Uri>] [-ProxyCredential <PSCredential>] [-AllowClobber] [-SkipPublisherCheck] [-Force]
- [-AllowPrerelease] [-AcceptLicense] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-AllowPrerelease] [-AcceptLicense] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### InputObject
@@ -30,7 +29,7 @@ Install-Module [-Name] <String[]> [-MinimumVersion <String>] [-MaximumVersion <S
 ```
 Install-Module [-InputObject] <PSObject[]> [-Credential <PSCredential>] [-Scope <String>]
  [-Proxy <Uri>] [-ProxyCredential <PSCredential>] [-AllowClobber] [-SkipPublisherCheck] [-Force]
- [-AcceptLicense] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-AcceptLicense] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -120,10 +119,10 @@ user's directory, `$home\Documents\WindowsPowerShell\Modules`.
 ### -AcceptLicense
 
 For modules that require a license, **AcceptLicense** automatically accepts the license agreement
-during installation. For more information, see [Modules Requiring License Acceptance](/powershell/gallery/concepts/module-license-acceptance).
+during installation. For more information, see [Modules Requiring License Acceptance](/powershell/scripting/gallery/concepts/module-license-acceptance).
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -141,7 +140,7 @@ Overwrites existing commands that have the same name as commands being installed
 **AllowClobber** and **Force** can be used together in an `Install-Module` command.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -157,7 +156,7 @@ Accept wildcard characters: False
 Allows you to install a module marked as a pre-release.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: NameParameterSet
 Aliases:
 
@@ -168,13 +167,29 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the `Install-Module` cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Credential
 
 Specifies a user account that has rights to install a module for a specified package provider or
 source.
 
 ```yaml
-Type: PSCredential
+Type: System.Management.Automation.PSCredential
 Parameter Sets: (All)
 Aliases:
 
@@ -193,7 +208,7 @@ installed. If there is an existing module with the same name and version, **Forc
 version. **Force** and **AllowClobber** can be used together in an `Install-Module` command.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -209,7 +224,7 @@ Accept wildcard characters: False
 Used for pipeline input.
 
 ```yaml
-Type: PSObject[]
+Type: System.Management.Automation.PSObject[]
 Parameter Sets: InputObject
 Aliases:
 
@@ -222,12 +237,13 @@ Accept wildcard characters: False
 
 ### -MaximumVersion
 
-Specifies the maximum version of a single module to install. If you want to install multiple
-modules, you cannot use **MaximumVersion**. **MaximumVersion** and **RequiredVersion** cannot be
-used in the same `Install-Module` command.
+Specifies the maximum version of a single module to install. The version installed must be less than
+or equal to **MaximumVersion**. If you want to install multiple modules, you cannot use
+**MaximumVersion**. **MaximumVersion** and **RequiredVersion** cannot be used in the same
+`Install-Module` command.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: NameParameterSet
 Aliases:
 
@@ -240,13 +256,13 @@ Accept wildcard characters: False
 
 ### -MinimumVersion
 
-Specifies the minimum version of a single module to install. If there is a newer version of the
-module available, the newer version is installed. If you want to install multiple modules, you
-cannot use **MinimumVersion**. **MinimumVersion** and **RequiredVersion** cannot be used in the same
-`Install-Module` command.
+Specifies the minimum version of a single module to install. The version installed must be greater than
+or equal to **MinimumVersion**. If there is a newer version of the module available, the newer
+version is installed. If you want to install multiple modules, you cannot use **MinimumVersion**.
+**MinimumVersion** and **RequiredVersion** cannot be used in the same `Install-Module` command.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: NameParameterSet
 Aliases:
 
@@ -264,7 +280,7 @@ module names is accepted. The module name must match the module name in the repo
 `Find-Module` to get a list of module names.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: NameParameterSet
 Aliases:
 
@@ -275,12 +291,26 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+### -PassThru
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Proxy
 
 Specifies a proxy server for the request, rather than connecting directly to the Internet resource.
 
 ```yaml
-Type: Uri
+Type: System.Uri
 Parameter Sets: (All)
 Aliases:
 
@@ -297,7 +327,7 @@ Specifies a user account that has permission to use the proxy server that is spe
 **Proxy** parameter.
 
 ```yaml
-Type: PSCredential
+Type: System.Management.Automation.PSCredential
 Parameter Sets: (All)
 Aliases:
 
@@ -316,7 +346,7 @@ repository in the `Install-Module` command. To register a repository, use `Regis
 To display registered repositories, use `Get-PSRepository`.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: NameParameterSet
 Aliases:
 
@@ -335,7 +365,7 @@ cannot use **RequiredVersion**. **RequiredVersion** cannot be used in the same `
 command as **MinimumVersion** or **MaximumVersion**.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: NameParameterSet
 Aliases:
 
@@ -357,23 +387,21 @@ computer:
 `$env:ProgramFiles\WindowsPowerShell\Modules`
 
 The **CurrentUser** installs modules in a location that is accessible only to the current user of
-the computer:
+the computer. For example:
 
 `$home\Documents\WindowsPowerShell\Modules`
 
-When no **Scope** is defined, the default is set based on the current session:
+When no **Scope** is defined, the default is set based on the PowerShellGet version.
 
-- For an elevated PowerShell session, **Scope** defaults to **AllUsers**.
-- For non-elevated PowerShell sessions in [PowerShellGet versions 2.0.0](https://www.powershellgallery.com/packages/PowerShellGet)
-  and above, the **Scope** is **CurrentUser**.
-- For non-elevated PowerShell sessions in PowerShellGet versions 1.6.7 and earlier, **Scope** is
-  undefined, and `Install-Module` fails.
+- In PowerShellGet versions 2.0.0 and above, the default is **CurrentUser**, which does not require
+  elevation for install.
+- In PowerShellGet 1.x versions, the default is **AllUsers**, which requires elevation for install.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
-Accepted values: AllUsers, CurrentUser
+Accepted values: CurrentUser, AllUsers
 
 Required: False
 Position: Named
@@ -389,7 +417,7 @@ when an existing module is digitally signed by a trusted publisher but the new v
 digitally signed by a trusted publisher.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -400,28 +428,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Confirm
-
-Prompts you for confirmation before running the `Install-Module` cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 
 Shows what would happen if an `Install-Module` command was run. The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -436,7 +448,8 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -445,7 +458,22 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 `Find-Module` creates **PSRepositoryItemInfo** objects that can be sent down the pipeline to
 `Install-Module`.
 
+### System.String[]
+
+### System.Management.Automation.PSObject[]
+
+### System.String
+
+### System.Management.Automation.PSCredential
+
+### System.Uri
+
 ## OUTPUTS
+
+### Microsoft.PowerShell.Commands.PSRepositoryItemInfo
+
+When using the **PassThru** parameter, `Install-Module` outputs a **PSRepositoryItemInfo** object
+for the module. This is the same information that you get from the `Find-Module` cmdlet.
 
 ## NOTES
 
@@ -485,6 +513,9 @@ If the existing module does not match the values specified by the **MinimumVersi
 version of the existing installed module is lower than the **MinimumVersion** value or not equal to
 the **RequiredVersion** value.
 
+A module installation will also install any dependent modules specified as required by the module publisher.
+The publisher will specify the required modules and their versions in the module manifest.
+
 ## RELATED LINKS
 
 [Find-Module](Find-Module.md)
@@ -500,3 +531,5 @@ the **RequiredVersion** value.
 [Uninstall-Module](Uninstall-Module.md)
 
 [Update-Module](Update-Module.md)
+
+[about_Module](../Microsoft.PowerShell.Core/About/about_Modules.md)

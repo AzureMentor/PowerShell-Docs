@@ -1,13 +1,6 @@
 ---
 title: "How to Support Jobs | Microsoft Docs"
-ms.custom: ""
 ms.date: "09/13/2016"
-ms.reviewer: ""
-ms.suite: ""
-ms.tgt_pltfrm: ""
-ms.topic: "article"
-ms.assetid: 5eac452c-eae2-4193-b4da-0b618bef3677
-caps.latest.revision: 9
 ---
 # How to Support Jobs
 
@@ -327,22 +320,7 @@ namespace Microsoft.Samples.PowerShell.Commands
       }
     } // End DoProcessLogic.
   } //End GetProcCommand
-}    void DoProcessLogic(bool asJob)
-    {
-      Process[] p = Process.GetProcesses();
-
-      foreach (Process pl in p)
-      {
-        if (!asjob)
-        {
-          WriteObject(pl);
-        }
-        else
-        {
-          job.ChildJobs[0].Output.Add(new PSObject(pl));
-        }
-      }
-    } // End DoProcessLogic.
+}
 ```
 
 <!-- TODO!!!: review snippet reference  [!CODE [msh_samplesGetProc06#GetProc06All](msh_samplesGetProc06#GetProc06All)]  -->

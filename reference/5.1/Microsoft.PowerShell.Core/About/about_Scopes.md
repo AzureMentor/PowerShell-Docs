@@ -1,7 +1,8 @@
 ---
+description: Explains the concept of scope in PowerShell and shows how to set and change the scope of elements. 
 keywords: powershell,cmdlet
-locale: en-us
-ms.date: 09/09/2019
+Locale: en-US
+ms.date: 03/13/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_scopes
@@ -105,7 +106,7 @@ optional scope modifiers:
 
 - `global:` - Specifies that the name exists in the **Global** scope.
 - `local:` - Specifies that the name exists in the **Local** scope. The current
-  scope is alway the **Local** scope.
+  scope is always the **Local** scope.
 - `private:` - Specifies that the name is **Private** and only visible to the
   current scope.
 - `script:` - Specifies that the name exists in the **Script** scope.
@@ -191,9 +192,51 @@ Using is a special scope modifier that identifies a local variable in a remote
 command. Without a modifier, PowerShell expects variables in remote commands
 to be defined in the remote session.
 
-The Using scope modifier is introduced in PowerShell 3.0.
+The `Using` scope modifier is introduced in PowerShell 3.0.
+
+For any script or command that executes out of session, you need the `Using`
+scope modifier to embed variable values from the calling session scope, so that
+out of session code can access them. The `Using` scope modifier is supported in
+the following contexts:
+
+- Remotely executed commands, started with `Invoke-Command` using the
+  **ComputerName** or **Session** parameter (remote session)
+- Background jobs, started with `Start-Job` (out-of-process session)
+- Thread jobs, started via `Start-ThreadJob` or `ForEach-Object -Parallel`
+  (separate thread session)
+
+Depending on the context, embedded variable values are either independent
+copies of the data in the caller's scope or references to it. In remote and
+out-of-process sessions, they are always independent copies.
 
 For more information, see [about_Remote_Variables](about_Remote_Variables.md).
+
+In thread sessions, they are passed by reference. This means it is possible to
+modify call scope variables in a different thread. To safely modify variables
+requires thread synchronization.
+
+For more information see:
+
+- [Start-ThreadJob](/powershell/module/ThreadJob/Start-ThreadJob)
+
+#### Serialization of variable values
+
+Remotely executed commands and background jobs run out-of-process.
+Out-of-process sessions use XML-based serialization and deserialization to make
+the values of variables available across the process boundaries. The
+serialization process converts objects to a **PSObject** that contains the
+original objects properties but not its methods.
+
+For a limited set of types, deserialization rehydrates objects back to the
+original type. The rehydrated object is a copy of the original object instance.
+It has the type properties and methods. For simple types, such as
+**System.Version**, the copy is exact. For complex types, the copy is
+imperfect. For example, rehydrated certificate objects do not include the
+private key.
+
+Instances of all other types are **PSObject** instances. The **PSTypeNames**
+property contains the original type name prefixed with **Deserialized**, for
+example, **Deserialized.System.Data.DataTable**
 
 ### The AllScope Option
 
@@ -323,29 +366,53 @@ accessible outside the module. Therefore, you can add the module to your
 session and use the public items without worrying that the other items might
 override the cmdlets, scripts, functions, and other items in your session.
 
-The privacy of a module behaves like a scope, but adding a module to a session
-does not change the scope. And, the module does not have its own scope,
-although the scripts in the module, like all PowerShell scripts, do have their
-own scope.
-
 By default, modules are loaded into the top-level of the current _session
-state_ not the current _scope_. This could be a module session state or the
-global session state. If you are in the global scope, then modules are loaded
+state_ not the current _scope_. The current session state could be a module
+session state or the global session state. Adding a module to a session does
+not change the scope. If you are in the global scope, then modules are loaded
 into the global session state. Any exports are placed into the global tables.
-If you load module2 from _within_ module1, module2 is loaded into the module1's
-session state, not the global session state. Any exports from module2 are
-placed at the top of the module1's session state. If you use
+If you load module2 from _within_ module1, module2 is loaded into the session
+state of module1 not the global session state. Any exports from module2 are
+placed at the top of the module1 session state. If you use
 `Import-Module -Scope local`, then the exports are placed into the current
 scope object rather than at the top level. If you are _in a module_ and use
 `Import-Module -Scope global` (or `Import-Module -Global`) to load another
 module, that module and it's exports are loaded into the global session state
 instead of the module's local session state. This feature was designed for
-writing module that manipulate modules. The WindowsCompatibility module does
-this to import proxy modules into the global scope.
+writing module that manipulate modules. The **WindowsCompatibility** module
+does this to import proxy modules into the global session state.
+
+Within the session state, modules have their own scope. Consider the following
+module `C:\temp\mod1.psm1`:
+
+```powershell
+$a = "Hello"
+
+function foo {
+    "`$a = $a"
+    "`$global:a = $global:a"
+}
+```
+
+Now we create a global variable `$a`, give it a value and call the function
+**foo**.
+
+```powershell
+$a = "Goodbye"
+foo
+```
+
+The module declares the variable `$a` in the module scope then the function
+**foo** outputs the value of the variable in both scopes.
+
+```Output
+$a = Hello
+$global:a = Goodbye
+```
 
 ### Nested Prompts
 
-Similarly, nested prompts do not have their own scope. When you enter a nested
+Nested prompts do not have their own scope. When you enter a nested
 prompt, the nested prompt is a subset of the environment. But, you remain
 within the local scope.
 
@@ -582,3 +649,5 @@ Invoke-Command $s {
 [about_Functions](about_Functions.md)
 
 [about_Script_Blocks](about_Script_Blocks.md)
+
+[Start-ThreadJob](/powershell/module/ThreadJob/Start-ThreadJob)

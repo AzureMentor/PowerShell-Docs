@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/write-information?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -121,7 +121,7 @@ For best results, enclose the informational message in quotation marks.
 An example is "Test complete."
 
 ```yaml
-Type: Object
+Type: System.Object
 Parameter Sets: (All)
 Aliases: Msg
 
@@ -138,7 +138,7 @@ Specifies a simple string that you can use to sort and filter messages that you 
 This parameter works similarly to the *Tags* parameter in `New-ModuleManifest`.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -185,5 +185,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 [Write-Warning](Write-Warning.md)
 
 [Write-Output](Write-Output.md)
-
-

@@ -1,9 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 11/04/2019
+ms.date: 04/08/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/start-job?view=powershell-6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Start-Job
@@ -31,18 +31,18 @@ Start-Job [-DefinitionName] <String> [[-DefinitionPath] <String>] [[-Type] <Stri
  [<CommonParameters>]
 ```
 
-### FilePathComputerName
-
-```
-Start-Job [-Name <String>] [-Credential <PSCredential>] [-FilePath] <String>
- [-Authentication <AuthenticationMechanism>] [[-InitializationScript] <ScriptBlock>] [-RunAs32]
- [-PSVersion <Version>] [-InputObject <PSObject>] [-ArgumentList <Object[]>] [<CommonParameters>]
-```
-
 ### LiteralFilePathComputerName
 
 ```
 Start-Job [-Name <String>] [-Credential <PSCredential>] -LiteralPath <String>
+ [-Authentication <AuthenticationMechanism>] [[-InitializationScript] <ScriptBlock>] [-RunAs32]
+ [-PSVersion <Version>] [-InputObject <PSObject>] [-ArgumentList <Object[]>] [<CommonParameters>]
+```
+
+### FilePathComputerName
+
+```
+Start-Job [-Name <String>] [-Credential <PSCredential>] [-FilePath] <String>
  [-Authentication <AuthenticationMechanism>] [[-InitializationScript] <ScriptBlock>] [-RunAs32]
  [-PSVersion <Version>] [-InputObject <PSObject>] [-ArgumentList <Object[]>] [<CommonParameters>]
 ```
@@ -250,18 +250,41 @@ variable. The `$input` variable gets objects from the **InputObject** parameter.
 the **Name** parameter to specify the job and outputs the results. The **Keep** parameter saves the
 job output so it can be viewed again during the PowerShell session.
 
+### Example 9: Use the ArgumentList parameter to specify an array
+
+This example uses the **ArgumentList** parameter to specify an array of arguments. The array is a
+comma-separated list of process names.
+
+```powershell
+Start-Job -ScriptBlock { Get-Process -Name $args } -ArgumentList powershell, pwsh, notepad
+```
+
+```Output
+Id     Name      PSJobTypeName   State       HasMoreData     Location     Command
+--     ----      -------------   -----       -----------     --------     -------
+1      Job1      BackgroundJob   Running     True            localhost    Get-Process -Name $args
+```
+
+The `Start-Job` cmdlet uses the **ScriptBlock** parameter to run a command. `Get-Process` uses the
+**Name** parameter to specify the automatic variable `$args`. The **ArgumentList** parameter passes
+the array of process names to `$args`. The process names powershell, pwsh, and notepad are processes
+running on the local computer.
+
+To view the job's output, use the `Receive-Job` cmdlet. For example, `Receive-Job -Id 1`.
+
 ## PARAMETERS
 
 ### -ArgumentList
 
 Specifies an array of arguments, or parameter values, for the script that is specified by the
-**FilePath** parameter.
+**FilePath** parameter or a command specified with the **ScriptBlock** parameter.
 
-Because all the values that follow the **ArgumentList** parameter name are interpreted as being
-values of **ArgumentList**, specify this parameter as the last parameter in the command.
+Arguments must be passed to **ArgumentList** as single-dimension array argument. For example, a
+comma-separated list. For more information about the behavior of **ArgumentList**, see
+[about_Splatting](about/about_Splatting.md#splatting-with-arrays).
 
 ```yaml
-Type: Object[]
+Type: System.Object[]
 Parameter Sets: ComputerName, FilePathComputerName, LiteralFilePathComputerName
 Aliases: Args
 
@@ -302,7 +325,7 @@ For more information about the values of this parameter, see
 > credentials that are passed to it can be used to control the network session.
 
 ```yaml
-Type: AuthenticationMechanism
+Type: System.Management.Automation.Runspaces.AuthenticationMechanism
 Parameter Sets: ComputerName, FilePathComputerName, LiteralFilePathComputerName
 Aliases:
 Accepted values: Default, Basic, Negotiate, NegotiateWithImplicitCredential, Credssp, Digest, Kerberos
@@ -331,7 +354,7 @@ object and the password is stored as a [SecureString](/dotnet/api/system.securit
 > [How secure is SecureString?](/dotnet/api/system.security.securestring#how-secure-is-securestring).
 
 ```yaml
-Type: PSCredential
+Type: System.Management.Automation.PSCredential
 Parameter Sets: ComputerName, FilePathComputerName, LiteralFilePathComputerName
 Aliases:
 
@@ -355,7 +378,7 @@ isn't saved to disk like triggered scheduled jobs. You can't use the **ArgumentL
 This parameter was introduced in PowerShell 3.0.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: DefinitionName
 Aliases:
 
@@ -379,7 +402,7 @@ For scheduled jobs, the value of the **DefinitionPath** parameter is
 This parameter was introduced in PowerShell 3.0.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: DefinitionName
 Aliases:
 
@@ -400,7 +423,7 @@ When you use this parameter, PowerShell converts the contents of the specified s
 script block and runs the script block as a background job.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: FilePathComputerName
 Aliases:
 
@@ -420,7 +443,7 @@ Use this parameter to prepare the session in which the job runs. For example, yo
 functions, snap-ins, and modules to the session.
 
 ```yaml
-Type: ScriptBlock
+Type: System.Management.Automation.ScriptBlock
 Parameter Sets: ComputerName, FilePathComputerName, LiteralFilePathComputerName
 Aliases:
 
@@ -440,7 +463,7 @@ In the value of the **ScriptBlock** parameter, use the `$input` automatic variab
 input objects.
 
 ```yaml
-Type: PSObject
+Type: System.Management.Automation.PSObject
 Parameter Sets: ComputerName, FilePathComputerName, LiteralFilePathComputerName
 Aliases:
 
@@ -462,9 +485,9 @@ quotation marks. Single quotation marks tell PowerShell not to interpret any cha
 sequences.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: LiteralFilePathComputerName
-Aliases: PSPath
+Aliases: PSPath, LP
 
 Required: True
 Position: Named
@@ -482,7 +505,7 @@ The default friendly name is `Job#`, where `#` is an ordinal number that is incr
 job.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: ComputerName, FilePathComputerName, LiteralFilePathComputerName
 Aliases:
 
@@ -501,7 +524,7 @@ for this parameter are: `2.0` and `3.0`.
 This parameter was introduced in PowerShell 3.0.
 
 ```yaml
-Type: Version
+Type: System.Version
 Parameter Sets: ComputerName, FilePathComputerName, LiteralFilePathComputerName
 Aliases:
 
@@ -522,7 +545,7 @@ the **RunAs32** parameter, you can't use the **Credential** parameter to specify
 another user.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: ComputerName, FilePathComputerName, LiteralFilePathComputerName
 Aliases:
 
@@ -540,7 +563,7 @@ in curly braces (`{}`). Use the `$input` automatic variable to access the value 
 **InputObject** parameter. This parameter is required.
 
 ```yaml
-Type: ScriptBlock
+Type: System.Management.Automation.ScriptBlock
 Parameter Sets: ComputerName
 Aliases: Command
 
@@ -560,7 +583,7 @@ for standard background jobs.
 This parameter was introduced in PowerShell 3.0.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: DefinitionName
 Aliases:
 
@@ -598,6 +621,10 @@ the `Invoke-Command` cmdlet to run a `Start-Job` command in a session on a remot
 
 ## RELATED LINKS
 
+[about_Arrays](./about/about_arrays.md)
+
+[about_Automatic_Variables](./about/about_automatic_variables.md)
+
 [about_Jobs](./About/about_Jobs.md)
 
 [about_Job_Details](./About/about_Job_Details.md)
@@ -612,10 +639,6 @@ the `Invoke-Command` cmdlet to run a `Start-Job` command in a session on a remot
 
 [Remove-Job](Remove-Job.md)
 
-[Resume-Job](Resume-Job.md)
-
 [Stop-Job](Stop-Job.md)
-
-[Suspend-Job](Suspend-Job.md)
 
 [Wait-Job](Wait-Job.md)

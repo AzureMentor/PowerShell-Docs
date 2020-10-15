@@ -12,6 +12,7 @@ feature sets and platform compatibilities.
 ## Searching by PowerShell Edition
 
 The two editions of PowerShell are:
+
 - **Desktop Edition:** Built on .NET Framework and provides compatibility with scripts and modules
   targeting versions of PowerShell running on full footprint editions of Windows such as Server Core
   and Windows Desktop.
@@ -25,7 +26,7 @@ If a package has compatible PSEditions specified, they are listed as part of 'Po
 Editions' in the package display page and also in packages results.
 You can also search for compatible packages using PowerShell.
 
-![Item display page with PSEditions](../../Images/packagedisplaypagewithpseditions.PNG)
+![Item display page with PSEditions](media/searching-by-compatibility/packagedisplaypagewithpseditions.PNG)
 
 ### Search for packages in the gallery UI that work on PowerShell Core
 
@@ -33,11 +34,11 @@ Use Tags:"PSEdition_Desktop" and Tags:"PSEdition_Core" to filters the packages o
 
 ### Use Tags:"PSEdition_Core" to search items compatible with PowerShell Core Edition.
 
-![Search results for items compatible with Core PSEdition](../../Images/searchresultswithpseditions.PNG)
+![Search results for items compatible with Core PSEdition](media/searching-by-compatibility/searchresultswithpseditions.PNG)
 
 ### Use Tags:"PSEdition_Desktop" to search items compatible with PowerShell Desktop Edition.
 
-![Search results for items compatible with Desktop PSEdition](../../Images/searchresultswithpseditionsdesktop.PNG)
+![Search results for items compatible with Desktop PSEdition](media/searching-by-compatibility/searchresultswithpseditionsdesktop.PNG)
 
 ### Search for packages to find compatible editions using PowerShell
 You can specify tags to filter for the PowerShell edition and OS.

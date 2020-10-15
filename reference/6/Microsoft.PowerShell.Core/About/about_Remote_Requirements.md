@@ -1,6 +1,7 @@
 ---
+description: Describes the system requirements and configuration requirements for running remote commands in PowerShell. 
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote_requirements?view=powershell-6&WT.mc_id=ps-gethelp
 schema: 2.0.0
@@ -231,8 +232,8 @@ installing a certificate on the target server. The certificate must have a
 CN name that matches the hostname, is not expired or revoked. A self-signed
 certificate may be used for testing purposes.
 
-See [How To: Configure WINRM for HTTPS](https://support.microsoft.com/en-us/help/2019527/how-to-configure-winrm-for-https)
-for additonal details.
+See [How To: Configure WINRM for HTTPS](https://support.microsoft.com/help/2019527/how-to-configure-winrm-for-https)
+for additional details.
 
 The following command, run from an elevated command prompt, will configure the
 HTTPS listener on Windows with the installed certificate.
@@ -260,6 +261,7 @@ in NTLM authentication between the client and server and payload is encrypted
 over HTTP.
 
 The following illustrates using Negotiate with New-PSSession:
+
 ```powershell
 # The specified user must have administrator rights on the target machine.
 $cred = Get-Credential username@hostname
@@ -272,7 +274,7 @@ $session = New-PSSession -Computer <hostname> -Credential $cred `
 > administrators, other than the built in administrator, to connect using NTLM.
 > Refer to the LocalAccountTokenFilterPolicy registry setting under Negotiate
 > Authentication in
-> [Authentication for Remote Connections](https://msdn.microsoft.com/en-us/library/aa384295(v=vs.85).aspx)
+> [Authentication for Remote Connections](/windows/win32/winrm/authentication-for-remote-connections)
 
 ## SEE ALSO
 
@@ -282,8 +284,8 @@ $session = New-PSSession -Computer <hostname> -Credential $cred `
 
 [about_PSSessions](about_PSSessions.md)
 
-[Invoke-Command](../Invoke-Command.md)
+[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
 
-[Enter-PSSession](../Enter-PSSession.md)
+[Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
 
-[New-PSSession](../New-PSSession.md)
+[New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)

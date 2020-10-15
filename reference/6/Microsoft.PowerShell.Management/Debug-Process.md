@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Management
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/debug-process?view=powershell-6&WT.mc_id=ps-gethelp
@@ -123,7 +123,7 @@ The *Id* parameter name is optional.
 To find the process ID of a process, type `Get-Process`.
 
 ```yaml
-Type: Int32[]
+Type: System.Int32[]
 Parameter Sets: Id
 Aliases: PID, ProcessId
 
@@ -141,7 +141,7 @@ Enter a variable that contains the process objects or a command that gets the pr
 You can also pipe process objects to this cmdlet.
 
 ```yaml
-Type: Process[]
+Type: System.Diagnostics.Process[]
 Parameter Sets: InputObject
 Aliases:
 
@@ -159,7 +159,7 @@ If there is more than one process with the same name, this cmdlet attaches a deb
 The *Name* parameter is optional.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: Name
 Aliases: ProcessName
 
@@ -175,7 +175,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -192,7 +192,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 

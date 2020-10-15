@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Management
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/wait-process?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -17,16 +17,19 @@ Waits for the processes to be stopped before accepting more input.
 ## SYNTAX
 
 ### Name (Default)
+
 ```
 Wait-Process [-Name] <String[]> [[-Timeout] <Int32>] [<CommonParameters>]
 ```
 
 ### Id
+
 ```
 Wait-Process [-Id] <Int32[]> [[-Timeout] <Int32>] [<CommonParameters>]
 ```
 
 ### InputObject
+
 ```
 Wait-Process [[-Timeout] <Int32>] -InputObject <Process[]> [<CommonParameters>]
 ```
@@ -41,6 +44,7 @@ You can specify a process by process name or process ID (PID), or pipe a process
 ## EXAMPLES
 
 ### Example 1: Stop a process and wait
+
 ```
 PS C:\> $nid = (Get-Process notepad).id
 PS C:\> Stop-Process -Id $nid
@@ -58,6 +62,7 @@ The third command uses **Wait-Process** to wait until the Notepad process is sto
 It uses the *Id* parameter of **Wait-Process** to identify the process.
 
 ### Example 2: Specifying a process
+
 ```
 PS C:\> $p = Get-Process notepad
 PS C:\> Wait-Process -Id $p.id
@@ -73,6 +78,7 @@ The second command uses the *Id* parameter, the third command uses the *Name* pa
 These commands have the same results and can be used interchangeably.
 
 ### Example 3: Wait for processes for a specified time
+
 ```
 PS C:\> Wait-Process -Name outlook, winword -Timeout 30
 ```
@@ -88,7 +94,7 @@ To specify multiple IDs, use commas to separate the IDs.
 To find the PID of a process, type `Get-Process`.
 
 ```yaml
-Type: Int32[]
+Type: System.Int32[]
 Parameter Sets: Id
 Aliases: PID, ProcessId
 
@@ -104,7 +110,7 @@ Specifies the processes by submitting process objects.
 Enter a variable that contains the process objects, or type a command or expression that gets the process objects, such as the Get-Process cmdlet.
 
 ```yaml
-Type: Process[]
+Type: System.Diagnostics.Process[]
 Parameter Sets: InputObject
 Aliases:
 
@@ -121,7 +127,7 @@ To specify multiple names, use commas to separate the names.
 Wildcard characters are not supported.
 
 ```yaml
-Type: String[]
+Type: System.String[]
 Parameter Sets: Name
 Aliases: ProcessName
 
@@ -138,7 +144,7 @@ When this interval expires, the command displays a non-terminating error that li
 By default, there is no time-out.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: (All)
 Aliases: TimeoutSec
 
@@ -163,6 +169,7 @@ You can pipe a process object to this cmdlet.
 This cmdlet does not generate any output.
 
 ## NOTES
+
 * This cmdlet uses the **WaitForExit** method of the System.Diagnostics.Process class. For more information about this method, see the Microsoft .NET Framework SDK.
 
 *
@@ -178,5 +185,3 @@ This cmdlet does not generate any output.
 [Stop-Process](Stop-Process.md)
 
 [Wait-Process](Wait-Process.md)
-
-

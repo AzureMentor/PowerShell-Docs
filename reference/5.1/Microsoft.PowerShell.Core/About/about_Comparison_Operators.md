@@ -1,7 +1,8 @@
 ---
+description: Describes the operators that compare values in PowerShell. 
 keywords: powershell,cmdlet
-locale: en-us
-ms.date: 01/18/2019
+Locale: en-US
+ms.date: 01/16/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Comparison_Operators
@@ -9,7 +10,6 @@ title: about_Comparison_Operators
 # About Comparison Operators
 
 ## Short description
-
 Describes the operators that compare values in PowerShell.
 
 ## Long description
@@ -56,26 +56,44 @@ PowerShell includes the following comparison operators:
 |             | -isnot       | Returns true if the objects are not the same|
 |             |              | type                                        |
 
-By default, all comparison operators are case-insensitive. To make a
-comparison operator case-sensitive, precede the operator name with a `c`. For
-example, the case-sensitive version of `-eq` is `-ceq`. To make the
-case-insensitivity explicit, precede the operator with an `i`. For example,
-the explicitly case-insensitive version of `-eq` is `-ieq`.
+By default, all comparison operators are case-insensitive. To make a comparison
+operator case-sensitive, precede the operator name with a `c`. For example, the
+case-sensitive version of `-eq` is `-ceq`. To make the case-insensitivity
+explicit, precede the operator with an `i`. For example, the explicitly
+case-insensitive version of `-eq` is `-ieq`.
 
 When the input to an operator is a scalar value, comparison operators return a
 Boolean value. When the input is a collection of values, the comparison
 operators return any matching values. If there are no matches in a collection,
-comparison operators do not return anything.
+comparison operators return an empty array.
 
-The exceptions are the containment operators (`-contains`, `-notcontains`),
-the In operators (`-in`, `-notin`), and the type operators (`-is`, `-isnot`),
-which always return a Boolean value.
+```powershell
+PS> (1, 2 -eq 3).GetType().FullName
+System.Object[]
+```
+
+The exceptions are the containment operators, the In operators, and the type
+operators, which always return a **Boolean** value.
+
+> [!NOTE]
+> If you need to compare a value to `$null` you should put `$null` on the
+> left-hand side of the comparison. When you compare `$null` to an **Object[]**
+> the result is **False** because the comparison object is an array. When you
+> compare an array to `$null`, the comparison filters out any `$null` values
+> stored in the array. For example:
+>
+> ```powershell
+> PS> $null -ne $null, "hello"
+> True
+> PS> $null, "hello" -ne $null
+> hello
+> ```
 
 ### Equality Operators
 
 The equality operators (`-eq`, `-ne`) return a value of TRUE or the matches
-when one or more of the input values is identical to the specified pattern.
-The entire pattern must match an entire value.
+when one or more of the input values is identical to the specified pattern. The
+entire pattern must match an entire value.
 
 Example:
 
@@ -86,13 +104,13 @@ Description: Equal to. Includes an identical value.
 Example:
 
 ```powershell
-C:PS> 2 -eq 2
+PS> 2 -eq 2
 True
 
-C:PS> 2 -eq 3
+PS> 2 -eq 3
 False
 
-C:PS> 1,2,3 -eq 2
+PS> 1,2,3 -eq 2
 2
 PS> "abc" -eq "abc"
 True
@@ -139,7 +157,10 @@ PS> 7, 8, 9 -gt 8
 ```
 
 > [!NOTE]
-> This should not to be confused with `>`, the greater-than operator in many other programming languages. In PowerShell, `>` is used for redirection. For more information, see [About_redirection](about_Redirection.md#potential-confusion-with-comparison-operators).
+> This should not to be confused with `>`, the greater-than operator in many
+> other programming languages. In PowerShell, `>` is used for redirection. For
+> more information, see
+> [About_redirection](about_Redirection.md#potential-confusion-with-comparison-operators).
 
 #### -ge
 
@@ -246,9 +267,6 @@ Server
 
 Description: Matches a string using regular expressions. When the input is
 scalar, it populates the `$Matches` automatic variable.
-
-The match operators search only in strings. They cannot search in arrays of
-integers or other objects.
 
 If the input is a collection, the `-match` and `-notmatch` operators return
 the matching members of that collection, but the operator does not populate
@@ -453,9 +471,9 @@ Where
 
 #### -in
 
-Description: In operator. Tells whether a test value appears in a collection
-of reference values. Always return as Boolean value. Returns TRUE only when
-the test value exactly matches at least one of the reference values.
+Description: In operator. Tells whether a test value appears in a collection of
+reference values. Always return as Boolean value. Returns TRUE only when the
+test value exactly matches at least one of the reference values.
 
 When the test value is a collection, the In operator uses reference equality.
 It returns TRUE only when one of the reference values is the same instance of
@@ -494,8 +512,8 @@ True
 #### -notin
 
 Description: Tells whether a test value appears in a collection of reference
-values. Always returns a Boolean value. Returns TRUE when the test value is
-not an exact match for at least one of the reference values.
+values. Always returns a Boolean value. Returns TRUE when the test value is not
+an exact match for at least one of the reference values.
 
 When the test value is a collection, the In operator uses reference equality.
 It returns TRUE only when one of the reference values is the same instance of
@@ -544,8 +562,8 @@ command changes the file name extensions of all .txt files to .log:
 Get-ChildItem *.txt | Rename-Item -NewName { $_.name -replace '\.txt$','.log' }
 ```
 
-The syntax of the `-replace` operator is as follows, where the \<original>
-placeholder represents the characters to be replaced, and the \<substitute>
+The syntax of the `-replace` operator is as follows, where the `<original>`
+placeholder represents the characters to be replaced, and the `<substitute>`
 placeholder represents the characters that will replace them:
 
 `<input> <operator> <original>, <substitute>`
@@ -560,7 +578,7 @@ Consider the following examples:
 PS> "book" -replace "B", "C"
 ```
 
-```output
+```Output
 Cook
 ```
 
@@ -568,7 +586,7 @@ Cook
 "book" -ireplace "B", "C"
 ```
 
-```output
+```Output
 Cook
 ```
 
@@ -576,12 +594,14 @@ Cook
 "book" -creplace "B", "C"
 ```
 
-```output
+```Output
 book
 ```
 
-It is also possible to use capturing groups, and substitutions with the
-`-replace` operator. For more information, see [about_Regular_Expressions](about_Regular_Expressions.md).
+It is also possible to use regular expressions to dynamically replace text
+using capturing groups, and substitutions. For more information, see
+[about_Regular_Expressions](about_Regular_Expressions.md).
+
 #### Substitutions in Regular Expressions
 
 Additionally, capturing groups can be referenced in the \<substitute\> string.
@@ -596,7 +616,7 @@ Two of the ways to reference capturing groups is by **Number** and by **Name**
   "John D. Smith" -replace "(\w+) (\w+)\. (\w+)", '$1.$2.$3@contoso.com'
   ```
 
-  ```output
+  ```Output
   John.D.Smith@contoso.com
   ```
 
@@ -607,28 +627,30 @@ Two of the ways to reference capturing groups is by **Number** and by **Name**
   "CONTOSO\Administrator" -replace '\w+\\(?<user>\w+)', 'FABRIKAM\${user}'
   ```
 
-  ```output
+  ```Output
   FABRIKOM\Administrator
   ```
 
 > [!WARNING]
 > Since the `$` character is used in string expansion, you will need to use
 > literal strings with substitution, or escape the `$` character.
+>
 > ```powershell
 > 'Hello World' -replace '(\w+) \w+', "`$1 Universe"
 > ```
 >
-> ```output
+> ```Output
 > Hello Universe
 > ```
 >
-> Additionally, sicne the `$` character is used in substitution, you will need
+> Additionally, since the `$` character is used in substitution, you will need
 > to escape any instances in your string.
 >
 > ```powershell
 > '5.72' -replace '(.+)', '$$$1'
 > ```
-> ```output
+>
+> ```Output
 > $5.72
 > ```
 
@@ -679,6 +701,6 @@ True
 - [about_Operators](about_Operators.md)
 - [about_Regular_Expressions](about_Regular_Expressions.md)
 - [about_Wildcards](about_Wildcards.md)
-- [Compare-Object](../../Microsoft.PowerShell.Utility/Compare-Object.md)
-- [Foreach-Object](../ForEach-Object.md)
-- [Where-Object](../Where-Object.md)
+- [Compare-Object](xref:Microsoft.PowerShell.Utility.Compare-Object)
+- [Foreach-Object](xref:Microsoft.PowerShell.Core.ForEach-Object)
+- [Where-Object](xref:Microsoft.PowerShell.Core.Where-Object)

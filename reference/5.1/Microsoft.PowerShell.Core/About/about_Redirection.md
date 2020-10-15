@@ -1,7 +1,8 @@
 ---
+description: Explains how to redirect output from PowerShell to text files. 
 keywords: PowerShell,cmdlet
-locale: en-us
-ms.date: 12/01/2017
+Locale: en-US
+ms.date: 07/22/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_redirection?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Redirection
@@ -9,7 +10,6 @@ title: about_Redirection
 # About Redirection
 
 ## Short description
-
 Explains how to redirect output from PowerShell to text files.
 
 ## Long description
@@ -37,15 +37,15 @@ The redirection operators enable you to send streams of data to a file or the
 The PowerShell redirection operators use the following numbers to represent
 the available output streams:
 
-|Stream # |Description  |Introduced in |
-|---------|---------|---------|
-|1|**Success** Stream|PowerShell 2.0|
-|2|**Error** Stream|PowerShell 2.0|
-|3|**Warning** Stream|PowerShell 3.0|
-|4|**Verbose** Stream|PowerShell 3.0|
-|5|**Debug** Stream|PowerShell 3.0|
-|6|**Information** Stream|PowerShell 5.0|
-|*|All Streams|PowerShell 3.0|
+| Stream # |      Description       | Introduced in  |
+| -------- | ---------------------- | -------------- |
+| 1        | **Success** Stream     | PowerShell 2.0 |
+| 2        | **Error** Stream       | PowerShell 2.0 |
+| 3        | **Warning** Stream     | PowerShell 3.0 |
+| 4        | **Verbose** Stream     | PowerShell 3.0 |
+| 5        | **Debug** Stream       | PowerShell 3.0 |
+| 6        | **Information** Stream | PowerShell 5.0 |
+| *        | All Streams            | PowerShell 3.0 |
 
 > [!NOTE]
 > There is also a **Progress** stream in PowerShell, but it is not used for
@@ -55,34 +55,41 @@ The PowerShell redirection operators are as follows, where `n` represents
 the stream number. The **Success** stream ( `1` ) is the default if no stream
 is specified.
 
-|Operator|Description| Syntax|
-|---------|---------|--------|
-|`>`|Send specified stream to a file.|`n>`|
-|`>>`|**Append** specified stream to a file.|`n>>`|
-|`>&1`|*Redirects* the specified stream to the **Success** stream.|`n>&1`|
+| Operator |                         Description                         | Syntax |
+| -------- | ----------------------------------------------------------- | ------ |
+| `>`      | Send specified stream to a file.                            | `n>`   |
+| `>>`     | **Append** specified stream to a file.                      | `n>>`  |
+| `>&1`    | _Redirects_ the specified stream to the **Success** stream. | `n>&1` |
+
+> [!NOTE]
+> Unlike some Unix shells, you can only redirect other streams to the
+> **Success** stream.
 
 ## Examples
 
 ### Example 1: Redirect errors and output to a file
 
+This example runs `dir` on one item that will succeed, and one that will error.
+
 ```powershell
 dir 'C:\', 'fakepath' 2>&1 > .\dir.log
 ```
-
-This example runs `dir` on one item that will succeed, and one that will error.
 
 It uses `2>&1` to redirect the **Error** stream to the **Success** stream, and
 `>` to send the resultant **Success** stream to a file called `dir.log`
 
 ### Example 2: Send all Success stream data to a file
 
+This example sends all **Success** stream data to a file called `script.log`.
+
 ```powershell
 .\script.ps1 > script.log
 ```
 
-This command sends all **Success** stream data to a file called `script.log`
-
 ### Example 3: Send Success, Warning, and Error streams to a file
+
+This example shows how you can combine redirection operators to achieve a
+desired result.
 
 ```powershell
 &{
@@ -92,9 +99,6 @@ This command sends all **Success** stream data to a file called `script.log`
 } 3>&1 2>&1 > P:\Temp\redirection.log
 ```
 
-This example shows how you can combine redirection operators to achieve a
-desired result.
-
 - `3>&1` redirects the **Warning** stream to the **Success** stream.
 - `2>&1` redirects the **Error** stream to the **Success** stream (which also
   now includes all **Warning** stream data)
@@ -103,14 +107,19 @@ desired result.
 
 ### Example 4: Redirect all streams to a file
 
+This example sends all streams output from a script called `script.ps1` to a
+file called `script.log`
+
 ```powershell
 .\script.ps1 *> script.log
 ```
 
-This example sends all streams output from a script called `script.ps1` to a
-file called `script.log`
-
 ### Example 5: Suppress all Write-Host and Information stream data
+
+This example suppresses all information stream data. To read more about
+**Information** stream cmdlets, see
+[Write-Host](xref:Microsoft.PowerShell.Utility.Write-Host) and
+[Write-Information](xref:Microsoft.PowerShell.Utility.Write-Information)
 
 ```powershell
 &{
@@ -119,8 +128,74 @@ file called `script.log`
 } 6> $null
 ```
 
-This example suppresses all information stream data. To read more about
-**Information** stream cmdlets, see [Write-Host](../../microsoft.powershell.utility/Write-Host.md) and [Write-Information](../../microsoft.powershell.utility/Write-Information.md)
+### Example 6: Show the affect of Action Preferences
+
+Action Preference variables and parameters can change what gets written to a
+particular stream. The script in this example shows how the value of
+`$ErrorActionPreference` affects what gets written to the **Error** stream.
+
+```powershell
+$ErrorActionPreference = 'Continue'
+$ErrorActionPreference > log.txt
+get-item /not-here 2>&1 >> log.txt
+
+$ErrorActionPreference = 'SilentlyContinue'
+$ErrorActionPreference >> log.txt
+get-item /not-here 2>&1 >> log.txt
+
+$ErrorActionPreference = 'Stop'
+$ErrorActionPreference >> log.txt
+Try {
+    get-item /not-here 2>&1 >> log.txt
+}
+catch {
+    "`tError caught!" >> log.txt
+}
+$ErrorActionPreference = 'Ignore'
+$ErrorActionPreference >> log.txt
+get-item /not-here 2>&1 >> log.txt
+
+$ErrorActionPreference = 'Inquire'
+$ErrorActionPreference >> log.txt
+get-item /not-here 2>&1 >> log.txt
+
+$ErrorActionPreference = 'Continue'
+```
+
+When we run this script we get prompted when `$ErrorActionPreference` is set to
+`Inquire`.
+
+```powershell
+PS C:\temp> .\test.ps1
+
+Confirm
+Cannot find path 'C:\not-here' because it does not exist.
+[Y] Yes  [A] Yes to All  [H] Halt Command  [S] Suspend  [?] Help (default is "Y"): H
+Get-Item: C:\temp\test.ps1:23
+Line |
+  23 |  get-item /not-here 2>&1 >> log.txt
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The running command stopped because the user selected the Stop option.
+```
+
+When we examine the log file we see the following:
+
+```
+PS C:\temp> Get-Content .\log.txt
+Continue
+
+Get-Item: C:\temp\test.ps1:3
+Line |
+   3 |  get-item /not-here 2>&1 >> log.txt
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\not-here' because it does not exist.
+
+SilentlyContinue
+Stop
+    Error caught!
+Ignore
+Inquire
+```
 
 ## Notes
 
@@ -141,16 +216,20 @@ with its `Encoding` parameter.
 
 ### Potential confusion with comparison operators
 
-The `>` operator is not to be confused with the [Greater-than](about_Comparison_Operators.md#-gt) comparison operator (often denoted as `>` in other programming languages).
+The `>` operator is not to be confused with the
+[Greater-than](about_Comparison_Operators.md#-gt) comparison operator (often
+denoted as `>` in other programming languages).
 
-Depending on the objects being compared, the output using `>` can appear to be correct (because 36 is not greater than 42).
+Depending on the objects being compared, the output using `>` can appear to be
+correct (because 36 is not greater than 42).
 
 ```powershell
 PS> if (36 > 42) { "true" } else { "false" }
 false
 ```
 
-However, a check of the local filesystem can see that a file called `42` was written, with the contents `36`.
+However, a check of the local filesystem can see that a file called `42` was
+written, with the contents `36`.
 
 ```powershell
 PS> dir
@@ -175,13 +254,14 @@ The '<' operator is reserved for future use.
 + FullyQualifiedErrorId : RedirectionNotSupported
 ```
 
-If numeric comparison is the required operation, `-lt` and `-gt` should be used. See: [`-gt` Comparison Operator](about_Comparison_Operators.md#-gt)
+If numeric comparison is the required operation, `-lt` and `-gt` should be
+used. See: [`-gt` Comparison Operator](about_Comparison_Operators.md#-gt)
 
 ## See also
 
-[Out-File](../../microsoft.powershell.utility/Out-File.md)
+[Out-File](xref:Microsoft.PowerShell.Utility.Out-File)
 
-[Tee-Object](../../microsoft.powershell.utility/Tee-Object.md)
+[Tee-Object](xref:Microsoft.PowerShell.Utility.Tee-Object)
 
 [about_Operators](about_Operators.md)
 

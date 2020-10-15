@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Security
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/convertto-securestring?view=powershell-5.1&WT.mc_id=ps-gethelp
@@ -19,16 +19,19 @@ It is used with ConvertFrom-SecureString and Read-Host.
 ## SYNTAX
 
 ### Secure (Default)
+
 ```
 ConvertTo-SecureString [-String] <String> [[-SecureKey] <SecureString>] [<CommonParameters>]
 ```
 
 ### PlainText
+
 ```
 ConvertTo-SecureString [-String] <String> [-AsPlainText] [-Force] [<CommonParameters>]
 ```
 
 ### Open
+
 ```
 ConvertTo-SecureString [-String] <String> [-Key <Byte[]>] [<CommonParameters>]
 ```
@@ -46,6 +49,7 @@ If the standard string being converted was encrypted with **ConvertFrom-SecureSt
 ## EXAMPLES
 
 ### Example 1: Convert a secure string to an encrypted string
+
 ```
 PS C:\> $Secure = Read-Host -AsSecureString
 PS C:\> $Secure
@@ -77,6 +81,7 @@ The sixth command displays the value of the $Secure2 variable.
 The SecureString type indicates that the command was successful.
 
 ### Example 2: Create a secure string from an encrypted string in a file
+
 ```
 PS C:\> $Secure = Read-Host -AsSecureString
 PS C:\> $Encrypted = ConvertFrom-SecureString -SecureString $Secure -Key (1..16)
@@ -99,6 +104,7 @@ The command uses a pipeline operator to send the encrypted string to the **Conve
 The results are saved in the $Secure2 variable.
 
 ### Example 3: Convert a plain text string to a secure string
+
 ```
 PS C:\> $Secure_String_Pwd = ConvertTo-SecureString "P@ssW0rD!" -AsPlainText -Force
 ```
@@ -117,7 +123,7 @@ If you use this parameter to provide plain text as input, the system cannot prot
 To use this parameter, you must also specify the *Force* parameter.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: PlainText
 Aliases:
 
@@ -132,7 +138,7 @@ Accept wildcard characters: False
 Confirms that you understand the implications of using the *AsPlainText* parameter and still want to use it.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: PlainText
 Aliases:
 
@@ -144,11 +150,11 @@ Accept wildcard characters: False
 ```
 
 ### -Key
-Specifies the encryption key to use when converting a secure string into an encrypted standard string.
-Valid key lengths are 16, 24, and 32 bytes.
+Specifies the encryption key used to convert the original secure string into the encrypted standard string.
+Valid key lengths are 16, 24 and 32 bytes.
 
 ```yaml
-Type: Byte[]
+Type: System.Byte[]
 Parameter Sets: Open
 Aliases:
 
@@ -160,13 +166,13 @@ Accept wildcard characters: False
 ```
 
 ### -SecureKey
-Specifies the encryption key to use when converting a secure string into an encrypted standard string.
+Specifies the encryption key used to convert the original secure string into the encrypted standard string.
 The key must be provided in the format of a secure string.
-The secure string is converted to a byte array before being used as the key.
-Valid key lengths are 16, 24, and 32 bytes.
+The secure string will be converted to a byte array to be used as the key.
+Valid secure key lengths are 8, 12 and 16 code points.
 
 ```yaml
-Type: SecureString
+Type: System.Security.SecureString
 Parameter Sets: Secure
 Aliases:
 
@@ -181,7 +187,7 @@ Accept wildcard characters: False
 Specifies the string to convert to a secure string.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -207,8 +213,10 @@ ConvertTo-SecureString returns a **SecureString** object.
 
 ## NOTES
 
+Some characters, such as emoticons, correspond to several code points in the string that contains
+them. Avoid using these characters because they may cause problems and misunderstandings when used
+in a password.
+
 ## RELATED LINKS
 
 [ConvertFrom-SecureString](ConvertFrom-SecureString.md)
-
-

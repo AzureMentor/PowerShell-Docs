@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.PowerShell.Utility-help.xml
 keywords: powershell,cmdlet
-locale: en-us
+Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-sddlstring?view=powershell-6&WT.mc_id=ps-gethelp
@@ -15,8 +15,10 @@ Converts a SDDL string to a custom object.
 
 ## SYNTAX
 
+### All
+
 ```
-ConvertFrom-SddlString [-Sddl] <String> [-Type <Object>] [<CommonParameters>]
+ConvertFrom-SddlString [-Sddl] <String> [-Type <AccessRightTypeNames>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -82,7 +84,7 @@ The third command uses the `ConvertFrom-SddlString` cmdlet with the `-Type` para
 Specifies the string representing the security descriptor in SDDL syntax.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -112,7 +114,7 @@ By default cmdlet uses file system rights.
 CryptoKeyRights and ActiveDirectoryRights are not supported in PowerShell Core.
 
 ```yaml
-Type: Object
+Type: Microsoft.PowerShell.Commands.ConvertFromSddlStringCommand+AccessRightTypeNames
 Parameter Sets: (All)
 Aliases:
 Accepted values: FileSystemRights, RegistryRights, ActiveDirectoryRights, MutexRights, SemaphoreRights, CryptoKeyRights, EventWaitHandleRights
@@ -140,6 +142,4 @@ You can pipe a SDDL string to `ConvertFrom-SddlString`.
 
 ## RELATED LINKS
 
-[Security Descriptor Definition Language](https://msdn.microsoft.com/en-us/library/windows/desktop/aa379567(v=vs.85).aspx)
-
-
+[Security Descriptor Definition Language](/windows/win32/secauthz/security-descriptor-definition-language)

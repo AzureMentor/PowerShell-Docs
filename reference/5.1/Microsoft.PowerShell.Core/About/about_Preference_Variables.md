@@ -1,12 +1,12 @@
 ---
+description:  Variables that customize the behavior of PowerShell. 
 keywords: powershell,cmdlet
-locale: en-us
-ms.date: 09/13/2019
+Locale: en-US
+ms.date: 04/22/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Preference_Variables
 ---
-
 # About Preference Variables
 
 ## Short description
@@ -25,44 +25,52 @@ that you can use to override the preference behavior for a specific command.
 
 The following table lists the preference variables and their default values.
 
-| Variable | Default Value |
-| -------- | ------------- |
-| `$ConfirmPreference`         | High|
-| `$DebugPreference`           | SilentlyContinue |
-| `$ErrorActionPreference`     | Continue |
-| `$ErrorView`                 | NormalView |
-| `$FormatEnumerationLimit`    | 4 |
-| `$InformationPreference`     | SilentlyContinue |
-| `$LogCommandHealthEvent`     | False (not logged) |
-| `$LogCommandLifecycleEvent`  | False (not logged) |
-| `$LogEngineHealthEvent`      | True (logged) |
-| `$LogEngineLifecycleEvent`   | True (logged) |
-| `$LogProviderLifecycleEvent` | True (logged) |
-| `$LogProviderHealthEvent`    | True (logged) |
-| `$MaximumAliasCount`         | 4096 |
-| `$MaximumDriveCount`         | 4096 |
-| `$MaximumErrorCount`         | 256 |
-| `$MaximumFunctionCount`      | 4096 |
-| `$MaximumHistoryCount`       | 4096 |
-| `$MaximumVariableCount`      | 4096 |
-| `$OFS`                       | (Space character (`" "`)) |
-| `$OutputEncoding`            | ASCIIEncoding object |
-| `$ProgressPreference`        | Continue |
-| `$PSDefaultParameterValues`  | (None - empty hash table) |
-| `$PSEmailServer`             | (None) |
-| `$PSModuleAutoLoadingPreference` | All |
-| `$PSSessionApplicationName`      | WSMAN |
-| `$PSSessionConfigurationName`    | `http://schemas.microsoft.com/PowerShell/microsoft.PowerShell` |
-| `$PSSessionOption`               | See [$PSSessionOption](#pssessionoption)|
-| `$VerbosePreference`             | SilentlyContinue |
-| `$WarningPreference`             | Continue |
-| `$WhatIfPreference`              | 0 |
+|             Variable             |       Default Value       |
+| -------------------------------- | ------------------------- |
+| `$ConfirmPreference`             | High                      |
+| `$DebugPreference`               | SilentlyContinue          |
+| `$ErrorActionPreference`         | Continue                  |
+| `$ErrorView`                     | NormalView                |
+| `$FormatEnumerationLimit`        | 4                         |
+| `$InformationPreference`         | SilentlyContinue          |
+| `$LogCommandHealthEvent`         | False (not logged)        |
+| `$LogCommandLifecycleEvent`      | False (not logged)        |
+| `$LogEngineHealthEvent`          | True (logged)             |
+| `$LogEngineLifecycleEvent`       | True (logged)             |
+| `$LogProviderLifecycleEvent`     | True (logged)             |
+| `$LogProviderHealthEvent`        | True (logged)             |
+| `$MaximumAliasCount`             | 4096                      |
+| `$MaximumDriveCount`             | 4096                      |
+| `$MaximumErrorCount`             | 256                       |
+| `$MaximumFunctionCount`          | 4096                      |
+| `$MaximumHistoryCount`           | 4096                      |
+| `$MaximumVariableCount`          | 4096                      |
+| `$OFS`                           | (Space character (`" "`)) |
+| `$OutputEncoding`                | **ASCIIEncoding** object  |
+| `$ProgressPreference`            | Continue                  |
+| `$PSDefaultParameterValues`      | (None - empty hash table) |
+| `$PSEmailServer`                 | (None)                    |
+| `$PSModuleAutoLoadingPreference` | All                       |
+| `$PSSessionApplicationName`      | wsman                     |
+| `$PSSessionConfigurationName`    | `http://schemas.microsoft.com/powershell/Microsoft.PowerShell` |
+| `$PSSessionOption`               | See [$PSSessionOption](#pssessionoption) |
+| `$Transcript`                    | (none)                    |
+| `$VerbosePreference`             | SilentlyContinue          |
+| `$WarningPreference`             | Continue                  |
+| `$WhatIfPreference`              | False                     |
 
 PowerShell includes the following environment variables that store user
-preferences. For more information about these environment variables, see [about_Environment_Variables](about_Environment_Variables.md).
+preferences. For more information about these environment variables, see
+[about_Environment_Variables](about_Environment_Variables.md).
 
 - `env:PSExecutionPolicyPreference`
 - `$env:PSModulePath`
+
+> [!NOTE]
+> Changes to preference variable only take effect in scripts and functions if
+> those scripts or functions are defined in the same scope as the scope in
+> which preference was used. For more information, see
+> [about_Scopes](about_Scopes.md).
 
 ## Working with preference variables
 
@@ -149,8 +157,7 @@ Remove-Item -Path C:\file.txt
 Confirm
 Are you sure you want to perform this action?
 Performing operation "Remove File" on Target "C:\file.txt".
-[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend
-[?] Help (default is "Y"):
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [?] Help (default is "Y"):
 ```
 
 The estimate of the risk is an attribute of the cmdlet or function known as its
@@ -234,7 +241,8 @@ debugging messages aren't displayed, but you can display debugging messages by
 changing the value of `$DebugPreference`.
 
 You can use the **Debug** common parameter of a cmdlet to display or hide the
-debugging messages for a specific command. For more information, see [about_CommonParameters](about_CommonParameters.md).
+debugging messages for a specific command. For more information, see
+[about_CommonParameters](about_CommonParameters.md).
 
 The valid values are as follows:
 
@@ -367,22 +375,29 @@ preference for a specific command.
 
 The valid values are as follows:
 
-- **Stop**: Displays the error message and stops executing.
-- **Inquire**: Displays the error message and asks you whether you want to
-  continue.
 - **Continue**: (Default) Displays the error message and continues executing.
-- **Suspend**: Automatically suspends a workflow job to allow for further
-  investigation. After investigation, the workflow can be resumed.
-- **SilentlyContinue**: No effect. The error message isn't displayed and
-  execution continues without interruption.
 - **Ignore**: Suppresses the error message and continues to execute the
   command. The **Ignore** value is intended for per-command use, not for use as
   saved preference. **Ignore** isn't a valid value for the
   `$ErrorActionPreference` variable.
+- **Inquire**: Displays the error message and asks you whether you want to
+  continue.
+- **SilentlyContinue**: No effect. The error message isn't displayed and
+  execution continues without interruption.
+- **Stop**: Displays the error message and stops executing. In addition to the
+  error generated, the **Stop** value generates an ActionPreferenceStopException
+  object to the error stream.
+  stream
+- **Suspend**: Automatically suspends a workflow job to allow for further
+  investigation. After investigation, the workflow can be resumed. The
+  **Suspend** value is intended for per-command use, not for use as saved
+  preference. **Suspend** isn't a valid value for the `$ErrorActionPreference`
+  variable.
 
-The `$ErrorActionPreference` and **ErrorAction** parameter don't affect how
+`$ErrorActionPreference` and the **ErrorAction** parameter don't affect how
 PowerShell responds to terminating errors that stop cmdlet processing. For more
-information about the **ErrorAction** common parameter, see [about_CommonParameters](about_CommonParameters.md).
+information about the **ErrorAction** common parameter, see
+[about_CommonParameters](about_CommonParameters.md).
 
 #### Examples
 
@@ -394,92 +409,82 @@ This example shows the `$ErrorActionPreference` default value, **Continue**. A
 non-terminating error is generated. The message is displayed and processing
 continues.
 
+```powershell
+# Change the ErrorActionPreference to 'Continue'
+$ErrorActionPreference = 'Continue'
+# Generate a non-terminating error and continue processing the script.
+Write-Error -Message  'Test Error' ; Write-Host 'Hello World'
 ```
-PS> $ErrorActionPreference = "Continue"
-PS> # Display the value of the preference.
-PS> $ErrorActionPreference
-Continue
-PS> # Generate a non-terminating error.
-PS> Write-Error -Message  "Hello, World"
-Write-Error -Message  "Hello, World" : Hello, World
-+ CategoryInfo          : NotSpecified: (:) [Write-Error],WriteErrorException
-+ FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException
-PS> # The error message is displayed and execution continues.
-PS> # Use the ErrorAction parameter with a value of "SilentlyContinue".
-PS> Write-Error -Message  "Hello, World" -ErrorAction:SilentlyContinue
-PS> # The error message isn't displayed and execution continues.
+
+```Output
+Write-Error -Message  'Test Error' ; Write-Host 'Hello World' : Test Error
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException
+
+Hello World
+```
+
+This example shows the `$ErrorActionPreference` default value, **Inquire**. An
+error is generated and a prompt for action is shown.
+
+```powershell
+# Change the ErrorActionPreference to 'Inquire'
+$ErrorActionPreference = 'Inquire'
+Write-Error -Message 'Test Error' ; Write-Host 'Hello World'
+```
+
+```Output
+Confirm
+Test Error
+[Y] Yes  [A] Yes to All  [H] Halt Command  [S] Suspend  [?] Help (default is "Y"):
 ```
 
 This example shows the `$ErrorActionPreference` set to **SilentlyContinue**.
 The error message is suppressed.
 
-```
-PS> # Display the value of the preference
-PS> $ErrorActionPreference = "SilentlyContinue"
-PS> # Generate an error message
-PS> Write-Error -Message "Hello, World"
-PS> # Error message is suppressed
-PS> # Use the ErrorAction parameter with a value of "Continue"
-PS> Write-Error -Message "Hello, World" -ErrorAction:Continue
-Write-Error -Message "Hello, World" -ErrorAction:Continue : Hello, World
-+ CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
-+ FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException
+```powershell
+# Change the ErrorActionPreference to 'SilentlyContinue'
+$ErrorActionPreference = 'SilentlyContinue'
+# Generate an error message
+Write-Error -Message 'Test Error' ; Write-Host 'Hello World'
+# Error message is suppressed and script continues processing
 ```
 
-This example shows the effect of a real error. In this case, the command gets a
-non-existent file, `nofile.txt`.
-
+```Output
+Hello World
 ```
-PS> # Display the value of the preference.
-PS> $ErrorActionPreference
-SilentlyContinue
-PS> Get-ChildItem -Path C:\nofile.txt
-PS> # Error message is suppressed.
-PS> # Change the value to Continue.
-PS> $ErrorActionPreference = "Continue"
-PS> Get-ChildItem -Path C:\nofile.txt
-Get-ChildItem : Cannot find path 'C:\nofile.txt' because it does not exist.
+
+This example shows the `$ErrorActionPreference` set to **Stop**. It also shows
+the extra object generated to the `$Error` variable.
+
+```powershell
+# Change the ErrorActionPreference to 'Stop'
+$ErrorActionPreference = 'Stop'
+# Error message is is generated and script stops processing
+Write-Error -Message 'Test Error' ; Write-Host 'Hello World'
+
+# Show the ActionPreferenceStopException and the error generated
+$Error[0]
+$Error[1]
+```
+
+```Output
+Write-Error -Message 'Test Error' ; Write-Host 'Hello World' : Test Error
 At line:1 char:1
-+ Get-ChildItem -Path C:\nofile.txt
++ Write-Error -Message 'Test Error' ; Write-Host 'Hello World'
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ CategoryInfo : ObjectNotFound: (C:\nofile.txt:String) [Get-ChildItem],
-    ItemNotFoundException
-+ FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.
-    GetChildItemCommand
-PS> # Use the ErrorAction parameter
-PS> Get-ChildItem -Path C:\nofile.txt -ErrorAction SilentlyContinue
-PS> # Error message is suppressed.
-PS> # Change the value to Inquire.
-PS> $ErrorActionPreference = "Inquire"
-PS> Get-ChildItem -Path C:\nofile.txt
-Confirm
-Cannot find path 'C:\nofile.txt' because it does not exist.
-[Y] Yes  [A] Yes to All  [H] Halt Command  [S] Suspend
-  [?] Help (default is "Y"): Y
-Get-ChildItem : Cannot find path 'C:\nofile.txt' because it does not exist.
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException
+
+The running command stopped because the preference variable "ErrorActionPreference"
+or common parameter is set to Stop: Test Error
+
+Write-Error -Message 'Test Error' ; Write-Host 'Hello World' : Test Error
 At line:1 char:1
-+ Get-ChildItem -Path C:\nofile.txt
++ Write-Error -Message 'Test Error' ; Write-Host 'Hello World'
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ CategoryInfo : ObjectNotFound: (C:\nofile.txt:String) [Get-ChildItem],
-   ItemNotFoundException
-+ FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.
-   GetChildItemCommand
-PS> # Change the value to Continue.
-PS> $ErrorActionPreference = "Continue"
-PS> # Use the ErrorAction parameter to override the preference value.
-PS> Get-Childitem C:\nofile.txt -ErrorAction "Inquire"
-Confirm
-Cannot find path 'C:\nofile.txt' because it does not exist.
-[Y] Yes  [A] Yes to All  [H] Halt Command  [S] Suspend
-  [?] Help (default is "Y"): Y
-Get-Childitem : Cannot find path 'C:\nofile.txt' because it does not exist.
-At line:1 char:1
-+ Get-Childitem C:\nofile.txt -ErrorAction "Inquire"
-+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ CategoryInfo : ObjectNotFound: (C:\nofile.txt:String) [Get-ChildItem],
-   ItemNotFoundException
-+ FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.
-   GetChildItemCommand
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException
 ```
 
 ### \$ErrorView
@@ -489,14 +494,15 @@ Determines the display format of error messages in PowerShell.
 The valid values are as follows:
 
 - **NormalView**: (Default) A detailed view designed for most users. Consists
-  of a description of the error, and the name of the object involved in the
+  of a description of the error and the name of the object involved in the
   error.
 - **CategoryView**: A succinct, structured view designed for production
   environments. The format is as follows:
 
   {Category}: ({TargetName}:{TargetType}):[{Activity}], {Reason}
 
-For more information about the fields in **CategoryView**, see [ErrorCategoryInfo](/dotnet/api/system.management.automation.errorcategoryinfo)
+For more information about the fields in **CategoryView**, see
+[ErrorCategoryInfo](/dotnet/api/system.management.automation.errorcategoryinfo)
 class.
 
 #### Examples
@@ -588,7 +594,8 @@ which groups the results by the service status.
 The result is a table that lists the status in the **Name** column, and the
 processes in the **Group** column. To change the column labels, use a hash
 table, see [about_Hash_Tables](about_Hash_Tables.md). For more information, see
-the examples in [Format-Table](../../Microsoft.PowerShell.Utility/Format-Table.md).
+the examples in
+[Format-Table](xref:Microsoft.PowerShell.Utility.Format-Table).
 
 Find the current value of `$FormatEnumerationLimit`.
 
@@ -666,7 +673,7 @@ Count  Name       Group
 
 The `$InformationPreference` variable lets you set information stream
 preferences that you want displayed to users. Specifically, informational
-messages that you added to commands or scripts by adding the [Write-Information](../../Microsoft.PowerShell.Utility/Write-Information.md)
+messages that you added to commands or scripts by adding the [Write-Information](xref:Microsoft.PowerShell.Utility.Write-Information)
 cmdlet. If the **InformationAction** parameter is used, its value overrides the
 value of the `$InformationPreference` variable. `Write-Information` was
 introduced in PowerShell 5.0.
@@ -726,7 +733,8 @@ $LogCommandLifeCycleEvent = $false
 
 The events that you enable are effective only for the current PowerShell
 console. To apply the configuration to all consoles, save the variable settings
-in your PowerShell profile. For more information, see [about_Profiles](about_Profiles.md).
+in your PowerShell profile. For more information, see
+[about_Profiles](about_Profiles.md).
 
 ### \$MaximumAliasCount
 
@@ -1023,9 +1031,9 @@ test.txt:         <Unicode-characters>
 ### \$ProgressPreference
 
 Determines how PowerShell responds to progress updates generated by a script,
-cmdlet, or provider, such as the progress bars generated by the [Write-Progress](../../Microsoft.PowerShell.Utility/Write-Progress.md)
-cmdlet. The `Write-Progress` cmdlet creates progress bars that show a command's
-status.
+cmdlet, or provider, such as the progress bars generated by the
+[Write-Progress](xref:Microsoft.PowerShell.Utility.Write-Progress) cmdlet.
+The `Write-Progress` cmdlet creates progress bars that show a command's status.
 
 The valid values are as follows:
 
@@ -1041,7 +1049,8 @@ The valid values are as follows:
 ### \$PSEmailServer
 
 Specifies the default e-mail server that is used to send email messages. This
-preference variable is used by cmdlets that send email, such as the [Send-MailMessage](../../Microsoft.PowerShell.Utility/Send-MailMessage.md)
+preference variable is used by cmdlets that send email, such as the
+[Send-MailMessage](xref:Microsoft.PowerShell.Utility.Send-MailMessage)
 cmdlet.
 
 ### \$PSDefaultParameterValues
@@ -1053,13 +1062,14 @@ a custom default value that you specify.
 
 `$PSDefaultParameterValues` was introduced in PowerShell 3.0.
 
-For more information about this preference variable, see [about_Parameters_Default_Values](about_Parameters_Default_Values.md).
+For more information about this preference variable, see
+[about_Parameters_Default_Values](about_Parameters_Default_Values.md).
 
 ### \$PSModuleAutoloadingPreference
 
 Enables and disables automatic importing of modules in the session. **All** is
-the default. Regardless of the variable's value, you can use [Import-Module](../Import-Module.md)
-to import a module.
+the default. Regardless of the variable's value, you can use
+[Import-Module](xref:Microsoft.PowerShell.Core.Import-Module) to import a module.
 
 Valid values are:
 
@@ -1071,7 +1081,8 @@ Valid values are:
 - **None**: Automatic importing of modules is disabled in the session. To
   import a module, use the `Import-Module` cmdlet.
 
-For more information about automatic importing of modules, see [about_Modules](about_Modules.md).
+For more information about automatic importing of modules, see
+[about_Modules](about_Modules.md).
 
 ### \$PSSessionApplicationName
 
@@ -1096,8 +1107,9 @@ the connection request. The parameter's value should match the value of the
 
 To override the system default and the value of this variable, and select a
 different application name for a particular session, use the **ConnectionURI**
-or **ApplicationName** parameters of the [New-PSSession](../New-PSSession.md), [Enter-PSSession](../Enter-PSSession.md),
-or [Invoke-Command](../Invoke-Command.md) cmdlets.
+or **ApplicationName** parameters of the [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession),
+[Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession), or
+[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command) cmdlets.
 
 The `$PSSessionApplicationName` preference variable is set on the local
 computer, but it specifies a listener on the remote computer. If the
@@ -1178,9 +1190,10 @@ CancelTimeout                     : 00:01:00
 IdleTimeout                       : -00:00:00.0010000
 ```
 
-For descriptions of these options and more information, see [New-PSSessionOption](../New-PSSessionOption.md).
-For more information about remote commands and sessions, see [about_Remote](about_Remote.md)
-and [about_PSSessions](about_PSSessions.md).
+For descriptions of these options and more information, see
+[New-PSSessionOption](xref:Microsoft.PowerShell.Core.New-PSSessionOption). For more information about
+remote commands and sessions, see [about_Remote](about_Remote.md) and
+[about_PSSessions](about_PSSessions.md).
 
 To change the value of the `$PSSessionOption` preference variable, use the
 `New-PSSessionOption` cmdlet to create a **PSSessionOption** object with the
@@ -1193,7 +1206,8 @@ $PSSessionOption = New-PSSessionOption -NoCompression
 
 To use the `$PSSessionOption` preference variable in every PowerShell session,
 add a `New-PSSessionOption` command that creates the `$PSSessionOption`
-variable to your PowerShell profile. For more information, see [about_Profiles](about_Profiles.md).
+variable to your PowerShell profile. For more information, see
+[about_Profiles](about_Profiles.md).
 
 You can set custom options for a particular remote session. The options that
 you set take precedence over the system defaults and the value of the
@@ -1204,17 +1218,28 @@ To set custom session options, use the `New-PSSessionOption` cmdlet to create a
 value of the **SessionOption** parameter in cmdlets that create a session, such
 as `New-PSSession`, `Enter-PSSession`, and `Invoke-Command`.
 
+### $Transcript
+
+Used by `Start-Transcript` to specify the name and location of the transcript
+file. If you do not specify a value for the **Path** parameter,
+`Start-Transcript` uses the path in the value of the `$Transcript` global
+variable. If you have not created this variable, `Start-Transcript` stores the
+transcripts in the `$Home\My Documents` directory as
+`\PowerShell_transcript.<time-stamp>.txt` files.
+
 ### \$VerbosePreference
 
 Determines how PowerShell responds to verbose messages generated by a script,
-cmdlet, or provider, such as the messages generated by the [Write-Verbose](../../Microsoft.PowerShell.Utility/Write-Verbose.md)
-cmdlet. Verbose messages describe the actions performed to execute a command.
+cmdlet, or provider, such as the messages generated by the
+[Write-Verbose](xref:Microsoft.PowerShell.Utility.Write-Verbose) cmdlet.
+Verbose messages describe the actions performed to execute a command.
 
 By default, verbose messages aren't displayed, but you can change this behavior
 by changing the value of `$VerbosePreference`.
 
 You can use the **Verbose** common parameter of a cmdlet to display or hide the
-verbose messages for a specific command. For more information, see [about_CommonParameters](about_CommonParameters.md).
+verbose messages for a specific command. For more information, see
+[about_CommonParameters](about_CommonParameters.md).
 
 The valid values are as follows:
 
@@ -1322,8 +1347,8 @@ Write-Verbose -Message "Verbose message test." -Verbose:$false
 ### \$WarningPreference
 
 Determines how PowerShell responds to warning messages generated by a script,
-cmdlet, or provider, such as the messages generated by the [Write-Warning](../../Microsoft.PowerShell.Utility/Write-Warning.md)
-cmdlet.
+cmdlet, or provider, such as the messages generated by the
+[Write-Warning](xref:Microsoft.PowerShell.Utility.Write-Warning) cmdlet.
 
 By default, warning messages are displayed and execution continues, but you can
 change this behavior by changing the value of `$WarningPreference`.
