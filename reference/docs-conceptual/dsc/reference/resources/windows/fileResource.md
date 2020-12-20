@@ -1,7 +1,8 @@
 ---
 ms.date: 07/16/2020
-keywords: dsc,powershell,configuration,setup
+ms.topic: reference
 title: DSC File Resource
+description: DSC File Resource
 ---
 # DSC File Resource
 
@@ -10,6 +11,8 @@ title: DSC File Resource
 The **File** resource in Windows PowerShell Desired State Configuration (DSC) provides a mechanism
 to manage files and folders on the target node. **DestinationPath** and **SourcePath** must both be
 accessible by the target Node.
+
+[!INCLUDE [Updated DSC Resources](../../../../../includes/dsc-resources.md)]
 
 ## Syntax
 

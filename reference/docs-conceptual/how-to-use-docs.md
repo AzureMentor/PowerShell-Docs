@@ -2,14 +2,16 @@
 ms.date: 07/29/2020
 keywords:  powershell,cmdlet
 title:  How to use the PowerShell documentation
+description: This articles explains how to use the features of this site including search filtering and version selection.
 ---
 # How to use the PowerShell documentation
 
 Welcome to the PowerShell online documentation. This site contains cmdlet reference for the
 following versions of PowerShell:
 
-- PowerShell 7
-- PowerShell 6
+- PowerShell 7.2 (prerelease)
+- PowerShell 7.1 (current)
+- PowerShell 7.0 (LTS)
 - PowerShell 5.1
 
 ## Finding articles and selecting a version
@@ -53,5 +55,6 @@ This site contains documentation for the following topics:
 - PowerShell 3.0
 - PowerShell 4.0
 - PowerShell 5.0
+- PowerShell 6
 - PowerShell Workflows
 - PowerShell Web Access

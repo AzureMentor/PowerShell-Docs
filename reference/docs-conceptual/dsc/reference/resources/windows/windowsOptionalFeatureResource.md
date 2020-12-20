@@ -1,7 +1,8 @@
 ---
 ms.date: 08/28/2020
-keywords: dsc,powershell,configuration,setup
+ms.topic: reference
 title: DSC WindowsOptionalFeature Resource
+description: DSC WindowsOptionalFeature Resource
 ---
 # DSC WindowsOptionalFeature Resource
 
@@ -12,6 +13,8 @@ provides a mechanism to ensure that optional features are enabled on a target no
 
 > [!NOTE]
 > **WindowsOptionalFeature** only works on Windows client machines like Windows 10.
+
+[!INCLUDE [Updated DSC Resources](../../../../../includes/dsc-resources.md)]
 
 ## Syntax
 

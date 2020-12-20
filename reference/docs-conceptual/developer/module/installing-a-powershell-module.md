@@ -1,6 +1,8 @@
 ---
-title: "Installing a PowerShell Module | Microsoft Docs"
-ms.date: "09/13/2016"
+ms.date: 09/13/2016
+ms.topic: reference
+title: Installing a PowerShell Module
+description: Installing a PowerShell Module
 ---
 # Installing a PowerShell Module
 
@@ -154,7 +156,7 @@ Program Files location.
 > [!NOTE]
 > The Program Files location is added to the value of the PSModulePath environment variable by
 > default in Windows PowerShell 4.0 and later. For earlier versions of Windows PowerShell, you can
-> manually create the Program Files location ((%ProgramFiles%\WindowsPowerShell\Modules) and add
+> manually create the Program Files location (%ProgramFiles%\WindowsPowerShell\Modules) and add
 > this path to your PSModulePath environment variable as described above.
 
 ### Installing Modules in a Product Directory

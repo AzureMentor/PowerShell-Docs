@@ -13,9 +13,6 @@ title: Get-Clipboard
 ## SYNOPSIS
 Gets the contents of the clipboard.
 
-[!NOTE]
-> On Linux, this cmdlet requires the `xclip` utility to be in the path.
-
 ## SYNTAX
 
 ```
@@ -26,6 +23,10 @@ Get-Clipboard [-Raw] [<CommonParameters>]
 
 The `Get-Clipboard` cmdlet gets the contents of the clipboard as text. Multiple lines of text are
 returned as an array of strings similar to `Get-Content`.
+
+> [!NOTE]
+> On Linux, this cmdlet requires the `xclip` utility to be in the path. This cmdlet is not supported
+> on macOS.
 
 ## EXAMPLES
 
@@ -78,4 +79,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Set-Clipboard](Set-Clipboard.md)
-

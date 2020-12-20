@@ -1,7 +1,8 @@
 ---
 ms.date: 07/16/2020
-keywords: dsc,powershell,configuration,setup
+ms.topic: reference
 title: DSC Script Resource
+description: DSC Script Resource
 ---
 # DSC Script Resource
 
@@ -11,6 +12,8 @@ The `Script` resource in Windows PowerShell Desired State Configuration (DSC) pr
 to run Windows PowerShell script blocks on target nodes. The `Script` resource uses `GetScript`
 `SetScript`, and `TestScript` properties that contain script blocks you define to perform the
 corresponding DSC state operations.
+
+[!INCLUDE [Updated DSC Resources](../../../../../includes/dsc-resources.md)]
 
 ## Syntax
 
